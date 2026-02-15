@@ -30,7 +30,9 @@ bash# Basic usage (no ground truth)
 python enhanced_voice_eval.py audio.wav
 
 # With ground truth transcript
-**python enhanced_voice_eval.py audio.wav transcript.txt**
+```bash
+python enhanced_voice_eval.py audio.wav transcript.txt
+```
 
 # Full options
 python enhanced_voice_eval.py audio.wav transcript.txt <utmos_dir> <saer_lambda> <saer_lang>
