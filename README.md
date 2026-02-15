@@ -35,14 +35,33 @@ python enhanced_voice_eval.py audio.wav transcript.txt
 ```
 
 # Full options
+```bash
 python enhanced_voice_eval.py audio.wav transcript.txt <utmos_dir> <saer_lambda> <saer_lang>
+```
 Examples
 bash# English monolingual
+```bash
 python enhanced_voice_eval.py call.wav ground_truth.txt '' 0.5 en
+```
 
-# Chinese (uses CER for form-error in SAER)
-python enhanced_voice_eval.py call.wav ground_truth.txt '' 0.5 zh
+Python API
+```bash
+pythonfrom enhanced_voice_eval import EnhancedVoiceEvaluator, format_report
 
-# Code-switching / mixed language
-python enhanced_voice_eval.py call.wav ground_truth.txt '' 0.5 mixed
-Results are printed to stdout and saved as <audio_stem>_enhanced_eval.json.
+evaluator = EnhancedVoiceEvaluator(
+    audio_path="call.wav",
+    transcript_path="ground_truth.txt",   # optional
+    utmos_model_dir=None,                 # optional
+    saer_lambda=0.5,
+    saer_lang="en",
+)
+
+metrics = evaluator.evaluate_all()
+print(format_report(metrics))
+
+# Access individual fields
+print(metrics.wer_score)
+print(metrics.semascore)
+print(metrics.asd)
+print(metrics.saer)
+```
