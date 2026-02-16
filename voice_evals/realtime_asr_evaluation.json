@@ -1,0 +1,62 @@
+{
+  "upwr_metrics": {
+    "upwr": 1.565217391304348,
+    "total_partial_words": 713,
+    "changed_words": 1116,
+    "stable_words": -403,
+    "word_stability_ratio": -0.5652173913043479,
+    "chunks_analyzed": 177,
+    "avg_words_per_chunk": 4.028248587570621
+  },
+  "streaming_wer": 0.2595419847328244,
+  "batch_wer": 0.16412213740458015,
+  "streaming_degradation": 9.541984732824426,
+  "chunk_analyses": [
+    {
+      "chunk_duration": 0.16,
+      "wer": 84.62977099236642,
+      "latency_ms": 5988.1175700507865,
+      "throughput": 0.026705565331876603,
+      "num_chunks": 554
+    },
+    {
+      "chunk_duration": 0.32,
+      "wer": 74.19847328244275,
+      "latency_ms": 5700.17055656075,
+      "throughput": 0.05610922108212715,
+      "num_chunks": 277
+    },
+    {
+      "chunk_duration": 0.56,
+      "wer": 26.076335877862597,
+      "latency_ms": 5555.1836550610615,
+      "throughput": 0.10030124267660176,
+      "num_chunks": 159
+    },
+    {
+      "chunk_duration": 1.0,
+      "wer": 8.431297709923664,
+      "latency_ms": 2644.9560583307502,
+      "throughput": 0.37635127477236324,
+      "num_chunks": 89
+    },
+    {
+      "chunk_duration": 2.0,
+      "wer": 4.038167938931298,
+      "latency_ms": 2487.7675586276587,
+      "throughput": 0.7913699322980458,
+      "num_chunks": 45
+    }
+  ],
+  "optimal_chunk_size": 2.0,
+  "noise_robustness": {
+    "clean_wer": 0.16412213740458015,
+    "noisy_wer": 1.2315521628498727,
+    "normalized_wer": 6.503875968992247,
+    "wer_variance": 0.3821876477024779,
+    "degradation_factor": 7.503875968992248,
+    "snr_correlation": -0.1427192670956276
+  },
+  "total_latency_ms": 4475.239079726201,
+  "avg_chunk_latency_ms": 4475.239079726201
+}
