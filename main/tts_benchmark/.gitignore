@@ -1,0 +1,31 @@
+# Virtual environment
+tts/
+
+# Large datasets (re-downloadable)
+datasets/libritts_r/
+datasets/ljspeech_hf_audio/
+datasets/reference_audio/
+datasets/seed_tts_eval/
+
+# LJSpeech raw archives (re-downloadable)
+LJSpeech-1.1.tar.bz2
+LJSpeech-1.1.tar.bz2.1
+LJSpeech-1.1.tar.bz2.2
+
+# Model files
+models/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Uncompressed audio dirs (replaced by .tar.gz archives)
+generated_audio/
+hov_gen_audio/
+harvard_gen_audio/
+challenge_gen_audio/
+ljspeech_gen_audio/
