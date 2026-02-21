@@ -1,0 +1,104 @@
+models:
+  kokoro:
+    class_path: models.kokoro_client.KokoroClient
+    enabled: true  # Fixed: Now loads model at initialization instead of lazy loading
+    config:
+      voice: "af"
+
+  piper:
+    class_path: models.piper_client.PiperClient
+    enabled: false  # Python package API incompatible with implementation
+    config:
+      model: "en_US-lessac-medium"
+
+  xtts_v2:
+    class_path: models.xtts_client.XTTSClient
+    enabled: false  # Incompatible with Python 3.13 (requires <3.12)
+    config:
+      language: "en"
+
+  deepgram:
+    class_path: models.deepgram_client.DeepgramClient
+    enabled: true
+    config:
+      voice: "aura-asteria-en"
+    rate_limit_rps: 5  # requests per second
+
+  cartesia:
+    class_path: models.cartesia_client.CartesiaClient
+    enabled: true
+    config:
+      voice_id: "a0e99841-438c-4a64-b679-ae501e7d6091"
+    rate_limit_rps: 5
+
+  elevenlabs:
+    class_path: models.elevenlabs_client.ElevenLabsClient
+    enabled: true
+    config:
+      voice_id: "21m00Tcm4TlvDq8ikWAM"  # Rachel voice
+    rate_limit_rps: 1  # Free tier: ~10,000 chars/month
+
+  google_tts:
+    class_path: models.google_tts_client.GoogleTTSClient
+    enabled: true
+    config:
+      voice_name: "en-US-Neural2-F"
+      language_code: "en-US"
+    rate_limit_rps: 2  # Free tier: 1M chars/month
+
+  polly:
+    class_path: models.polly_client.PollyClient
+    enabled: true
+    config:
+      voice_id: "Joanna"
+      engine: "neural"
+    rate_limit_rps: 3  # Free tier: 5M chars/month (first 12 months)
+
+  azure_tts:
+    class_path: models.azure_tts_client.AzureTTSClient
+    enabled: true
+    config:
+      voice_name: "en-US-JennyNeural"
+    rate_limit_rps: 2  # Free tier: 500K chars/month
+
+  playht:
+    class_path: models.playht_client.PlayHTClient
+    enabled: false  # Requires API key setup
+    config:
+      voice: "s3://voice-cloning-zero-shot/d9ff78ba-d016-47f6-b0ef-dd630f59414e/female-cs/manifest.json"
+    rate_limit_rps: 1
+
+  resemble:
+    class_path: models.resemble_client.ResembleClient
+    enabled: false  # Requires project and voice UUID setup in .env
+    config:
+      voice_uuid: null  # Set RESEMBLE_VOICE_UUID in .env
+      project_uuid: null  # Set RESEMBLE_PROJECT_UUID in .env
+    rate_limit_rps: 1
+
+  lmnt:
+    class_path: models.lmnt_client.LMNTClient
+    enabled: true
+    config:
+      voice: "lily"
+    rate_limit_rps: 1  # Free tier: ~1 req/s to avoid 429s
+
+  hume:
+    class_path: models.hume_client.HumeClient
+    enabled: true
+    config:
+      voice: "ITO"
+    rate_limit_rps: 2
+
+  qwen:
+    class_path: models.qwen_client.QwenClient
+    enabled: false  # Requires Alibaba Cloud credentials in .env
+    config:
+      voice: "zhifeng_emo"
+    rate_limit_rps: 1
+
+# ASR for evaluation
+asr:
+  provider: "assemblyai"  # or "deepgram"
+  assemblyai_model: "best"
+  deepgram_model: "nova-2"

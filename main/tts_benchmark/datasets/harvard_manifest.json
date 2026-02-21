@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "HAR_H01_01",
+    "text": "The birch canoe slid on the smooth planks.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_02",
+    "text": "Glue the sheet to the dark blue background.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_03",
+    "text": "It's easy to tell the depth of a well.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_04",
+    "text": "These days a chicken leg is a rare dish.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_05",
+    "text": "Rice is often served in round bowls.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_06",
+    "text": "The juice of lemons makes fine punch.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_07",
+    "text": "The box was thrown beside the parked truck.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_08",
+    "text": "The hogs were fed chopped corn and garbage.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_09",
+    "text": "Four hours of steady work faced us.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H01_10",
+    "text": "A large size in stockings is hard to sell.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_01",
+    "text": "The boy was there when the sun rose.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_02",
+    "text": "A rod is used to catch pink salmon.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_03",
+    "text": "The source of the huge river is the clear spring.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_04",
+    "text": "Kick the ball straight and follow through.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_05",
+    "text": "Help the woman get back to her feet.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_06",
+    "text": "A pot of tea helps to pass the evening.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_07",
+    "text": "Smoky fires lack flame and heat.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_08",
+    "text": "The soft cushion broke the man's fall.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_09",
+    "text": "The salt breeze came across from the sea.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H02_10",
+    "text": "The girl at the booth sold fifty bonds.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_01",
+    "text": "The small pup gnawed a hole in the sock.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_02",
+    "text": "The fish twisted and turned on the bent hook.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_03",
+    "text": "Press the pants and sew a button on the vest.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_04",
+    "text": "The swan dive was far short of perfect.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_05",
+    "text": "The beauty of the view stunned the young boy.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_06",
+    "text": "Two blue fish swam in the tank.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_07",
+    "text": "Her purse was full of useless trash.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_08",
+    "text": "The colt reared and threw the tall rider.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_09",
+    "text": "It snowed, rained, and hailed the same morning.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H03_10",
+    "text": "Read verse out loud for pleasure.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_01",
+    "text": "Hoist the load to your left shoulder.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_02",
+    "text": "Take the winding path to reach the lake.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_03",
+    "text": "Note closely the size of the gas tank.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_04",
+    "text": "Wipe the grease off his dirty face.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_05",
+    "text": "Mend the coat before you go out.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_06",
+    "text": "The wrist was badly sprained and hung limp.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_07",
+    "text": "The stray cat gave birth to kittens.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_08",
+    "text": "The young girl gave no clear response.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_09",
+    "text": "The meal was cooked before the bell rang.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H04_10",
+    "text": "What joy there is in living.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_01",
+    "text": "A king ruled the state in the early days.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_02",
+    "text": "The ship was torn apart on the sharp reef.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_03",
+    "text": "Sickness kept him home the third week.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_04",
+    "text": "The wide road shimmered in the hot sun.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_05",
+    "text": "The lazy horse found the heavy load too hard.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_06",
+    "text": "The rose is an excellent example of a flower.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_07",
+    "text": "Chest and back pain are common complaints.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_08",
+    "text": "The sleek car sped along the track.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_09",
+    "text": "There is a lag between thought and act.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H05_10",
+    "text": "Screen the porch with woven straw mats.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_01",
+    "text": "The store was jammed with shoppers.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_02",
+    "text": "Greet the newly arrived man on time.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_03",
+    "text": "The job requires extra hard work and long hours.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_04",
+    "text": "The drip of the rain made a pleasant sound.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_05",
+    "text": "Cut the cord that ties the sack tightly.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_06",
+    "text": "The stitch in time saves nine, the adage goes.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_07",
+    "text": "The couch covers were washed and hung to dry.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_08",
+    "text": "The tiny insect is hard to see without a lens.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_09",
+    "text": "The young couple had not yet wed.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H06_10",
+    "text": "The old box was thrown in the fire.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_01",
+    "text": "The fog prevented a view of the mountains.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_02",
+    "text": "A cup of sugar makes sweet fudge.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_03",
+    "text": "Place a rosebush near the porch steps.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_04",
+    "text": "Both lost their lives in the raging storm.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_05",
+    "text": "We talked of the slide show in the circus.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_06",
+    "text": "Use a pencil to write the first draft.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_07",
+    "text": "He ran half the distance at full speed.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_08",
+    "text": "The rain came down in slanting lines.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_09",
+    "text": "Mud was spattered on the front of his white shirt.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H07_10",
+    "text": "The cause of the new war was not clear.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_01",
+    "text": "There he lay in a heap of litter.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_02",
+    "text": "The basket was full of fresh picked corn.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_03",
+    "text": "Nine men were hired to dig the ruins.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_04",
+    "text": "The strong steel pen can be used to scratch glass.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_05",
+    "text": "A white silk jacket goes with any shoes.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_06",
+    "text": "A pink shell was found on the sandy beach.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_07",
+    "text": "Two men were sent to watch the bridge.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_08",
+    "text": "The herd of cattle was of a thousand head.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_09",
+    "text": "A chip of glass cut her foot badly.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H08_10",
+    "text": "Flight patterns for the jets were drawn in blue.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_01",
+    "text": "The maps were posted before the week was up.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_02",
+    "text": "Dimes showered down from all sides.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_03",
+    "text": "They both like more and more candy.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_04",
+    "text": "The string on the kite was cut.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_05",
+    "text": "The stand on the corner was left there all night.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_06",
+    "text": "A screwdriver is most useful around the house.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_07",
+    "text": "Never put too much faith in a new friend.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_08",
+    "text": "We must not waste good butter on an old dog.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_09",
+    "text": "The fruit of a fig tree is apple-shaped.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H09_10",
+    "text": "Mark the spot with a sign painted red.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_01",
+    "text": "Take two of these pills after each meal.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_02",
+    "text": "The heart beat strongly and with firm strokes.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_03",
+    "text": "Eight miles of woodland burned to waste.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_04",
+    "text": "The third act was dull and tired the players.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_05",
+    "text": "This saved the man his boat and his life.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_06",
+    "text": "He looked inward and found himself wanting.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_07",
+    "text": "Jump the fence and cross the field.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_08",
+    "text": "The friendly gang left the drug store.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_09",
+    "text": "Mesh wire keeps the tiger from the tent.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  },
+  {
+    "id": "HAR_H10_10",
+    "text": "The small red neon lamp went out.",
+    "dataset": "harvard_sentences",
+    "category": "phonetically_balanced",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_harvard"
+  }
+]

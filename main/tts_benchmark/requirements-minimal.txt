@@ -1,0 +1,54 @@
+# Minimal Requirements - Core dependencies only
+# For users who want to install step by step
+
+# Core
+torch>=2.0.0
+torchaudio>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Audio
+soundfile>=0.12.1
+librosa>=0.10.1
+pydub>=0.25.1
+
+# Data
+pandas>=2.0.0
+pyyaml>=6.0
+
+# CLI
+tqdm>=4.65.0
+rich>=13.0.0
+click>=8.1.0
+
+# TTS Models - APIs
+deepgram-sdk>=3.0.0
+cartesia>=1.0.0
+
+# TTS Models - Local
+kokoro>=0.3.0
+kokoro-onnx>=0.1.0
+onnxruntime>=1.16.0
+piper-tts>=1.2.0
+TTS>=0.22.0
+
+# ASR
+assemblyai>=0.20.0
+jiwer>=3.0.0
+
+# Evaluation - Core
+speechbrain>=0.5.16
+resemblyzer>=0.1.0
+praat-parselmouth>=0.4.3
+nisqa>=0.1.0
+pesq>=0.0.4
+torchmetrics>=1.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+kaleido>=0.2.1
+
+# HTTP
+requests>=2.31.0

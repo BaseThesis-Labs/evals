@@ -1,0 +1,200 @@
+# TTS Evaluation Benchmark - Requirements
+# Python 3.10+
+
+# ============================================================================
+# CORE DEPENDENCIES
+# ============================================================================
+
+# PyTorch (CPU-only - install separately from https://pytorch.org)
+# torch==2.1.0+cpu
+# torchaudio==2.1.0+cpu
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Audio Processing
+soundfile>=0.12.1
+librosa>=0.10.1
+pydub>=0.25.1
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Data & Utilities
+pandas>=2.0.0
+pyyaml>=6.0
+tqdm>=4.65.0
+rich>=13.0.0
+click>=8.1.0
+
+# ============================================================================
+# TTS MODELS
+# ============================================================================
+
+# Kokoro ONNX (Local, Fast)
+kokoro>=0.3.0
+kokoro-onnx>=0.1.0
+onnxruntime>=1.16.0
+
+# Piper TTS (Local, Very Fast)
+piper-tts>=1.2.0
+
+# Coqui TTS (Local, Voice Cloning)
+TTS>=0.22.0
+
+# Deepgram SDK (API - TTS)
+deepgram-sdk>=3.0.0
+
+# Cartesia SDK (API - TTS)
+cartesia>=1.0.0
+
+# ============================================================================
+# ASR FOR EVALUATION
+# ============================================================================
+
+# AssemblyAI (Primary ASR)
+assemblyai>=0.20.0
+
+# Deepgram also used for ASR (already included above)
+
+# WER/CER Computation
+jiwer>=3.0.0
+
+# ============================================================================
+# EVALUATION METRICS - NATURALNESS
+# ============================================================================
+
+# UTMOS (loaded via torch.hub at runtime)
+# Requires: torch, torchaudio
+
+# SCOREQ (MOS Prediction)
+# Install from git if not on PyPI
+# git+https://github.com/shimhz/scoreq.git
+
+# NISQA (Multi-dimensional MOS)
+nisqa>=0.1.0
+
+# DNSMOS (requires ONNX models downloaded separately)
+# Uses onnxruntime already installed
+
+# General metrics
+torchmetrics>=1.0.0
+
+# ============================================================================
+# EVALUATION METRICS - SPEAKER SIMILARITY
+# ============================================================================
+
+# SpeechBrain (ECAPA-TDNN)
+speechbrain>=0.5.16
+
+# Resemblyzer (GE2E embeddings)
+resemblyzer>=0.1.0
+# Note: May need to install from GitHub if PyPI version outdated
+# git+https://github.com/resemble-ai/Resemblyzer.git
+
+# Sentence Transformers (semantic distance metric)
+sentence-transformers>=2.2.0
+
+# ============================================================================
+# EVALUATION METRICS - SIGNAL QUALITY
+# ============================================================================
+
+# PESQ
+pesq>=0.0.4
+pypesq>=1.2.4
+
+# STOI
+pystoi>=0.3.3
+
+# ViSQOL (optional - complex build)
+# Not included due to build complexity
+# Can be installed separately if needed
+
+# ============================================================================
+# EVALUATION METRICS - PROSODY
+# ============================================================================
+
+# Praat-Parselmouth (F0 extraction)
+praat-parselmouth>=0.4.3
+
+# Silero VAD (loaded via torch.hub at runtime)
+# Requires: torch
+
+# ============================================================================
+# EVALUATION METRICS - DISTRIBUTION
+# ============================================================================
+
+# TTSDS2
+# May need to install from source
+# git+https://github.com/microsoft/TTSDS.git
+
+# ============================================================================
+# VISUALIZATION
+# ============================================================================
+
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+kaleido>=0.2.1
+
+# ============================================================================
+# HTTP & API
+# ============================================================================
+
+requests>=2.31.0
+aiohttp>=3.9.0
+httpx>=0.25.0
+
+# ============================================================================
+# OPTIONAL DEPENDENCIES
+# ============================================================================
+
+# Jupyter (for analysis notebooks)
+# jupyter>=1.0.0
+# ipython>=8.0.0
+
+# Additional audio processing
+# resampy>=0.4.2
+# audioread>=3.0.0
+
+# Progress bars and logging
+# loguru>=0.7.0
+
+# ============================================================================
+# DEVELOPMENT DEPENDENCIES (Optional)
+# ============================================================================
+
+# pytest>=7.4.0
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.5.0
+
+# ============================================================================
+# NOTES
+# ============================================================================
+
+# 1. PyTorch CPU Installation:
+#    Install PyTorch separately for CPU-only to save space:
+#    pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# 2. Some models auto-download on first use:
+#    - UTMOS: Downloaded via torch.hub
+#    - Silero VAD: Downloaded via torch.hub
+#    - SpeechBrain models: Downloaded from HuggingFace
+#    - Coqui XTTS v2: Downloaded from HuggingFace
+#
+# 3. SCOREQ installation (if not on PyPI):
+#    pip install git+https://github.com/shimhz/scoreq.git
+#
+# 4. TTSDS2 installation (if not on PyPI):
+#    pip install git+https://github.com/microsoft/TTSDS.git
+#
+# 5. For ARM-based Macs (M1/M2/M3):
+#    Some packages may need special flags or may not be available.
+#    Use setup.sh which handles platform-specific installation.
+#
+# 6. Minimum Python version: 3.10
+#    Recommended: 3.11 or 3.12
+#
+# 7. System Requirements:
+#    - RAM: 16 GB minimum, 32 GB recommended
+#    - Disk: 10 GB free space for models and data
+#    - Internet: Required for downloading models and datasets

@@ -1,0 +1,93 @@
+# TTS Evaluation Benchmark - PINNED VERSIONS
+# Fast installation - no dependency resolution needed
+# Python 3.10+
+
+# ============================================================================
+# CORE DEPENDENCIES - PINNED
+# ============================================================================
+
+# PyTorch CPU (install separately first)
+# pip install torch==2.1.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cpu
+
+# Audio Processing
+soundfile==0.12.1
+librosa==0.10.1
+pydub==0.25.1
+numpy==1.26.4
+scipy==1.11.4
+
+# Data & Utilities
+pandas==2.1.4
+pyyaml==6.0.1
+tqdm==4.66.1
+rich==13.7.0
+click==8.1.7
+
+# ============================================================================
+# TTS MODELS - API ONLY (FASTEST)
+# ============================================================================
+
+# Deepgram SDK
+deepgram-sdk==3.2.7
+
+# Cartesia SDK
+cartesia==1.0.4
+
+# ============================================================================
+# ASR FOR EVALUATION
+# ============================================================================
+
+# AssemblyAI
+assemblyai==0.25.0
+
+# WER/CER Computation
+jiwer==3.0.3
+
+# ============================================================================
+# EVALUATION METRICS - ESSENTIAL ONLY
+# ============================================================================
+
+# Speaker Similarity
+speechbrain==0.5.16
+resemblyzer==0.1.1.dev0
+
+# Prosody
+praat-parselmouth==0.4.3
+
+# Naturalness
+torchmetrics==1.2.1
+
+# Signal Quality
+pesq==0.0.4
+
+# ============================================================================
+# VISUALIZATION
+# ============================================================================
+
+matplotlib==3.8.2
+seaborn==0.13.1
+plotly==5.18.0
+kaleido==0.2.1
+
+# ============================================================================
+# HTTP & API
+# ============================================================================
+
+requests==2.31.0
+aiohttp==3.9.1
+httpx==0.25.2
+
+# ============================================================================
+# SUPPORTING DEPENDENCIES (auto-installed with above)
+# ============================================================================
+
+# These will be installed automatically as dependencies
+# Listed here for clarity
+certifi==2023.11.17
+charset-normalizer==3.3.2
+idna==3.6
+urllib3==2.1.0
+packaging==23.2
+python-dateutil==2.8.2
+pytz==2023.3
+six==1.16.0

@@ -1,0 +1,632 @@
+[
+  {
+    "id": "CHL_CHN_01",
+    "text": "Call one eight hundred five five five zero one two three.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_02",
+    "text": "The invoice total is one thousand two hundred thirty four dollars and fifty six cents.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_03",
+    "text": "Today is February twentieth, two thousand twenty six.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_04",
+    "text": "The temperature reached one hundred and four point seven degrees Fahrenheit.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_05",
+    "text": "Flight BA four seven nine departs at oh six thirty.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_06",
+    "text": "The speed limit is sixty five miles per hour on highway ninety four.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_07",
+    "text": "Your PIN is four seven three nine.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_08",
+    "text": "Pi is approximately three point one four one five nine two six.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_09",
+    "text": "The package weighs twelve pounds and eight ounces.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHN_10",
+    "text": "There are three hundred sixty five days in a year, or three sixty six in a leap year.",
+    "dataset": "challenge_numbers",
+    "category": "numbers",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_numbers"
+  },
+  {
+    "id": "CHL_CHP_01",
+    "text": "The Schuylkill River runs through Philadelphia.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_02",
+    "text": "Nguyen and Szymanski presented their findings at MIT.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_03",
+    "text": "The restaurant Noma in Copenhagen holds three Michelin stars.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_04",
+    "text": "Mount Kilimanjaro is the highest peak in Africa.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_05",
+    "text": "The Guadalquivir River flows through Seville and Cordoba.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_06",
+    "text": "Elon Musk's company SpaceX launched the Starship rocket.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_07",
+    "text": "The Tchaikovsky violin concerto was played by Hilary Hahn.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_08",
+    "text": "CRISPR-Cas9 technology was pioneered by Jennifer Doudna.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_09",
+    "text": "ETH Zurich, or Eidgenossische Technische Hochschule, was founded in eighteen fifty five.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHP_10",
+    "text": "The Fjallraven backpack was designed for hiking in Lapland.",
+    "dataset": "challenge_proper_nouns",
+    "category": "proper_nouns",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_proper_nouns"
+  },
+  {
+    "id": "CHL_CHT_01",
+    "text": "She sells seashells by the seashore.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_02",
+    "text": "Peter Piper picked a peck of pickled peppers.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_03",
+    "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_04",
+    "text": "Red lorry, yellow lorry, red lorry, yellow lorry.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_05",
+    "text": "The sixth sick sheik's sixth sheep is sick.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_06",
+    "text": "Unique New York, unique New York, you know you need unique New York.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_07",
+    "text": "Fred fed Ted bread and Ted fed Fred bread.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_08",
+    "text": "I scream, you scream, we all scream for ice cream.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_09",
+    "text": "Pad kid poured curd pulled cod.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHT_10",
+    "text": "Whether the weather is warm, whether the weather is hot, we have to put up with the weather whether we like it or not.",
+    "dataset": "challenge_tongue_twisters",
+    "category": "tongue_twisters",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_tongue_twisters"
+  },
+  {
+    "id": "CHL_CHL_01",
+    "text": "Artificial intelligence has transformed how we interact with technology in our daily lives. From voice assistants that answer our questions to recommendation systems that suggest what to watch next, machine learning algorithms are now deeply embedded in the tools we use most. The development of large language models has accelerated this transformation, enabling systems that can engage in sophisticated dialogue, write code, analyze documents, and perform a wide range of cognitive tasks. However, this rapid advancement raises important questions about the future of work, privacy, and the nature of intelligence itself. Researchers and policymakers are grappling with how to harness the benefits of these technologies while mitigating potential harms. The challenge is not merely technical but fundamentally social and ethical. We must decide what values we want our systems to embody, who gets to make those decisions, and how we ensure that the benefits are distributed fairly across society.",
+    "dataset": "challenge_long_form",
+    "category": "long_form",
+    "language": "en",
+    "difficulty": "very_hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_long_form"
+  },
+  {
+    "id": "CHL_CHL_02",
+    "text": "The old lighthouse stood at the edge of the rocky cliff, its white paint faded and cracked by decades of salt air and winter storms. Every evening at dusk, the keeper would climb the worn spiral staircase to ignite the great lamp, sending its beam sweeping across the dark water in a steady, rhythmic pulse. Ships for miles around relied on that signal to navigate safely past the dangerous shoals that lay hidden beneath the surface. The keeper had inherited the post from his father, who had kept the light before him, and his grandfather before that. Three generations of faithful service, each one passing the responsibility to the next with quiet pride. The work was solitary and demanding, requiring constant vigilance through the long nights and careful maintenance during the days. But standing at the top of the tower on a clear morning, watching the sunrise paint the waves in shades of gold and amber, the keeper knew there was no other life he would have chosen.",
+    "dataset": "challenge_long_form",
+    "category": "long_form",
+    "language": "en",
+    "difficulty": "very_hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_long_form"
+  },
+  {
+    "id": "CHL_CHL_03",
+    "text": "Climate change represents one of the most complex challenges humanity has ever faced. The science is unambiguous: global average temperatures have risen by approximately one point one degrees Celsius since pre-industrial times, driven primarily by human emissions of greenhouse gases. The consequences are already visible across the globe, from melting glaciers and rising sea levels to more frequent and intense extreme weather events. Yet despite decades of international negotiations and countless pledges to reduce emissions, global carbon dioxide output continues to rise. The gap between the commitments made by governments and the actions required to limit warming to one point five degrees Celsius remains stubbornly wide. Bridging that gap will require unprecedented cooperation across nations, industries, and communities, as well as transformative changes in how we produce energy, grow food, build cities, and move people and goods around the world.",
+    "dataset": "challenge_long_form",
+    "category": "long_form",
+    "language": "en",
+    "difficulty": "very_hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_long_form"
+  },
+  {
+    "id": "CHL_CHQ_01",
+    "text": "Can you tell me what the weather is like today?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_02",
+    "text": "Are you sure this is the right address?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_03",
+    "text": "What time does the next train to London depart?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_04",
+    "text": "Have you considered all the possible consequences of this decision?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_05",
+    "text": "Why did the stock market crash in nineteen twenty nine?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_06",
+    "text": "Is there any chance the meeting could be rescheduled to Thursday?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_07",
+    "text": "Do you know how long the surgical procedure typically takes?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_08",
+    "text": "Which route would you recommend for avoiding traffic on the highway?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_09",
+    "text": "Where exactly did you find that information about the experiment?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHQ_10",
+    "text": "How many people attended the annual conference last year?",
+    "dataset": "challenge_questions",
+    "category": "questions",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_questions"
+  },
+  {
+    "id": "CHL_CHE_01",
+    "text": "I can't believe you did this to me. I am absolutely devastated.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_02",
+    "text": "We won! We actually won! This is the greatest day of my entire life!",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_03",
+    "text": "Please, I am begging you, this is a matter of life and death.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_04",
+    "text": "Everything is calm and peaceful here. There is nothing at all to worry about.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_05",
+    "text": "I am so incredibly proud of everything you have accomplished this year.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_06",
+    "text": "The situation is completely under control. You have absolutely nothing to fear.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_07",
+    "text": "I am furious. This is completely unacceptable behavior from any standard.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_08",
+    "text": "What a wonderful surprise! I had absolutely no idea you were planning any of this.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_09",
+    "text": "I'm sorry. I know that nothing I say now can undo the damage that has been done.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHE_10",
+    "text": "Just breathe. Take it one step at a time. You have done this before and you can do it again.",
+    "dataset": "challenge_emotional",
+    "category": "emotional",
+    "language": "en",
+    "difficulty": "standard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_emotional"
+  },
+  {
+    "id": "CHL_CHX_01",
+    "text": "The meeting is at three PM, tres bien.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_02",
+    "text": "She said merci beaucoup and walked gracefully out the door.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_03",
+    "text": "The concept of schadenfreude is notoriously difficult to translate into English.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_04",
+    "text": "He said auf Wiedersehen and boarded the train to Frankfurt.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_05",
+    "text": "The menu listed a prix fixe dinner for sixty euros per person.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_06",
+    "text": "Use the resume template for all new job applicants going forward.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_07",
+    "text": "The esprit de corps of the team was remarkable throughout the entire campaign.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_08",
+    "text": "Her joie de vivre was absolutely infectious to everyone around her.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_09",
+    "text": "The company reported strong third quarter results, a true coup de grace for investors.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  },
+  {
+    "id": "CHL_CHX_10",
+    "text": "The zeitgeist of the era was captured perfectly in that singular photograph.",
+    "dataset": "challenge_code_switching",
+    "category": "code_switching",
+    "language": "en",
+    "difficulty": "hard",
+    "reference_audio_path": null,
+    "speaker_id": "spk_code_switching"
+  }
+]
