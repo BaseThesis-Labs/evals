@@ -237,13 +237,15 @@ def compute_utmos(audio: np.ndarray, sr: int) -> float:
 
 def compute_scoreq(audio: np.ndarray, sr: int) -> float:
     """Compute SCOREQ score."""
-    # SCOREQ installation is unreliable - skip for now
+    # STUBBED: SCOREQ installation is unreliable - skip for now
+    # TODO: Enable for future version
     return None
 
 
 def compute_nisqa(audio_path: str) -> Dict:
     """Compute NISQA scores."""
-    # NISQA is complex - skip for now
+    # STUBBED: NISQA is complex - skip for now
+    # TODO: NISQA integration pending packaging issues
     return {
         'nisqa_mos': None,
         'nisqa_noisiness': None,
@@ -469,7 +471,8 @@ def compute_speaker_similarity(audio1: np.ndarray, sr1: int,
     """Compute speaker similarity using Resemblyzer."""
     metrics = {
         'resemblyzer_cosine_sim': None,
-        'ecapa_cosine_sim': None  # Disabled due to torchaudio compatibility issues
+        'ecapa_cosine_sim': None  # DISABLED: torchaudio compatibility issues
+        # TODO: Re-enable when torchaudio compatibility resolved
     }
 
     # Resemblyzer similarity

@@ -246,46 +246,117 @@ def compute_composite_score(dimensions: Dict, use_case: str) -> Optional[float]:
     return score / total_weight
 
 
+def _per_utterance_balanced(utterances: List[Dict]) -> Dict[str, float]:
+    """Compute a balanced composite score for each utterance individually.
+
+    Returns {utterance_id: balanced_score}.  Utterances where no dimension
+    can be computed are omitted.
+    """
+    balanced_weights = USE_CASES['balanced']
+    result = {}
+
+    for utt in utterances:
+        utt_id = utt.get('id')
+        if utt_id is None:
+            continue
+
+        # Compute per-dimension scores for this single utterance
+        dims: Dict[str, float] = {}
+        for dim_name, dim_metrics in DIMENSIONS.items():
+            norm_vals = []
+            for metric in dim_metrics:
+                value = utt.get(metric)
+                if value is not None and isinstance(value, (int, float)):
+                    normalized = normalize_metric(value, metric)
+                    if normalized is not None:
+                        norm_vals.append(normalized)
+            if norm_vals:
+                dims[dim_name] = float(np.mean(norm_vals))
+
+        # Weighted balanced composite (re-normalise for missing dimensions)
+        score = 0.0
+        total_weight = 0.0
+        for dim_name, weight in balanced_weights.items():
+            if weight > 0 and dim_name in dims:
+                score += dims[dim_name] * weight
+                total_weight += weight
+
+        if total_weight > 0:
+            result[utt_id] = score / total_weight
+
+    return result
+
+
 def compute_significance(model_results: Dict) -> Dict:
-    """Compute statistical significance between models using Wilcoxon test."""
+    """Compute statistical significance between models using Wilcoxon test.
+
+    Tests are run on two metrics:
+      1. UTMOS (raw per-utterance naturalness scores)
+      2. Balanced composite (per-utterance weighted score across all dimensions)
+
+    Both use paired Wilcoxon signed-rank with Bonferroni correction.
+    """
     from itertools import combinations
 
     model_names = list(model_results.keys())
     significance = {}
 
-    # Get UTMOS scores for each model
-    utmos_scores = {}
+    # ── Collect per-utterance UTMOS scores (keyed by utterance id) ────────
+    utmos_by_id: Dict[str, Dict[str, float]] = {}  # {model: {utt_id: score}}
     for model in model_names:
-        scores = []
+        scores = {}
         for utt in model_results[model]['per_utterance']:
-            if utt.get('utmos') is not None:
-                scores.append(utt['utmos'])
-        utmos_scores[model] = scores
+            if utt.get('utmos') is not None and utt.get('id') is not None:
+                scores[utt['id']] = utt['utmos']
+        utmos_by_id[model] = scores
 
-    # Pairwise comparisons
+    # ── Collect per-utterance balanced composite scores ───────────────────
+    balanced_by_id: Dict[str, Dict[str, float]] = {}
+    for model in model_names:
+        balanced_by_id[model] = _per_utterance_balanced(
+            model_results[model]['per_utterance']
+        )
+
+    # ── Bonferroni correction denominator ─────────────────────────────────
+    n_comparisons = len(list(combinations(model_names, 2)))
+    alpha = 0.05 / max(n_comparisons, 1)
+
+    # ── Pairwise comparisons ──────────────────────────────────────────────
     for model1, model2 in combinations(model_names, 2):
-        scores1 = utmos_scores[model1]
-        scores2 = utmos_scores[model2]
+        entry: Dict[str, Any] = {}
 
-        if len(scores1) > 5 and len(scores2) > 5:
-            # Wilcoxon signed-rank test (paired)
-            min_len = min(len(scores1), len(scores2))
-            statistic, p_value = stats.wilcoxon(
-                scores1[:min_len],
-                scores2[:min_len],
-                alternative='two-sided'
-            )
+        # --- UTMOS (paired by utterance id) ---
+        common_utmos = sorted(
+            set(utmos_by_id[model1]) & set(utmos_by_id[model2])
+        )
+        if len(common_utmos) > 5:
+            s1 = [utmos_by_id[model1][uid] for uid in common_utmos]
+            s2 = [utmos_by_id[model2][uid] for uid in common_utmos]
+            _, p = stats.wilcoxon(s1, s2, alternative='two-sided')
+            entry['utmos_p_value'] = float(p)
+            entry['utmos_significant'] = bool(p < alpha)
+        else:
+            entry['utmos_p_value'] = None
+            entry['utmos_significant'] = None
 
-            # Bonferroni correction
-            n_comparisons = len(list(combinations(model_names, 2)))
-            alpha = 0.05 / n_comparisons
+        # --- Balanced composite (paired by utterance id) ---
+        common_bal = sorted(
+            set(balanced_by_id[model1]) & set(balanced_by_id[model2])
+        )
+        if len(common_bal) > 5:
+            s1 = [balanced_by_id[model1][uid] for uid in common_bal]
+            s2 = [balanced_by_id[model2][uid] for uid in common_bal]
+            _, p = stats.wilcoxon(s1, s2, alternative='two-sided')
+            entry['balanced_p_value'] = float(p)
+            entry['balanced_significant'] = bool(p < alpha)
+        else:
+            entry['balanced_p_value'] = None
+            entry['balanced_significant'] = None
 
-            significance[f"{model1}_vs_{model2}"] = {
-                'p_value': float(p_value),
-                'significant_005': bool(p_value < alpha),
-                'n_pairs': min_len,
-                'effect_size_r': None  # Could compute rank-biserial r
-            }
+        entry['n_pairs_utmos'] = len(common_utmos)
+        entry['n_pairs_balanced'] = len(common_bal)
+
+        significance[f"{model1}_vs_{model2}"] = entry
 
     return significance
 
@@ -618,7 +689,7 @@ def main():
             'dataset': 'multi' if has_multi_dataset else 'seed_tts_eval',
             'n_models': len(model_results),
             'n_utterances': len(next(iter(model_results.values()))['per_utterance']) if model_results else 0,
-            'n_active_metrics': 44,  # Updated count
+            'n_active_metrics': 28,  # 28 metrics feed into 6 dimensions (41 total computed, 7 stubbed/disabled)
             'has_dataset_comparison': has_multi_dataset,
             'has_ttsds': ttsds_data is not None,
             'ttsds_version': ttsds_data.get('ttsds_version') if ttsds_data else None,
