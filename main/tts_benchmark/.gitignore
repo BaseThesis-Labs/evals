@@ -1,5 +1,7 @@
 # Virtual environment
 tts/
+.venv/
+venv/
 
 # Large datasets (re-downloadable)
 datasets/libritts_r/
@@ -29,3 +31,9 @@ hov_gen_audio/
 harvard_gen_audio/
 challenge_gen_audio/
 ljspeech_gen_audio/
+
+# TTSDS — large audio dirs (re-generatable)
+datasets/ttsds_reference/
+ttsds_gen_audio/
+# Raw TTSDS CSV output (large, re-generatable)
+ttsds_results/raw.csv

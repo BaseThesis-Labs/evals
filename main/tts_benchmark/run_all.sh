@@ -37,17 +37,17 @@ fi
 START_TIME=$(date +%s)
 
 # Step 1: Download dataset
-echo "▶ [1/5] Downloading Seed-TTS-Eval & sampling 200 utterances..."
+echo "▶ [1/9] Downloading Seed-TTS-Eval & sampling 200 utterances..."
 python datasets/download.py --n-samples 200 --seed 42
 echo ""
 
 # Step 2: Generate audio
-echo "▶ [2/5] Generating audio (5 models × 200 utterances)..."
+echo "▶ [2/9] Generating audio (5 models × 200 utterances)..."
 python generate.py --config configs/models.yaml --manifest datasets/manifest.json
 echo ""
 
 # Step 3: Evaluate
-echo "▶ [3/5] Computing 35 metrics..."
+echo "▶ [3/9] Computing 35 metrics..."
 python evaluate.py \
     --gen-dir generated_audio \
     --manifest datasets/manifest.json \
@@ -56,16 +56,42 @@ python evaluate.py \
 echo ""
 
 # Step 4: Aggregate
-echo "▶ [4/5] Aggregating scores & computing rankings..."
+echo "▶ [4/9] Aggregating scores & computing rankings..."
 python aggregate.py --results-dir results --output analysis/leaderboard.json
 echo ""
 
 # Step 5: Visualize
-echo "▶ [5/5] Generating 6 charts..."
+echo "▶ [5/9] Generating 6 charts..."
 python visualize.py \
     --input analysis/leaderboard.json \
     --output analysis/charts \
     --results-dir results
+echo ""
+
+# ── TTSDS Benchmark ────────────────────────────────────────────────────────
+echo "▶ [6/9] TTSDS: Downloading dataset & reference audio..."
+python datasets/download.py --dataset ttsds --n-samples 50 --seed 42
+echo ""
+
+echo "▶ [7/9] TTSDS: Generating audio..."
+python generate.py \
+    --config configs/models.yaml \
+    --manifest datasets/ttsds_manifest.json \
+    --output ttsds_gen_audio
+echo ""
+
+echo "▶ [8/9] TTSDS: Evaluating distributional scores..."
+python evaluate_ttsds.py \
+    --gen-dir ttsds_gen_audio \
+    --reference-dir datasets/ttsds_reference \
+    --output ttsds_results/ttsds_scores.json
+echo ""
+
+echo "▶ [9/9] TTSDS: Merging into leaderboard..."
+python aggregate.py \
+    --results-dir results \
+    --ttsds-results ttsds_results/ttsds_scores.json \
+    --output analysis/leaderboard.json
 echo ""
 
 END_TIME=$(date +%s)

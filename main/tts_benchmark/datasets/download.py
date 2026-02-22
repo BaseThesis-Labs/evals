@@ -804,6 +804,98 @@ def create_cmu_arctic_manifest(
     return entries
 
 
+def create_ttsds_manifest(
+    n_samples: int = 200,
+    seed: int = 42,
+    reference_dir: str = "datasets/ttsds_reference",
+) -> List[Dict]:
+    """Create manifest from TTSDS dataset (distributional TTS benchmark).
+
+    Downloads text prompts from HuggingFace and saves reference audio WAVs
+    to reference_dir for use as the real-speech distribution in TTSDS evaluation.
+
+    Args:
+        n_samples: Number of utterances to include (default: 200).
+        seed: Random seed for reproducibility.
+        reference_dir: Directory to save reference audio WAVs.
+    """
+    try:
+        import soundfile as sf
+        import numpy as np
+        from datasets import load_dataset as hf_load_dataset
+    except ImportError:
+        print("  ✗ Missing packages. Run: pip install datasets soundfile")
+        return []
+
+    ref_dir = Path(reference_dir)
+    ref_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"  ▶ Loading TTSDS dataset from HuggingFace...")
+
+    ds = None
+    for dataset_name in ["ttsds/ttsds-bench", "ttsds/ttsds", "ttsds/ttsds-en"]:
+        try:
+            ds = hf_load_dataset(dataset_name, split="test", trust_remote_code=True)
+            print(f"  ✓ Loaded: {dataset_name}")
+            break
+        except Exception as e:
+            print(f"  ⚠ Could not load '{dataset_name}': {e}")
+
+    if ds is None:
+        print("  ✗ Could not load TTSDS dataset from HuggingFace.")
+        print("    Ensure 'datasets' is installed: pip install datasets huggingface_hub")
+        return []
+
+    random.seed(seed)
+
+    total = len(ds)
+    if n_samples < total:
+        indices = random.sample(range(total), n_samples)
+    else:
+        indices = list(range(total))
+
+    entries = []
+    for i, idx in enumerate(indices):
+        item = ds[idx]
+        text = (
+            item.get('text')
+            or item.get('sentence')
+            or item.get('transcription')
+            or ''
+        )
+        if not text:
+            continue
+
+        uid = f"TTSDS_{i:05d}"
+
+        # Save reference audio WAV if available
+        audio_info = item.get('audio', {})
+        if isinstance(audio_info, dict):
+            array = audio_info.get('array')
+            sr = audio_info.get('sampling_rate', 22050)
+            if array is not None:
+                wav_path = ref_dir / f"{uid}.wav"
+                if not wav_path.exists():
+                    sf.write(str(wav_path), np.array(array), sr)
+
+        entries.append({
+            'id': uid,
+            'text': text,
+            'dataset': 'ttsds',
+            'category': 'ttsds',
+            'language': 'en',
+            'difficulty': 'standard',
+            'reference_audio_path': None,
+            'speaker_id': 'spk_ttsds',
+        })
+
+        if (i + 1) % 20 == 0:
+            print(f"    {i + 1}/{len(indices)} processed...", end='\r')
+
+    print(f"  ✓ TTSDS: {len(entries)} entries, reference audio in {ref_dir}")
+    return entries
+
+
 def create_multi_dataset_manifest(
     datasets: List[str],
     n_samples: int = None,
@@ -895,7 +987,7 @@ Examples:
     parser.add_argument(
         '--dataset', type=str, default='seed',
         choices=['seed', 'harvard', 'challenge', 'all',
-                 'ljspeech', 'vctk', 'cmu_arctic'],
+                 'ljspeech', 'vctk', 'cmu_arctic', 'ttsds'],
         help='Dataset(s) to prepare (default: seed)')
     parser.add_argument(
         '--categories', nargs='+',
@@ -931,6 +1023,10 @@ Examples:
     parser.add_argument(
         '--cmu-speakers', nargs='+', default=None,
         help='CMU Arctic speaker IDs (e.g. slt bdl). Default: all found.')
+    parser.add_argument(
+        '--reference-dir', type=str, default='datasets/ttsds_reference',
+        help='Directory to save TTSDS reference audio WAVs '
+             '(default: datasets/ttsds_reference). Only used with --dataset ttsds.')
     parser.add_argument(
         '--output', type=str, default=None,
         help='Output path for manifest JSON. '
@@ -1003,6 +1099,14 @@ Examples:
             dataset_root=Path(args.cmu_arctic_path),
             speakers=args.cmu_speakers,
             seed=args.seed,
+        )
+
+    elif args.dataset == 'ttsds':
+        n_samples = args.n_samples if args.n_samples else 200
+        entries = create_ttsds_manifest(
+            n_samples=n_samples,
+            seed=args.seed,
+            reference_dir=args.reference_dir,
         )
 
     else:

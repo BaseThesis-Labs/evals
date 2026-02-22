@@ -15,7 +15,7 @@ torchaudio>=2.0.0
 soundfile>=0.12.1
 librosa>=0.10.1
 pydub>=0.25.1
-numpy>=1.24.0
+numpy>=1.24.0,<2
 scipy>=1.11.0
 
 # Data & Utilities
@@ -119,12 +119,19 @@ praat-parselmouth>=0.4.3
 # Requires: torch
 
 # ============================================================================
+# DATASET ACCESS
+# ============================================================================
+
+# HuggingFace (for TTSDS dataset download and LJSpeech/VCTK streaming)
+datasets>=2.0.0
+huggingface_hub>=0.20.0
+
+# ============================================================================
 # EVALUATION METRICS - DISTRIBUTION
 # ============================================================================
 
-# TTSDS2
-# May need to install from source
-# git+https://github.com/microsoft/TTSDS.git
+# TTSDS (Text-to-Speech Distribution Score)
+ttsds
 
 # ============================================================================
 # VISUALIZATION

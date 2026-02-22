@@ -508,6 +508,9 @@ def main():
                        help='Results directory')
     parser.add_argument('--output', type=str, default='analysis/leaderboard.json',
                        help='Output file')
+    parser.add_argument('--ttsds-results', type=str, default=None,
+                       help='Path to ttsds_scores.json to merge TTSDS dimensions '
+                            'into the leaderboard (optional, backward compatible)')
     args = parser.parse_args()
 
     results_dir = Path(args.results_dir)
@@ -528,6 +531,46 @@ def main():
     for model_name, result_data in model_results.items():
         print(f"▶ Aggregating {model_name}")
         aggregated[model_name] = aggregate_model(result_data)
+
+    # ── Merge TTSDS distributional scores (optional) ──────────────────────────
+    ttsds_data = None
+    if args.ttsds_results:
+        ttsds_path = Path(args.ttsds_results)
+        if ttsds_path.exists():
+            with open(ttsds_path) as f:
+                ttsds_data = json.load(f)
+            print(f"▶ Loaded TTSDS results from {ttsds_path} "
+                  f"({len(ttsds_data.get('models', {}))} models)")
+
+            for model_name, model_entry in aggregated.items():
+                if model_name in ttsds_data.get("models", {}):
+                    td = ttsds_data["models"][model_name]
+                    # Add TTSDS sub-scores as named dimensions
+                    if td.get("general") is not None:
+                        model_entry["dimensions"]["ttsds_general"] = td["general"]
+                    if td.get("environment") is not None:
+                        model_entry["dimensions"]["ttsds_environment"] = td["environment"]
+                    if td.get("intelligibility") is not None:
+                        model_entry["dimensions"]["ttsds_intelligibility"] = td["intelligibility"]
+                    if td.get("prosody") is not None:
+                        model_entry["dimensions"]["ttsds_prosody"] = td["prosody"]
+                    if td.get("speaker") is not None:
+                        model_entry["dimensions"]["ttsds_speaker"] = td["speaker"]
+                    if td.get("overall") is not None:
+                        model_entry["dimensions"]["ttsds_overall"] = td["overall"]
+
+                    # Blend ttsds_overall into the balanced composite (10% weight)
+                    ttsds_overall = td.get("overall")
+                    if ttsds_overall is not None:
+                        old_balanced = model_entry["composites"].get("balanced")
+                        if old_balanced is not None:
+                            model_entry["composites"]["balanced"] = (
+                                0.9 * old_balanced + 0.1 * ttsds_overall
+                            )
+                        # Also store the raw TTSDS composite for reference
+                        model_entry["composites"]["ttsds_overall"] = ttsds_overall
+        else:
+            print(f"  ⚠ TTSDS results file not found: {ttsds_path} (skipping)")
 
     # Compute rankings
     rankings = {}
@@ -577,6 +620,8 @@ def main():
             'n_utterances': len(next(iter(model_results.values()))['per_utterance']) if model_results else 0,
             'n_active_metrics': 44,  # Updated count
             'has_dataset_comparison': has_multi_dataset,
+            'has_ttsds': ttsds_data is not None,
+            'ttsds_version': ttsds_data.get('ttsds_version') if ttsds_data else None,
         },
         'rankings': rankings,
         'models': aggregated,
