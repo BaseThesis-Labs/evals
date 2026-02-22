@@ -1,0 +1,51 @@
+\section{Related Work}
+
+% Paragraph 1: TTS Evaluation Benchmarks (~100 words)
+MOS has dominated TTS evaluation, yet a meta-analysis of Interspeech and SSW papers reveals
+pervasive inconsistencies in how MOS tests are conducted and
+reported~\cite{kirkland2023mos}. The VoiceMOS Challenge established shared
+tasks for MOS prediction~\cite{huang2022voicemos,huang2024voicemos}, but
+human parity claims grounded in MOS/CMOS collapse under deception
+testing~\cite{srinivasavaradhan2025statetts}. Multi-factor objective
+frameworks address this: TTSDS evaluates distribution-level quality across
+prosody, speaker identity, and
+intelligibility~\cite{minixhofer2024ttsds,minixhofer2025ttsds2}, while others
+propose contextual dialogue evaluation~\cite{wang2024contextual} and
+reference-free quality assessment~\cite{manocha2021noresqa}. These frameworks
+assess quality dimensions independently but provide no deployment-specific
+composite scoring---a practitioner selecting a system for audiobooks faces
+different tradeoffs than one building a voice assistant, yet existing
+benchmarks rank all systems on a single axis.
+
+% Paragraph 2: Objective Speech Quality Metrics (~100 words)
+Neural MOS predictors enable scalable quality assessment without human raters:
+UTMOS~\cite{saeki2022utmos} and DNSMOS~\cite{reddy2021dnsmos} predict
+perceptual quality non-intrusively, while PESQ~\cite{itu2001pesq} and
+STOI~\cite{taal2011stoi} measure signal-level fidelity against reference
+audio. Speaker similarity assessment relies on embedding cosine distance
+validated against human judgments~\cite{deja2022calibrated}, with tools such
+as Resemblyzer~\cite{jemine2019resemblyzer} enabling automated comparison.
+Prosody analysis via Parselmouth~\cite{jadoul2018parselmouth} captures F0
+dynamics, jitter, shimmer, and temporal patterns; intelligibility is typically
+reduced to word error rate via ASR~\cite{radford2023whisper}. Most benchmarks
+select two or three of these metrics in isolation. Latency, despite its
+criticality for real-time deployment, is rarely treated as a first-class
+evaluation dimension. No existing framework
+systematically aggregates across naturalness, intelligibility, speaker
+similarity, prosody, robustness, and latency with principled normalization and
+dimension-level scoring.
+
+% Paragraph 3: Robustness and Adversarial Evaluation (~100 words)
+Standard TTS benchmarks rely on clean read-speech datasets such as
+Seed-TTS-Eval~\cite{anastassiou2024seedtts}, which fail to expose
+system-specific failure modes. Robustness testing remains narrow: one study
+tested resilience to noisy transcriptions~\cite{feng2024robustness};
+EmergentTTS-Eval introduced 1,645 challenge cases but relies on
+LLM-as-judge without objective metrics~\cite{manku2025emergentttseval}.
+Code-switching---a critical real-world scenario---has advanced in TTS
+synthesis~\cite{zhou2020codeswitching,wu2024mole} but remains absent as an
+evaluation dimension. Similarly, emotional prosody generation is
+progressing~\cite{lei2022msemotts}, yet benchmarks rarely test emotionally
+loaded text. We address these gaps with a 7-category adversarial challenge
+set, 28 objective metrics across 6 dimensions, and 5 use-case composite
+scores that map evaluation directly to deployment requirements.

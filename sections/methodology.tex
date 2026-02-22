@@ -1,0 +1,138 @@
+\section{Methodology}
+
+\subsection{Framework Architecture}
+
+% ~120 words — 6-stage pipeline, 24kHz, model-agnostic
+The framework implements a six-stage pipeline
+(Figure~\ref{fig:architecture}): (1)~dataset preparation, including
+standard corpora and our novel challenge set; (2)~speech generation through
+a model-agnostic client interface, where each TTS system inherits from a
+common \texttt{BaseTTSClient} class configured via YAML, with exponential
+backoff for API rate limits; (3)~per-utterance metric computation across 28
+objective measures; (4)~normalization and composite score aggregation;
+(5)~visualization; and (6)~statistical significance testing. All generated
+audio is resampled to 24\,kHz mono float32 to ensure fair comparison across
+systems with differing native sample rates. The modular design allows new
+models and metrics to be added by implementing the client interface and
+registering metric functions, without modifying the core pipeline.
+
+\subsection{Evaluation Metrics}
+
+% ~200 words — 28 metrics, 6 dimensions, table + prose descriptions
+We evaluate synthesized speech across 28 metrics organized into six
+perceptual dimensions (Table~\ref{tab:dimensions}).
+
+\begin{table}[t]
+\centering
+\caption{Evaluation dimensions and their constituent metrics. All 28 metrics
+are computed per utterance and aggregated per dimension.}
+\label{tab:dimensions}
+\small
+\begin{tabular}{@{}p{1.6cm}p{4.4cm}c@{}}
+\toprule
+\textbf{Dimension} & \textbf{Metrics} & \textbf{N} \\
+\midrule
+Naturalness & UTMOS, DNSMOS, output SNR, PESQ, STOI & 5 \\
+Intelligibility & WER, CER, ASR mismatch, word skip rate, semantic distance & 5 \\
+Speaker Sim. & Resemblyzer cosine similarity & 1 \\
+Prosody & F0 range, jitter, shimmer, HNR, pause ratio, speaking/syllable rate, pause count/mean dur., duration ratio, energy mean/std, dynamic range & 13 \\
+Robustness & repetition, silence anomaly, insertion rate & 3 \\
+Latency & real-time factor (RTF) & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Naturalness} combines neural MOS prediction via
+UTMOS~\cite{saeki2022utmos} and DNSMOS~\cite{reddy2021dnsmos} with
+signal-level fidelity measured by PESQ~\cite{itu2001pesq} and
+STOI~\cite{taal2011stoi}, plus VAD-based output SNR as a reference-free
+signal quality indicator.
+\textbf{Intelligibility} computes word and character error rates using
+Whisper base~\cite{radford2023whisper} as the ASR backbone, supplemented by
+word skip rate (proportion of deleted words) and round-trip semantic
+distance via sentence embeddings to capture meaning preservation beyond
+surface-level transcription accuracy.
+\textbf{Speaker similarity} measures cosine distance between reference and
+synthesized speaker embeddings using
+Resemblyzer~\cite{jemine2019resemblyzer}; it is evaluated only when
+reference audio is available.
+\textbf{Prosody} captures 13 features spanning pitch dynamics (F0 range,
+jitter, shimmer, HNR), temporal patterns (pause ratio, speaking and
+syllable rates, pause count and mean duration, duration ratio), and energy
+statistics (mean, standard deviation, dynamic range)---all extracted via
+Parselmouth~\cite{jadoul2018parselmouth} and Silero VAD.
+\textbf{Robustness} flags three failure modes: n-gram repetition (the same
+phrase repeated three or more times), silence anomalies from VAD analysis,
+and spurious word insertions.
+\textbf{Latency} records the real-time factor (RTF) from generation
+metadata, measuring computational cost relative to audio duration.
+
+\subsection{Challenge Set}
+
+% ~170 words — 7 categories, ~350 utterances, code-switching theme
+Standard TTS benchmarks rely on clean read speech such as
+Seed-TTS-Eval~\cite{anastassiou2024seedtts}, which fails to expose
+system-specific failure modes. We introduce a 7-category adversarial
+challenge set comprising approximately 350 utterances (${\sim}50$ per
+category), each targeting a distinct synthesis difficulty:
+\textit{numbers} (dates, currency, phone numbers), \textit{proper nouns}
+(foreign-origin names, brands), \textit{tongue twisters} (phonetically
+demanding sequences), \textit{long-form} passages (200+ words testing
+coherence over extended output), \textit{questions} (interrogative prosody
+requiring rising intonation), \textit{emotional} text (excitement, sadness,
+anger), and \textit{code-switching} (English with embedded French and
+German phrases). The code-switching category directly addresses multilingual
+speech production, aligning with the Interspeech 2026 ``Speaking Together''
+theme. Concurrent work on adversarial TTS
+evaluation~\cite{manku2025emergentttseval} introduces 1,645 challenge cases
+but relies on LLM-as-judge scoring; our challenge set instead pairs each
+utterance with ground-truth transcripts and evaluates all 28 objective
+metrics, enabling reproducible, fine-grained difficulty analysis across
+categories and systems.
+
+\subsection{Use-Case Composite Scoring}
+
+% ~180 words — normalization, weights table, renormalization, Wilcoxon
+Raw dimension scores are derived in three steps. First, each metric is
+clipped to empirically determined bounds and linearly scaled to $[0,\,1]$.
+Second, lower-is-better metrics (e.g., WER, RTF) are inverted so that
+higher always indicates better performance. Third, prosodic measures where
+both extremes are undesirable---jitter, shimmer, speaking rate, pause
+ratio, syllable rate, and duration ratio---use target-based deviation
+scoring: values near the empirical optimum receive scores close to 1.0,
+with symmetric or asymmetric penalties for deviation. Each dimension score
+is the mean of its constituent normalized metrics.
+
+Use-case composites are weighted sums of the six dimension scores
+(Table~\ref{tab:composites}), reflecting deployment-specific priorities:
+audiobook narration emphasizes naturalness and prosody, while conversational
+AI prioritizes latency and intelligibility. When a dimension cannot be
+computed (e.g., speaker similarity without reference audio), the remaining
+weights are renormalized by dividing by their sum, preserving a $[0,\,1]$
+range.
+
+\begin{table}[t]
+\centering
+\caption{Use-case composite weights. Each row sums to 1.0; ``---'' denotes
+zero weight (dimension excluded from scoring).}
+\label{tab:composites}
+\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Use Case} & \textbf{Nat} & \textbf{Int} & \textbf{Spk} & \textbf{Pro} & \textbf{Rob} & \textbf{Lat} \\
+\midrule
+Audiobook      & .35 & .15 & .10 & .25 & .15 & --- \\
+Conversational & .20 & .25 & --- & .10 & .15 & .30 \\
+Voice Cloning  & .20 & .15 & .40 & .05 & .10 & .10 \\
+Low-Latency    & .15 & .20 & --- & .05 & .15 & .45 \\
+Balanced       & .20 & .20 & .15 & .10 & .15 & .20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Statistical significance of pairwise model differences is assessed via the
+Wilcoxon signed-rank test on matched per-utterance scores, with Bonferroni
+correction for multiple comparisons ($\alpha = 0.05 / \binom{k}{2}$ for $k$
+models). Tests are applied to both the balanced composite and raw UTMOS
+scores, providing complementary views of overall and perceptual quality
+differences.
