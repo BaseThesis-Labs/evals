@@ -1,0 +1,73 @@
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+*.env
+.env.*
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── Audio data (large, re-downloadable) ───────────────────────────────────────
+datasets/librispeech/
+datasets/tedlium/
+datasets/voxpopuli/
+datasets/commonvoice/
+datasets/earnings22/
+datasets/kincaid46/
+datasets/silence_noise/
+datasets/tts_generated/
+# Keep manifests (small, useful to version):
+!datasets/**/*.jsonl
+
+# ── Results (large, regeneratable from a pipeline run) ────────────────────────
+results/
+# Keep nothing from results — all regeneratable
+
+# ── Analysis outputs (charts, CSVs, leaderboards) ─────────────────────────────
+analysis/
+comparison_charts/
+# Optionally keep final leaderboards:
+# !analysis/**/leaderboard.json
+
+# ── HuggingFace cache ──────────────────────────────────────────────────────────
+~/.cache/huggingface/
+.cache/
+
+# ── Model weights (auto-downloaded at runtime) ────────────────────────────────
+models/
+*.bin
+*.pt
+*.ckpt
+*.safetensors
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Test & coverage artefacts ─────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log

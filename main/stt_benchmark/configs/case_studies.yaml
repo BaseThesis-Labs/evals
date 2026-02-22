@@ -1,0 +1,103 @@
+# 5 use-case weighting scenarios for aggregate.py
+# Weights per dimension must sum to 1.0.
+# Dimensions: intelligibility, semantic, latency, formatting, hallucination, entity
+
+case_studies:
+  conversational_ai:
+    description: "Real-time voice assistants, chatbots, IVR"
+    datasets: [tts_generated]
+    weights:
+      intelligibility: 0.30
+      semantic: 0.25
+      latency: 0.30
+      formatting: 0.00
+      hallucination: 0.15
+      entity: 0.00
+    primary_metrics: [wer, semdist, rtfx, hallucination_rate, ser]
+
+  audiobook:
+    description: "Long-form narration, podcasts, subtitles"
+    datasets: [tts_generated, librispeech_test_clean]
+    weights:
+      intelligibility: 0.35
+      semantic: 0.25
+      latency: 0.05
+      formatting: 0.25
+      hallucination: 0.00
+      entity: 0.10
+    primary_metrics: [wer, cer, fwer, punctuation_f1, semdist]
+
+  voice_cloning_qa:
+    description: "QA pipeline for voice-cloned TTS output"
+    datasets: [tts_generated]
+    weights:
+      intelligibility: 0.30
+      semantic: 0.25
+      latency: 0.10
+      formatting: 0.10
+      hallucination: 0.05
+      entity: 0.20
+    primary_metrics: [wer, semdist, entity_f1, bertscore_f1, ser]
+
+  low_latency:
+    description: "Streaming applications, live captioning"
+    datasets: [tts_generated, librispeech_test_clean]
+    weights:
+      intelligibility: 0.30
+      semantic: 0.10
+      latency: 0.45
+      formatting: 0.00
+      hallucination: 0.15
+      entity: 0.00
+    primary_metrics: [rtfx, wer, ser, hallucination_rate]
+
+  balanced:
+    description: "Equal-weight comparison across all dimensions"
+    datasets: [tts_generated, librispeech_test_clean, librispeech_test_other]
+    weights:
+      intelligibility: 0.25
+      semantic: 0.20
+      latency: 0.20
+      formatting: 0.15
+      hallucination: 0.10
+      entity: 0.10
+    primary_metrics: [wer, cer, semdist, bertscore_f1, rtfx, cost_per_hour_usd]
+
+# Metric normalization bounds used in aggregate.py
+# lower_is_better=true  → raw score normalized so 0=best, 1=worst
+# lower_is_better=false → inverted so 0=worst, 1=best
+metric_bounds:
+  wer:                {lower_is_better: true,  min: 0.0, max: 1.0}
+  cer:                {lower_is_better: true,  min: 0.0, max: 1.0}
+  mer:                {lower_is_better: true,  min: 0.0, max: 1.0}
+  ser:                {lower_is_better: true,  min: 0.0, max: 1.0}
+  fwer:               {lower_is_better: true,  min: 0.0, max: 1.0}
+  semdist:            {lower_is_better: true,  min: 0.0, max: 1.0}
+  asd:                {lower_is_better: true,  min: 0.0, max: 1.0}   # word-level avg semantic distance
+  bertscore_f1:       {lower_is_better: false, min: 0.0, max: 1.0}
+  entity_f1:          {lower_is_better: false, min: 0.0, max: 1.0}
+  rtfx:               {lower_is_better: false, min: 0.0, max: 10.0}   # 10x real-time = practical STT ceiling on CPU/API
+  hallucination_rate: {lower_is_better: true,  min: 0.0, max: 1.0}
+  punctuation_f1:     {lower_is_better: false, min: 0.0, max: 1.0}
+  capitalization_acc: {lower_is_better: false, min: 0.0, max: 1.0}  # near-0 on ALL-CAPS refs (LibriSpeech) — not discriminative there
+  # Advanced metrics
+  semascore:          {lower_is_better: false, min: 0.0, max: 1.0}
+  bleu_4:             {lower_is_better: false, min: 0.0, max: 1.0}
+  bleu_1:             {lower_is_better: false, min: 0.0, max: 1.0}
+  meteor:             {lower_is_better: false, min: 0.0, max: 1.0}
+  her:                {lower_is_better: true,  min: 0.0, max: 1.0}
+  punct_per:          {lower_is_better: true,  min: 0.0, max: 2.0}
+  avg_error_severity: {lower_is_better: true,  min: 0.0, max: 1.0}
+  max_error_severity: {lower_is_better: true,  min: 0.0, max: 1.0}
+  krr:                {lower_is_better: false, min: 0.0, max: 1.0}
+  impact_score:       {lower_is_better: true,  min: 0.0, max: 1.0}
+  shallow_sf:         {lower_is_better: true,  min: 0.0, max: 1.0}
+  shallow_rl:         {lower_is_better: true,  min: 0.0, max: 1.0}
+  shallow_lc:         {lower_is_better: true,  min: 0.0, max: 1.0}
+  # Error breakdown
+  wrr:                {lower_is_better: false, min: 0.0, max: 1.0}
+  sub_rate:           {lower_is_better: true,  min: 0.0, max: 1.0}
+  del_rate:           {lower_is_better: true,  min: 0.0, max: 1.0}
+  ins_rate:           {lower_is_better: true,  min: 0.0, max: 1.0}
+  # Economics / efficiency
+  nic:                {lower_is_better: false, min: 0.0, max: 10.0}

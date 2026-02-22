@@ -1,0 +1,912 @@
+{
+  "config": {
+    "primary_case_study": "balanced",
+    "n_models": 8,
+    "n_samples": 50,
+    "bootstrap_iters": 2000
+  },
+  "leaderboard": [
+    {
+      "model": "groq-distil-whisper-large-v3-en",
+      "composite_score": NaN,
+      "micro_wer": NaN,
+      "mean_wer": NaN,
+      "mean_cer": NaN,
+      "mean_semdist": NaN,
+      "mean_bertscore_f1": NaN,
+      "mean_rtfx": NaN,
+      "wer_ci_lo": NaN,
+      "wer_ci_hi": NaN,
+      "cost_per_hour_usd": NaN,
+      "dimension_scores": {
+        "intelligibility": NaN,
+        "semantic": NaN,
+        "latency": NaN,
+        "formatting": NaN,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": NaN,
+        "audiobook": NaN,
+        "voice_cloning_qa": NaN,
+        "low_latency": NaN,
+        "balanced": NaN
+      },
+      "rank": 1
+    },
+    {
+      "model": "elevenlabs-scribe_v2",
+      "composite_score": 0.6472316649224336,
+      "micro_wer": 0.0020408163265306124,
+      "mean_wer": 0.008,
+      "mean_cer": 0.0012903225806451613,
+      "mean_semdist": 0.0038161516189575196,
+      "mean_bertscore_f1": 0.9983741903305053,
+      "mean_rtfx": 5.857089318274893,
+      "wer_ci_lo": 0.008,
+      "wer_ci_hi": 0.008,
+      "cost_per_hour_usd": 0.29999999999999993,
+      "dimension_scores": {
+        "intelligibility": 0.9936774193548387,
+        "semantic": 0.9972790193557739,
+        "latency": 0.029285446591374463,
+        "formatting": 0.4270205593987163,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6543630760268322,
+        "audiobook": 0.7836958486582053,
+        "voice_cloning_qa": 0.7907381083258723,
+        "low_latency": 0.4835406808331147,
+        "balanced": 0.6472316649224336
+      },
+      "rank": 2
+    },
+    {
+      "model": "groq-whisper-large-v3-turbo",
+      "composite_score": 0.6460565416925954,
+      "micro_wer": 0.018367346938775512,
+      "mean_wer": 0.032501395429966856,
+      "mean_cer": 0.009911864644517033,
+      "mean_semdist": 0.015606962442398072,
+      "mean_bertscore_f1": 0.9926151299476623,
+      "mean_rtfx": 11.264755170974077,
+      "wer_ci_lo": 0.032501395429966856,
+      "wer_ci_hi": 0.032501395429966856,
+      "cost_per_hour_usd": 0.040199999999999986,
+      "dimension_scores": {
+        "intelligibility": 0.9731459872663956,
+        "semantic": 0.9885040837526321,
+        "latency": 0.05632377585487038,
+        "formatting": 0.4306210974398467,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6540787645582796,
+        "audiobook": 0.7757761995934462,
+        "voice_cloning_qa": 0.7836857392633979,
+        "low_latency": 0.4895763572822041,
+        "balanced": 0.6460565416925954
+      },
+      "rank": 3
+    },
+    {
+      "model": "groq-whisper-large-v3",
+      "composite_score": 0.640332299438889,
+      "micro_wer": 0.018367346938775512,
+      "mean_wer": 0.02948624391481534,
+      "mean_cer": 0.0073633735447121325,
+      "mean_semdist": 0.01610381841659546,
+      "mean_bertscore_f1": 0.9934203088283539,
+      "mean_rtfx": 7.135920799185168,
+      "wer_ci_lo": 0.02948624391481534,
+      "wer_ci_hi": 0.02948624391481534,
+      "cost_per_hour_usd": 0.0,
+      "dimension_scores": {
+        "intelligibility": 0.9760444736777104,
+        "semantic": 0.9886582452058792,
+        "latency": 0.03567960399592584,
+        "formatting": 0.4225810086088171,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6478609230630125,
+        "audiobook": 0.7735659549340768,
+        "voice_cloning_qa": 0.7810719528870096,
+        "low_latency": 0.47968822167302066,
+        "balanced": 0.640332299438889
+      },
+      "rank": 4
+    },
+    {
+      "model": "assemblyai-universal",
+      "composite_score": 0.6332926049400609,
+      "micro_wer": 0.011224489795918367,
+      "mean_wer": 0.025591686091686095,
+      "mean_cer": 0.009393535076729676,
+      "mean_semdist": 0.01290549397468567,
+      "mean_bertscore_f1": 0.9954076778888702,
+      "mean_rtfx": 1.5458980868637806,
+      "wer_ci_lo": 0.025591686091686095,
+      "wer_ci_hi": 0.025591686091686095,
+      "cost_per_hour_usd": 0.14999999999999997,
+      "dimension_scores": {
+        "intelligibility": 0.978457851662053,
+        "semantic": 0.9912510919570923,
+        "latency": 0.007729490434318903,
+        "formatting": 0.4148233637216887,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6396105595508054,
+        "audiobook": 0.7715170405812553,
+        "voice_cloning_qa": 0.7781405518713197,
+        "low_latency": 0.46604792398796296,
+        "balanced": 0.6332926049400609
+      },
+      "rank": 5
+    },
+    {
+      "model": "faster-whisper-large-v3-turbo",
+      "composite_score": 0.6325837916071626,
+      "micro_wer": 0.018367346938775512,
+      "mean_wer": 0.035209187637759064,
+      "mean_cer": 0.011874276659513638,
+      "mean_semdist": 0.020833064317703247,
+      "mean_bertscore_f1": 0.9925015115737915,
+      "mean_rtfx": 1.129034336194479,
+      "wer_ci_lo": 0.035209187637759064,
+      "wer_ci_hi": 0.035209187637759064,
+      "cost_per_hour_usd": 0.0,
+      "dimension_scores": {
+        "intelligibility": 0.9706245401068022,
+        "semantic": 0.9858342236280442,
+        "latency": 0.005645171680972395,
+        "formatting": 0.43410012798150793,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6345170228745216,
+        "audiobook": 0.772204928359797,
+        "voice_cloning_qa": 0.7754939305403997,
+        "low_latency": 0.46154248429562666,
+        "balanced": 0.6325837916071626
+      },
+      "rank": 6
+    },
+    {
+      "model": "deepgram-nova-3",
+      "composite_score": 0.6319491156244706,
+      "micro_wer": 0.017346938775510204,
+      "mean_wer": 0.03063991563991564,
+      "mean_cer": 0.01037854627101179,
+      "mean_semdist": 0.026804932355880738,
+      "mean_bertscore_f1": 0.9928323328495026,
+      "mean_rtfx": 2.5676568385988894,
+      "wer_ci_lo": 0.03063991563991564,
+      "wer_ci_hi": 0.03063991563991564,
+      "cost_per_hour_usd": 0.2579999999999999,
+      "dimension_scores": {
+        "intelligibility": 0.9744500572441821,
+        "semantic": 0.9830137002468109,
+        "latency": 0.012838284192994447,
+        "formatting": 0.4185092086704666,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6375763852857125,
+        "audiobook": 0.7689779571938141,
+        "voice_cloning_qa": 0.7749642553617379,
+        "low_latency": 0.4663689589232743,
+        "balanced": 0.6319491156244706
+      },
+      "rank": 7
+    },
+    {
+      "model": "faster-whisper-large-v3",
+      "composite_score": 0.6268040419966875,
+      "micro_wer": 0.04591836734693878,
+      "mean_wer": 0.05178783121640265,
+      "mean_cer": 0.027089151973682744,
+      "mean_semdist": 0.019369144439697266,
+      "mean_bertscore_f1": 0.9915374040603637,
+      "mean_rtfx": 0.6101969022659496,
+      "wer_ci_lo": 0.05178783121640265,
+      "wer_ci_hi": 0.05178783121640265,
+      "cost_per_hour_usd": 0.0,
+      "dimension_scores": {
+        "intelligibility": 0.9591498445941254,
+        "semantic": 0.9860841298103332,
+        "latency": 0.0030509845113297477,
+        "formatting": 0.42552499722990655,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6296250366873175,
+        "audiobook": 0.7652858628817448,
+        "voice_cloning_qa": 0.7694981120065929,
+        "low_latency": 0.45614859928161094,
+        "balanced": 0.6268040419966875
+      },
+      "rank": 8
+    }
+  ],
+  "significance": {
+    "assemblyai-universal": {
+      "assemblyai-universal": null,
+      "deepgram-nova-3": {
+        "statistic": 27.5,
+        "p_value": 0.3664319887723254,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.011616044899262476,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 1.0,
+        "p_value": 0.07961580146011343,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": {
+        "statistic": 7.0,
+        "p_value": 0.12348527214454895,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 5.0,
+        "p_value": 0.24886387493792206,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": {
+        "statistic": 14.0,
+        "p_value": 0.574934084570652,
+        "significant": false,
+        "n_pairs": 50
+      }
+    },
+    "deepgram-nova-3": {
+      "assemblyai-universal": {
+        "statistic": 27.5,
+        "p_value": 0.3664319887723254,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": null,
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.0014639297960568455,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 42.5,
+        "p_value": 0.529853803632789,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": {
+        "statistic": 18.0,
+        "p_value": 0.3328797545683888,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 42.5,
+        "p_value": 0.8337853523087038,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": {
+        "statistic": 20.5,
+        "p_value": 0.8125422341993517,
+        "significant": false,
+        "n_pairs": 50
+      }
+    },
+    "elevenlabs-scribe_v2": {
+      "assemblyai-universal": {
+        "statistic": 0.0,
+        "p_value": 0.011616044899262476,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": {
+        "statistic": 0.0,
+        "p_value": 0.0014639297960568455,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": null,
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 0.0,
+        "p_value": 0.005033508200606249,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": {
+        "statistic": 0.0,
+        "p_value": 0.00221772146423705,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 0.0,
+        "p_value": 0.005033508200606249,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": {
+        "statistic": 0.0,
+        "p_value": 0.005062032126267864,
+        "significant": true,
+        "n_pairs": 50
+      }
+    },
+    "faster-whisper-large-v3-turbo": {
+      "assemblyai-universal": {
+        "statistic": 1.0,
+        "p_value": 0.07961580146011343,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": {
+        "statistic": 42.5,
+        "p_value": 0.529853803632789,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.005033508200606249,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": null,
+      "faster-whisper-large-v3": {
+        "statistic": 7.0,
+        "p_value": 0.892738400944348,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 3.0,
+        "p_value": 0.4652088184521418,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": {
+        "statistic": 3.0,
+        "p_value": 0.2228009911811345,
+        "significant": false,
+        "n_pairs": 50
+      }
+    },
+    "faster-whisper-large-v3": {
+      "assemblyai-universal": {
+        "statistic": 7.0,
+        "p_value": 0.12348527214454895,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": {
+        "statistic": 18.0,
+        "p_value": 0.3328797545683888,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.00221772146423705,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 7.0,
+        "p_value": 0.892738400944348,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": null,
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 10.0,
+        "p_value": 0.49896229860376107,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": {
+        "statistic": 0.0,
+        "p_value": 0.10880943004054569,
+        "significant": false,
+        "n_pairs": 50
+      }
+    },
+    "groq-distil-whisper-large-v3-en": {
+      "assemblyai-universal": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "deepgram-nova-3": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "faster-whisper-large-v3": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-distil-whisper-large-v3-en": null,
+      "groq-whisper-large-v3-turbo": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      }
+    },
+    "groq-whisper-large-v3-turbo": {
+      "assemblyai-universal": {
+        "statistic": 5.0,
+        "p_value": 0.24886387493792206,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": {
+        "statistic": 42.5,
+        "p_value": 0.8337853523087038,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.005033508200606249,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 3.0,
+        "p_value": 0.4652088184521418,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": {
+        "statistic": 10.0,
+        "p_value": 0.49896229860376107,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": null,
+      "groq-whisper-large-v3": {
+        "statistic": 7.0,
+        "p_value": 0.46183801815063774,
+        "significant": false,
+        "n_pairs": 50
+      }
+    },
+    "groq-whisper-large-v3": {
+      "assemblyai-universal": {
+        "statistic": 14.0,
+        "p_value": 0.574934084570652,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "deepgram-nova-3": {
+        "statistic": 20.5,
+        "p_value": 0.8125422341993517,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "elevenlabs-scribe_v2": {
+        "statistic": 0.0,
+        "p_value": 0.005062032126267864,
+        "significant": true,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3-turbo": {
+        "statistic": 3.0,
+        "p_value": 0.2228009911811345,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "faster-whisper-large-v3": {
+        "statistic": 0.0,
+        "p_value": 0.10880943004054569,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-distil-whisper-large-v3-en": {
+        "statistic": NaN,
+        "p_value": NaN,
+        "significant": false
+      },
+      "groq-whisper-large-v3-turbo": {
+        "statistic": 7.0,
+        "p_value": 0.46183801815063774,
+        "significant": false,
+        "n_pairs": 50
+      },
+      "groq-whisper-large-v3": null
+    }
+  },
+  "all_models": {
+    "assemblyai-universal": {
+      "model": "assemblyai-universal",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.011224489795918367,
+        "mean_wer": 0.025591686091686095,
+        "mean_cer": 0.009393535076729676,
+        "mean_mer": 0.025591686091686095,
+        "mean_ser": 0.025591686091686095,
+        "mean_semdist": 0.01290549397468567,
+        "mean_bertscore_f1": 0.9954076778888702,
+        "mean_fwer": 0.18244423714758717,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 1.5458980868637806,
+        "mean_rtf": 0.9404865807892483,
+        "mean_inference_s": 4.991364404119086,
+        "total_cost_usd": 0.015650005208333335,
+        "cost_per_hour_usd": 0.14999999999999997
+      },
+      "wer_ci": {
+        "lo": 0.025591686091686095,
+        "hi": 0.025591686091686095
+      },
+      "dimension_scores": {
+        "intelligibility": 0.978457851662053,
+        "semantic": 0.9912510919570923,
+        "latency": 0.007729490434318903,
+        "formatting": 0.4148233637216887,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6396105595508054,
+        "audiobook": 0.7715170405812553,
+        "voice_cloning_qa": 0.7781405518713197,
+        "low_latency": 0.46604792398796296,
+        "balanced": 0.6332926049400609
+      }
+    },
+    "deepgram-nova-3": {
+      "model": "deepgram-nova-3",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.017346938775510204,
+        "mean_wer": 0.03063991563991564,
+        "mean_cer": 0.01037854627101179,
+        "mean_mer": 0.030590654556171798,
+        "mean_ser": 0.030590654556171798,
+        "mean_semdist": 0.026804932355880738,
+        "mean_bertscore_f1": 0.9928323328495026,
+        "mean_fwer": 0.17468793186541592,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 2.5676568385988894,
+        "mean_rtf": 0.5495183947171617,
+        "mean_inference_s": 3.042381611658493,
+        "total_cost_usd": 0.02691800895833333,
+        "cost_per_hour_usd": 0.2579999999999999
+      },
+      "wer_ci": {
+        "lo": 0.03063991563991564,
+        "hi": 0.03063991563991564
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9744500572441821,
+        "semantic": 0.9830137002468109,
+        "latency": 0.012838284192994447,
+        "formatting": 0.4185092086704666,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6375763852857125,
+        "audiobook": 0.7689779571938141,
+        "voice_cloning_qa": 0.7749642553617379,
+        "low_latency": 0.4663689589232743,
+        "balanced": 0.6319491156244706
+      }
+    },
+    "elevenlabs-scribe_v2": {
+      "model": "elevenlabs-scribe_v2",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.0020408163265306124,
+        "mean_wer": 0.008,
+        "mean_cer": 0.0012903225806451613,
+        "mean_mer": 0.008,
+        "mean_ser": 0.008,
+        "mean_semdist": 0.0038161516189575196,
+        "mean_bertscore_f1": 0.9983741903305053,
+        "mean_fwer": 0.15766523040891656,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 5.857089318274893,
+        "mean_rtf": 0.19915307414907818,
+        "mean_inference_s": 1.199434816619614,
+        "total_cost_usd": 0.03130001041666667,
+        "cost_per_hour_usd": 0.29999999999999993
+      },
+      "wer_ci": {
+        "lo": 0.008,
+        "hi": 0.008
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9936774193548387,
+        "semantic": 0.9972790193557739,
+        "latency": 0.029285446591374463,
+        "formatting": 0.4270205593987163,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6543630760268322,
+        "audiobook": 0.7836958486582053,
+        "voice_cloning_qa": 0.7907381083258723,
+        "low_latency": 0.4835406808331147,
+        "balanced": 0.6472316649224336
+      }
+    },
+    "faster-whisper-large-v3-turbo": {
+      "model": "faster-whisper-large-v3-turbo",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.018367346938775512,
+        "mean_wer": 0.035209187637759064,
+        "mean_cer": 0.011874276659513638,
+        "mean_mer": 0.035209187637759064,
+        "mean_ser": 0.035209187637759064,
+        "mean_semdist": 0.020833064317703247,
+        "mean_bertscore_f1": 0.9925015115737915,
+        "mean_fwer": 0.13957752181476196,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 1.129034336194479,
+        "mean_rtf": 1.2258399217910207,
+        "mean_inference_s": 6.51487750584376,
+        "total_cost_usd": 0.0,
+        "cost_per_hour_usd": 0.0
+      },
+      "wer_ci": {
+        "lo": 0.035209187637759064,
+        "hi": 0.035209187637759064
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9706245401068022,
+        "semantic": 0.9858342236280442,
+        "latency": 0.005645171680972395,
+        "formatting": 0.43410012798150793,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6345170228745216,
+        "audiobook": 0.772204928359797,
+        "voice_cloning_qa": 0.7754939305403997,
+        "low_latency": 0.46154248429562666,
+        "balanced": 0.6325837916071626
+      }
+    },
+    "faster-whisper-large-v3": {
+      "model": "faster-whisper-large-v3",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.04591836734693878,
+        "mean_wer": 0.05178783121640265,
+        "mean_cer": 0.027089151973682744,
+        "mean_mer": 0.042261819216706444,
+        "mean_ser": 0.042261819216706444,
+        "mean_semdist": 0.019369144439697266,
+        "mean_bertscore_f1": 0.9915374040603637,
+        "mean_fwer": 0.15371191030209164,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 0.6101969022659496,
+        "mean_rtf": 2.407841565160964,
+        "mean_inference_s": 14.97192175165983,
+        "total_cost_usd": 0.0,
+        "cost_per_hour_usd": 0.0
+      },
+      "wer_ci": {
+        "lo": 0.05178783121640265,
+        "hi": 0.05178783121640265
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9591498445941254,
+        "semantic": 0.9860841298103332,
+        "latency": 0.0030509845113297477,
+        "formatting": 0.42552499722990655,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6296250366873175,
+        "audiobook": 0.7652858628817448,
+        "voice_cloning_qa": 0.7694981120065929,
+        "low_latency": 0.45614859928161094,
+        "balanced": 0.6268040419966875
+      }
+    },
+    "groq-distil-whisper-large-v3-en": {
+      "model": "groq-distil-whisper-large-v3-en",
+      "n_samples": 0,
+      "raw": {
+        "micro_wer": NaN,
+        "mean_wer": NaN,
+        "mean_cer": NaN,
+        "mean_mer": NaN,
+        "mean_ser": NaN,
+        "mean_semdist": NaN,
+        "mean_bertscore_f1": NaN,
+        "mean_fwer": NaN,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": NaN,
+        "mean_rtf": NaN,
+        "mean_inference_s": NaN,
+        "total_cost_usd": 0,
+        "cost_per_hour_usd": NaN
+      },
+      "wer_ci": {
+        "lo": NaN,
+        "hi": NaN
+      },
+      "dimension_scores": {
+        "intelligibility": NaN,
+        "semantic": NaN,
+        "latency": NaN,
+        "formatting": NaN,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": NaN,
+        "audiobook": NaN,
+        "voice_cloning_qa": NaN,
+        "low_latency": NaN,
+        "balanced": NaN
+      }
+    },
+    "groq-whisper-large-v3-turbo": {
+      "model": "groq-whisper-large-v3-turbo",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.018367346938775512,
+        "mean_wer": 0.032501395429966856,
+        "mean_cer": 0.009911864644517033,
+        "mean_mer": 0.032501395429966856,
+        "mean_ser": 0.032501395429966856,
+        "mean_semdist": 0.015606962442398072,
+        "mean_bertscore_f1": 0.9926151299476623,
+        "mean_fwer": 0.14379748765998912,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 11.264755170974077,
+        "mean_rtf": 0.43556670315526425,
+        "mean_inference_s": 2.1911892834224274,
+        "total_cost_usd": 0.004194201395833333,
+        "cost_per_hour_usd": 0.040199999999999986
+      },
+      "wer_ci": {
+        "lo": 0.032501395429966856,
+        "hi": 0.032501395429966856
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9731459872663956,
+        "semantic": 0.9885040837526321,
+        "latency": 0.05632377585487038,
+        "formatting": 0.4306210974398467,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6540787645582796,
+        "audiobook": 0.7757761995934462,
+        "voice_cloning_qa": 0.7836857392633979,
+        "low_latency": 0.4895763572822041,
+        "balanced": 0.6460565416925954
+      }
+    },
+    "groq-whisper-large-v3": {
+      "model": "groq-whisper-large-v3",
+      "n_samples": 50,
+      "raw": {
+        "micro_wer": 0.018367346938775512,
+        "mean_wer": 0.02948624391481534,
+        "mean_cer": 0.0073633735447121325,
+        "mean_mer": 0.02948624391481534,
+        "mean_ser": 0.02948624391481534,
+        "mean_semdist": 0.01610381841659546,
+        "mean_bertscore_f1": 0.9934203088283539,
+        "mean_fwer": 0.15987766532204833,
+        "mean_punctuation_f1": NaN,
+        "mean_entity_f1": NaN,
+        "mean_rtfx": 7.135920799185168,
+        "mean_rtf": 0.47833755475192113,
+        "mean_inference_s": 2.4592209509387613,
+        "total_cost_usd": 0.0,
+        "cost_per_hour_usd": 0.0
+      },
+      "wer_ci": {
+        "lo": 0.02948624391481534,
+        "hi": 0.02948624391481534
+      },
+      "dimension_scores": {
+        "intelligibility": 0.9760444736777104,
+        "semantic": 0.9886582452058792,
+        "latency": 0.03567960399592584,
+        "formatting": 0.4225810086088171,
+        "hallucination": NaN,
+        "entity": NaN
+      },
+      "composite_scores": {
+        "conversational_ai": 0.6478609230630125,
+        "audiobook": 0.7735659549340768,
+        "voice_cloning_qa": 0.7810719528870096,
+        "low_latency": 0.47968822167302066,
+        "balanced": 0.640332299438889
+      }
+    }
+  }
+}

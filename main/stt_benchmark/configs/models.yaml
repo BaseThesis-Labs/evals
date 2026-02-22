@@ -1,0 +1,82 @@
+models:
+  - name: faster-whisper-large-v3-turbo
+    class: src.models.whisper_model.FasterWhisperSTT
+    enabled: true
+    params:
+      model_size: large-v3-turbo
+      device: cpu
+      compute_type: int8
+      beam_size: 5
+
+  - name: faster-whisper-large-v3
+    class: src.models.whisper_model.FasterWhisperSTT
+    enabled: true
+    params:
+      model_size: large-v3
+      device: cpu
+      compute_type: int8
+      beam_size: 5
+
+  - name: openai-gpt4o-transcribe
+    class: src.models.openai_api.OpenAISTT
+    enabled: false
+    params:
+      model: gpt-4o-transcribe
+    api_key_env: OPENAI_API_KEY
+    cost_per_minute_usd: 0.006
+
+  - name: openai-gpt4o-mini-transcribe
+    class: src.models.openai_api.OpenAISTT
+    enabled: false
+    params:
+      model: gpt-4o-mini-transcribe
+    api_key_env: OPENAI_API_KEY
+    cost_per_minute_usd: 0.003
+
+  - name: deepgram-nova-3
+    class: src.models.deepgram_api.DeepgramSTT
+    enabled: true
+    params:
+      model: nova-3
+    api_key_env: DEEPGRAM_API_KEY
+    cost_per_minute_usd: 0.0043
+
+  - name: assemblyai-universal
+    class: src.models.assemblyai_api.AssemblyAISTT
+    enabled: true
+    params:
+      speech_model: universal-2
+    api_key_env: ASSEMBLYAI_API_KEY
+    cost_per_minute_usd: 0.0025
+
+  - name: elevenlabs-scribe-v2
+    class: src.models.elevenlabs_api.ElevenLabsSTT
+    enabled: true
+    params:
+      model: scribe_v2
+    api_key_env: ELEVENLABS_API_KEY
+    cost_per_minute_usd: 0.005
+
+  - name: groq-whisper-large-v3-turbo
+    class: src.models.groq_api.GroqSTT
+    enabled: true
+    params:
+      model: whisper-large-v3-turbo
+    api_key_env: GROQ_API_KEY
+    cost_per_minute_usd: 0.00067
+
+  - name: groq-whisper-large-v3
+    class: src.models.groq_api.GroqSTT
+    enabled: true
+    params:
+      model: whisper-large-v3
+    api_key_env: GROQ_API_KEY
+    cost_per_minute_usd: 0.00111
+
+  - name: google-chirp-2
+    class: src.models.google_api.GoogleSTT
+    enabled: false
+    params:
+      model: chirp_2
+    api_key_env: GOOGLE_APPLICATION_CREDENTIALS
+    cost_per_minute_usd: 0.016

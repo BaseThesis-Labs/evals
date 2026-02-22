@@ -1,0 +1,51 @@
+# ── Core utilities ────────────────────────────────────────────────────────────
+pyyaml==6.0.2
+pydantic==2.12.5
+click==8.3.1
+rich==14.3.2
+tqdm==4.67.1
+
+# ── Audio I/O ─────────────────────────────────────────────────────────────────
+soundfile==0.13.1
+
+# ── PyTorch CPU-only ──────────────────────────────────────────────────────────
+# Install with: pip install torch==2.10.0 torchaudio==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+torch==2.10.0
+torchaudio==2.10.0
+
+# ── Audio processing & augmentation ──────────────────────────────────────────
+librosa==0.11.0
+audiomentations==0.43.1
+
+# ── Local STT (CPU: device=cpu, compute_type=int8) ────────────────────────────
+faster-whisper==1.2.1
+
+# ── API SDKs ──────────────────────────────────────────────────────────────────
+openai==2.21.0
+deepgram-sdk==5.3.2
+google-cloud-speech==2.36.1
+assemblyai==0.52.1
+elevenlabs==1.50.3
+groq==1.0.0
+
+# ── Evaluation metrics ────────────────────────────────────────────────────────
+jiwer==4.0.0
+whisper-normalizer==0.1.12
+sentence-transformers==5.2.3
+bert-score==0.3.13
+spacy==3.8.11
+pyannote.metrics==4.0.0
+
+# ── Dataset access ────────────────────────────────────────────────────────────
+datasets>=4.5.0
+huggingface-hub>=1.4.0
+nltk==3.9.1
+
+# ── Scientific computing & reporting ─────────────────────────────────────────
+scipy==1.17.0
+numpy==2.4.2
+pandas==3.0.1
+matplotlib==3.10.8
+seaborn==0.13.2
+tabulate==0.9.0
+diskcache==5.6.3

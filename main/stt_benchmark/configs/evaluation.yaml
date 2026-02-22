@@ -1,0 +1,68 @@
+normalization:
+  lowercase: true
+  expand_contractions: true
+  remove_fillers: true
+  remove_punctuation: true
+  filler_words: [uh, um, hmm, mhm, "uh-huh", "mm-hmm", ah, er]
+
+preprocessing:
+  target_sample_rate: 16000
+  target_channels: 1
+  normalize_amplitude: true
+
+metrics:
+  surface:
+    enabled: true
+    compute: [wer, cer, mer, wil, wip, ser]
+  semantic:
+    enabled: true
+    semdist_model: all-MiniLM-L6-v2
+    bertscore: true
+    bertscore_model: bert-base-uncased
+    meaning_preservation_llm: false
+  formatting:
+    enabled: true
+    compute: [fwer, punctuation_f1, capitalization_acc]
+  entity:
+    enabled: true
+    spacy_model: en_core_web_sm
+  latency:
+    enabled: true
+    percentiles: [50, 95, 99]
+  hallucination:
+    enabled: true
+
+advanced:
+  enabled: true
+  semascore: true              # Semantic + MER combined (Interspeech 2024)
+  bleu: true                   # BLEU-1 and BLEU-4 (n-gram overlap)
+  meteor: true                 # METEOR (synonyms + stemming via WordNet)
+  her: true                    # Hallucination Error Rate (ACL 2025)
+  per: true                    # Punctuation Error Rate (stored as punct_per — NOT phoneme PER)
+  error_severity: true         # Embedding distance per substitution
+  shallow: true                # 4-type hallucination scores (arXiv Oct 2025)
+  pner: true                   # Proper Noun Entity Rate via Jaro-Winkler alignment
+  alphanumeric: true           # Alphanumeric code/ID accuracy (e.g. COVID-19, V100)
+  embedding_hallucination: true # Flag insertions with embedding dist > 0.7 from ref
+  keywords: []                 # Domain keywords e.g. [cancel, confirm, transfer, book]
+  llm_judge: false             # LLM-as-judge impact scoring (needs OPENAI_API_KEY)
+  llm_judge_model: "gpt-4o-mini"
+
+statistical:
+  bootstrap_iterations: 10000      # NIST/ACL-standard; 10 k resamples for stable 95 % CI
+  confidence_level: 0.95
+  blockwise_bootstrap: true
+  block_field: speaker_id
+  seed: 42
+
+reporting:
+  formats: [markdown, csv, json, html]
+  charts:
+    - wer_comparison
+    - accuracy_vs_speed
+    - cost_vs_wer_pareto
+    - speaker_heatmap
+    - semdist_distribution
+    - use_case_scores
+    - wer_boxplot
+    - clean_vs_other
