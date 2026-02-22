@@ -95,7 +95,7 @@ We are a 3-person team submitting a paper to **Interspeech 2026** by **25 Februa
   - Leaderboard bar chart (composite scores)
   - Radar/spider chart (dimension profiles per model)
   - Heatmap (models × metrics with color intensity)
-  - Use-case grouped bar chart (5 composites × 5 models)
+  - Use-case grouped bar chart (5 composites × 6 models)
   - WER distribution box plots per model
   - UTMOS violin plots per model
 - Also generates **dataset difficulty analysis** (which challenge categories are hardest for which models)
@@ -103,17 +103,27 @@ We are a 3-person team submitting a paper to **Interspeech 2026** by **25 Februa
 #### Stage 6: `architecture_diagram.py` — Pipeline Visualization
 - Renders the full pipeline as a figure using matplotlib/graphviz
 
-### 5 TTS Model Clients
+### TTS Model Clients (8 supported, 6 evaluated)
 
 All inherit from `BaseTTSClient` → return `TTSResult` (audio array + sample_rate + metadata):
 
+**6 models with completed evaluation results:**
+
 | Model | File | Type | Cloning | Speed | License |
 |-------|------|------|---------|-------|---------|
+| **Kokoro** | `kokoro_client.py` | Local ONNX | No | Medium | Apache 2.0 |
+| **ElevenLabs** | `elevenlabs_client.py` | Cloud API | Yes | Fast | Commercial |
+| **Hume AI** | `hume_client.py` | Cloud API | No | Fast | Commercial |
+| **LMNT** | `lmnt_client.py` | Cloud API | No | Fast | Commercial |
 | **Deepgram Aura** | `deepgram_client.py` | Cloud API | No | Fast | Commercial |
 | **Cartesia Sonic** | `cartesia_client.py` | Cloud API | Yes | Fast | Commercial |
-| **Kokoro** | `kokoro_client.py` | Local ONNX | No | Medium | Apache 2.0 |
-| **Piper** | `piper_client.py` | Local | No | Fastest | MIT |
-| **Coqui XTTS v2** | `xtts_client.py` | Local | Yes | Slowest (~20s/utt) | CPML |
+
+**2 models supported but excluded from this evaluation (incomplete generation runs):**
+
+| Model | File | Type | Status |
+|-------|------|------|--------|
+| **Piper** | `piper_client.py` | Local | Empty results — generation incomplete |
+| **Coqui XTTS v2** | `xtts_client.py` | Local | Empty results — generation incomplete |
 
 Config: `configs/models.yaml` — each model has name, client class, API key reference, default voice, capabilities flags.
 
@@ -239,7 +249,7 @@ pipeline2.py                  # EnhancedVoiceEvaluator (SeMaScore, SAER, ASD)
 6. **Theme alignment matters for borderline papers.** "Speaking Together" rewards multilingualism, cross-cultural work. Our code-switching challenge set (French/German in English) directly aligns. EMPHASIZE THIS.
 
 7. **The rebuttal period is 1 week.** Prepare for these reviewer questions:
-   - "Why these 5 models and not [X]?" → Justify: 2 commercial API + 3 open-source spanning different architectures
+   - "Why these 6 models and not [X]?" → Justify: 5 commercial APIs + 1 open-source spanning cloud and local deployment contexts
    - "No human evaluation?" → Acknowledge as limitation, cite TTSDS correlation work
    - "How do composites correlate with human preferences?" → Future work, but weights are principled
    - "Challenge set is too small" → Qualitative insight matters more than scale for adversarial testing
@@ -258,7 +268,7 @@ pipeline2.py                  # EnhancedVoiceEvaluator (SeMaScore, SAER, ASD)
 2. **7-category adversarial Challenge Set**: stress-tests TTS beyond standard read speech — code-switching, emotional, tongue twisters, long-form, questions, numbers, proper nouns. Most benchmarks only use clean read speech.
 3. **28 metrics across 6 dimensions** with principled normalization and aggregation, vs. the typical MOS + WER.
 4. **Statistical rigor**: Wilcoxon signed-rank tests for all pairwise comparisons.
-5. **Commercial vs. open-source comparison**: Deepgram/Cartesia APIs alongside Kokoro/Piper/XTTS — rarely done in academic benchmarks due to API cost/access.
+5. **Comprehensive evaluation across deployment contexts**: 6 TTS systems spanning 5 commercial APIs (ElevenLabs, Hume, LMNT, Deepgram, Cartesia) and 1 open-source model (Kokoro), revealing how deployment context determines optimal choice.
 
 ### Paper Structure (4 Pages + 2 Refs)
 
@@ -271,7 +281,7 @@ Page 2-3: Methodology
          - Challenge Set (7 categories with examples, motivation for each)
          - Composite Scoring (formulas, use-case weight tables)
 Page 3-4: Experiments
-         - Setup (5 models, hardware, config)
+         - Setup (6 models, hardware, config)
          - Results (leaderboard table, radar chart, 1-2 key findings)
          - Analysis (which models excel where, challenge set difficulty, p-values)
 Page 4:  Conclusion + Limitations + Future Work

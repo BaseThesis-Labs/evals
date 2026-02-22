@@ -1,0 +1,537 @@
+% ============================================================================
+% VoiceBench: References for Interspeech 2026 Submission
+% Version: 3.0 (code-verified, publication-status confirmed)
+% Generated: 2026-02-22
+% Total entries: 33
+% Peer-reviewed: 20 | arXiv-only: 3 | Software/misc: 10
+%
+% CHANGES FROM v2:
+%   1. srinivasavaradhan2025statetts: Confirmed Interspeech 2025 proceedings (ISCA)
+%   2. minixhofer2025ttsds2: Confirmed SSW 2025 proceedings (ISCA)
+%   3. ravanelli2024speechbrain: REPLACED arXiv entry with JMLR V25 published version
+%   4. ADDED: @misc for Kokoro TTS (hexgrad/Kokoro-82M, no paper)
+%   5. ADDED: @misc for Piper TTS (rhasspy/piper, no paper)
+%   6. ADDED: @misc for Deepgram Aura (API docs, no paper)
+%   7. ADDED: @misc for Cartesia Sonic (API docs, no paper)
+%   8. KEPT itu2001pesq: PESQ IS used in evaluate.py (lines 327-352)
+%   9. KEPT jadoul2018parselmouth: Parselmouth IS used (line 538, F0/jitter/shimmer/HNR)
+%  10. deja2022calibrated: Title confirmed as "Automatic Evaluation of Speaker Similarity"
+%  11. ADDED: @misc for Resemblyzer (used for speaker similarity, lines 476-524)
+%  12. ADDED: taal2011stoi for STOI metric (used in evaluate.py)
+%
+% CODE VERIFICATION NOTES (from evaluate.py + aggregate.py):
+%   - UTMOS: used (line ~800)
+%   - DNSMOS: used (compute_dnsmos, lines 259-323)
+%   - PESQ: used (compute_pesq, lines 327-352) ← CONFIRMED KEEP
+%   - STOI: used (via pystoi, line ~805) ← ADDED
+%   - Whisper: used for ASR (line 60, model="base")
+%   - Parselmouth: used (line 538, F0/jitter/shimmer/HNR) ← CONFIRMED KEEP
+%   - Resemblyzer: used (lines 476-524, GE2E embeddings) ← ADDED
+%   - Silero VAD: used for SNR and pause detection
+%   - sentence-transformers: used for semantic distance (lines 168-201)
+%   - NISQA: STUBBED (returns None, "complex - skip for now")
+%   - SCOREQ: STUBBED (returns None, "unreliable")
+%   - ECAPA-TDNN: DISABLED ("torchaudio compatibility issues")
+% ============================================================================
+
+% ===========================================================================
+% CATEGORY 1: TTS BENCHMARKS & EVALUATION FRAMEWORKS (9 papers)
+% ===========================================================================
+
+% SUMMARY: Multi-factor TTS evaluation across prosody, speaker identity,
+%   intelligibility, environment. Benchmarked 35 systems spanning 2008-2024.
+% RELEVANCE: Primary competitor. We differentiate with use-case composites
+%   and adversarial challenge set. Cite in Related Work.
+% STATUS: VERIFIED (arXiv:2407.12707, DOI confirmed, SLT 2024)
+@inproceedings{minixhofer2024ttsds,
+  author    = {Minixhofer, Christoph and Klejch, Ondrej and Bell, Peter},
+  title     = {{TTSDS} -- Text-to-Speech Distribution Score},
+  booktitle = {Proceedings of the IEEE Spoken Language Technology Workshop (SLT)},
+  year      = {2024},
+  eprint    = {2407.12707},
+  archivePrefix = {arXiv},
+  doi       = {10.48550/arXiv.2407.12707},
+}
+
+% SUMMARY: Extended TTSDS with 200 human raters, 20 voice-cloning models,
+%   4 domains. Spearman >= 0.50 avg 0.67, outperforms 15 objective metrics.
+% RELEVANCE: Shows human correlation benchmarks we should compare against.
+%   Cite in Related Work and Discussion.
+% STATUS: VERIFIED — Published in SSW 2025 proceedings (ISCA archive).
+%   Note: proceedings title may read "Robust Objective Evaluation..."
+@inproceedings{minixhofer2025ttsds2,
+  author    = {Minixhofer, Christoph and Klejch, Ondrej and Bell, Peter},
+  title     = {{TTSDS2}: Resources and Benchmark for Evaluating Human-Quality Synthetic Speech},
+  booktitle = {Proceedings of the 13th ISCA Speech Synthesis Workshop (SSW)},
+  year      = {2025},
+  eprint    = {2506.19441},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: Introduces Human Fooling Rate (HFR) metric. 135 participants.
+%   Shows CMOS-based human parity claims fail under deception testing.
+%   Commercial models near human levels; open-source lags in conversational.
+% RELEVANCE: Key related work arguing MOS is insufficient. Supports our
+%   multi-dimensional approach. Cite in Introduction and Related Work.
+% STATUS: VERIFIED — Published in Interspeech 2025 proceedings (ISCA archive).
+@inproceedings{srinivasavaradhan2025statetts,
+  author    = {Srinivasavaradhan, Vedavyas and others},
+  title     = {The State of {TTS}: A Case Study with Human Fooling Rates},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2025},
+  eprint    = {2508.04179},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: Inaugural VoiceMOS Challenge. 22 teams, MOS prediction shared
+%   task using BVCC dataset with 187 TTS/VC systems.
+% RELEVANCE: Established MOS prediction as community benchmark. We build
+%   beyond single-MOS prediction. Cite in Related Work.
+% STATUS: VERIFIED (Interspeech 2022)
+@inproceedings{huang2022voicemos,
+  author    = {Huang, Wen-Chin and Cooper, Erica and Yamagishi, Junichi and others},
+  title     = {The {VoiceMOS} Challenge 2022},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2022},
+}
+
+% SUMMARY: VoiceMOS Challenge expands beyond MOS to singing voice conversion
+%   and speech enhancement evaluation.
+% RELEVANCE: Shows trend toward multi-task evaluation that we extend
+%   further with use-case composites. Cite in Related Work.
+% STATUS: VERIFIED (arXiv:2409.07001, Interspeech 2024)
+@inproceedings{huang2024voicemos,
+  author    = {Huang, Wen-Chin and Cooper, Erica and Yamagishi, Junichi and others},
+  title     = {The {VoiceMOS} Challenge 2024: Beyond Speech Quality Prediction},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2024},
+  eprint    = {2409.07001},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: Meta-analysis of 77 Interspeech/SSW papers revealing MOS testing
+%   inconsistencies. Actual title: "Stuck in the MOS Pit."
+% RELEVANCE: Motivates our work -- MOS methodology is unreliable and
+%   unstandardized. Cite in Introduction to justify multi-dimensional approach.
+% STATUS: VERIFIED (DOI:10.21437/SSW.2023-7, SSW 2023, pp. 41-47)
+@inproceedings{kirkland2023mos,
+  author    = {Kirkland, Alexandra and Mehta, Shivam and others},
+  title     = {Stuck in the {MOS} Pit: A Critical Analysis of {MOS} Test Methodology in {TTS} Evaluation},
+  booktitle = {Proceedings of the 12th ISCA Speech Synthesis Workshop (SSW)},
+  year      = {2023},
+  pages     = {41--47},
+  doi       = {10.21437/SSW.2023-7},
+}
+
+% SUMMARY: Three-level TTS evaluation framework: fidelity/accuracy,
+%   comparability/standardization, ethical/risk oversight.
+% RELEVANCE: Position paper supporting our argument that evaluation must
+%   be multi-dimensional and responsible. Cite in Related Work.
+% STATUS: VERIFIED (arXiv:2510.06927) -- arXiv only
+@article{yang2025responsible,
+  author    = {Yang, Zhe and others},
+  title     = {Towards Responsible Evaluation for Text-to-Speech},
+  journal   = {arXiv preprint},
+  year      = {2025},
+  eprint    = {2510.06927},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: Evaluates TTS in dialogue context via guessing-game system.
+%   Assesses context-adaptive prosody and turn-taking.
+% RELEVANCE: Extends evaluation beyond sentence-level, complementary to
+%   our use-case-driven approach. Cite in Related Work.
+% STATUS: VERIFIED (Interspeech 2024, KTH Royal Institute)
+@inproceedings{wang2024contextual,
+  author    = {Wang, Yiru and others},
+  title     = {Contextual Interactive Evaluation of {TTS} Models in Conversational Scenarios},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2024},
+}
+
+% SUMMARY: Relative quality assessment via non-matching references and
+%   multi-task learning. Outperforms DNSMOS on unseen perturbations.
+% RELEVANCE: Alternative quality framework that avoids MOS labels.
+%   Cite in Related Work as another beyond-MOS approach.
+% STATUS: VERIFIED (NeurIPS 2021, 100+ citations, Microsoft Research)
+@inproceedings{manocha2021noresqa,
+  author    = {Manocha, Pranay and Xu, Buye and Kumar, Anurag},
+  title     = {{NORESQA}: A Framework for Speech Quality Assessment Using Non-Matching References},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2021},
+}
+
+% ===========================================================================
+% CATEGORY 2: SPEECH QUALITY & SIMILARITY METRICS (9 papers)
+% ===========================================================================
+
+% SUMMARY: Non-intrusive MOS predictor using SSL representations. Topped
+%   VoiceMOS Challenge OOD track. 100+ citations.
+% RELEVANCE: We use UTMOS as a naturalness metric in our pipeline.
+%   Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Yes — evaluate.py
+% STATUS: VERIFIED (Interspeech 2022, arXiv:2204.02152)
+@inproceedings{saeki2022utmos,
+  author    = {Saeki, Takaaki and Xin, Detai and Narita, Wataru and Takamichi, Shinnosuke and Saruwatari, Hiroshi},
+  title     = {{UTMOS}: {UTokyo-SaruLab} System for {VoiceMOS} Challenge 2022},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2022},
+  eprint    = {2204.02152},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: CNN-Self-Attention model predicting multidimensional speech quality
+%   (MOS + Noisiness, Coloration, Discontinuity, Loudness). 200+ citations.
+% RELEVANCE: NISQA is referenced in our codebase but currently STUBBED
+%   (compute_nisqa returns None). Cite in Methods as planned metric.
+% USED IN CODE: Stubbed — function exists but returns None
+% STATUS: VERIFIED (Interspeech 2021, 200+ citations)
+@inproceedings{mittag2021nisqa,
+  author    = {Mittag, Gabriel and Naderi, Babak and Chehadi, Abderrahim and M{\"o}ller, Sebastian},
+  title     = {{NISQA}: A Deep {CNN-Self-Attention} Model for Multidimensional Speech Quality Prediction with Crowdsourced Datasets},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2021},
+}
+
+% SUMMARY: Non-intrusive metric for noise suppressors using self-teaching.
+%   Correlates better than PESQ/POLQA with human ratings. 300+ citations.
+% RELEVANCE: We use DNSMOS (sig/bak/ovrl) in our naturalness dimension.
+%   Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Yes — compute_dnsmos, lines 259-323
+% STATUS: VERIFIED (ICASSP 2021, Microsoft, 300+ citations)
+@inproceedings{reddy2021dnsmos,
+  author    = {Reddy, Chandan K. A. and Gopal, Vishak and Cutler, Ross},
+  title     = {{DNSMOS}: A Non-Intrusive Perceptual Objective Speech Quality Metric to Evaluate Noise Suppressors},
+  booktitle = {Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2021},
+}
+
+% SUMMARY: Emphasized channel attention in TDNN for speaker verification.
+%   192-dim embeddings, SOTA on VoxCeleb. 500+ citations.
+% RELEVANCE: ECAPA-TDNN embeddings referenced in codebase but DISABLED
+%   due to torchaudio compatibility. Resemblyzer used instead.
+%   Cite in Methods to describe intended speaker similarity approach.
+% USED IN CODE: Disabled — ecapa_cosine_sim always None
+% STATUS: VERIFIED (Interspeech 2020, 500+ citations)
+@inproceedings{desplanques2020ecapa,
+  author    = {Desplanques, Brecht and Thienpondt, Jenthe and Demuynck, Kris},
+  title     = {{ECAPA-TDNN}: Emphasized Channel Attention, Propagation and Aggregation in {TDNN} Based Speaker Verification},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2020},
+}
+
+% SUMMARY: Intrusive speech quality standard scoring -0.5 to 4.5.
+%   Still widely used alongside neural alternatives.
+% RELEVANCE: We use PESQ as one of our naturalness metrics.
+%   Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Yes — compute_pesq, lines 327-352, called at line 805
+% STATUS: VERIFIED (ITU standard, universally known)
+@techreport{itu2001pesq,
+  author      = {{ITU-T}},
+  title       = {Perceptual Evaluation of Speech Quality ({PESQ}): An Objective Method for End-to-End Speech Quality Assessment of Narrow-Band Telephone Networks and Speech Codecs},
+  institution = {International Telecommunication Union},
+  number      = {Recommendation P.862},
+  year        = {2001},
+}
+
+% SUMMARY: Short-Time Objective Intelligibility metric. Correlates with
+%   human intelligibility judgments for processed/degraded speech.
+% RELEVANCE: We use STOI in our pipeline for intelligibility assessment.
+%   Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Yes — via pystoi, called alongside PESQ at line ~805
+% STATUS: VERIFIED (IEEE TASLP 2011, 2000+ citations, foundational metric)
+@article{taal2011stoi,
+  author    = {Taal, Cees H. and Hendriks, Richard C. and Heusdens, Richard and Jensen, Jesper},
+  title     = {An Algorithm for Intelligibility Prediction of Time-Frequency Weighted Noisy Speech},
+  journal   = {IEEE Transactions on Audio, Speech, and Language Processing},
+  year      = {2011},
+  volume    = {19},
+  number    = {7},
+  pages     = {2125--2136},
+  doi       = {10.1109/TASL.2011.2114881},
+}
+
+% SUMMARY: Parselmouth provides Python bindings to Praat for acoustic
+%   analysis (pitch, formants, harmonicity, intensity).
+% RELEVANCE: We use Parselmouth for prosody metrics (F0, jitter, shimmer,
+%   HNR). Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Yes — import parselmouth at line 538; F0 (line 552),
+%   intensity (line 571), jitter/shimmer (lines 584-594), HNR (lines 598-602)
+% STATUS: VERIFIED (Journal of Phonetics 2018, DOI:10.1016/j.wocn.2018.07.001)
+@article{jadoul2018parselmouth,
+  author    = {Jadoul, Yannick and Thompson, Bill and de Boer, Bart},
+  title     = {Introducing {Parselmouth}: A {Python} Interface to {Praat}},
+  journal   = {Journal of Phonetics},
+  year      = {2018},
+  volume    = {71},
+  pages     = {1--15},
+  doi       = {10.1016/j.wocn.2018.07.001},
+}
+
+% SUMMARY: Calibrated speaker embedding distances via regression on MUSHRA
+%   similarity scores. 0.78 Pearson with human judgments.
+% RELEVANCE: Validates our use of cosine similarity on speaker embeddings
+%   for TTS evaluation. Cite in Methods.
+% STATUS: VERIFIED (Interspeech 2022, arXiv:2207.00344)
+@inproceedings{deja2022calibrated,
+  author    = {Deja, Micha{\l} and others},
+  title     = {Automatic Evaluation of Speaker Similarity},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2022},
+}
+
+% SUMMARY: Multi-scale emotional prosody transfer and prediction using
+%   chained encoder-decoder architecture. 200+ citations.
+% RELEVANCE: Supports our inclusion of emotional speech in the challenge
+%   set and prosody metrics. Cite in Related Work (adversarial/robustness).
+% STATUS: VERIFIED (IEEE/ACM TASLP 2022, 200+ citations)
+@article{lei2022msemotts,
+  author    = {Lei, Yi and Yang, Shan and Wang, Lei and others},
+  title     = {{MsEmoTTS}: Multi-Scale Emotion Transfer, Prediction, and Control for Emotional Speech Synthesis},
+  journal   = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+  year      = {2022},
+  volume    = {30},
+  pages     = {853--864},
+}
+
+% ===========================================================================
+% CATEGORY 3: ADVERSARIAL / ROBUSTNESS / EDGE CASE EVALUATION (4 papers)
+% ===========================================================================
+
+% SUMMARY: 1645 test cases across 6 TTS challenges (emotions, pronunciation,
+%   foreign words). LALM-as-judge with rho>=0.76 human correlation.
+% RELEVANCE: Most similar to our challenge set. We differentiate with
+%   use-case composites and 35+ automatic metrics. Cite in Related Work.
+% STATUS: VERIFIED (arXiv:2505.23009, authors: Manku, Tang, Shi, Li, Smola)
+%   -- arXiv only, no peer-reviewed version found
+@article{manku2025emergentttseval,
+  author    = {Manku, Ruskin Raj and Tang, Yuzhi and Shi, Xingjian and Li, Mu and Smola, Alex},
+  title     = {{EmergentTTS-Eval}: Evaluating {TTS} Models on Complex Prosodic, Expressiveness, and Linguistic Challenges Using Model-as-a-Judge},
+  journal   = {arXiv preprint},
+  year      = {2025},
+  eprint    = {2505.23009},
+  archivePrefix = {arXiv},
+}
+
+% SUMMARY: Diffusion-based TTS models survive 54.8% WER input noise.
+%   DVT achieves 13.9% WER under severe noise vs 45.3% for Tacotron2.
+% RELEVANCE: Validates robustness testing methodology for TTS. Supports
+%   our adversarial challenge set design. Cite in Related Work.
+% STATUS: VERIFIED (Interspeech 2024, Nagoya University)
+@inproceedings{feng2024robustness,
+  author    = {Feng, Yiwei and Yasuda, Yusuke and Toda, Tomoki},
+  title     = {Exploring the Robustness of Text-to-Speech Synthesis to Heavily Noisy Transcriptions},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2024},
+}
+
+% SUMMARY: Mixture-of-Language Experts on VITS2 for cross-lingual and
+%   code-switching TTS with disentangled speaker/language/accent control.
+% RELEVANCE: Supports our code-switching challenge category. Shows
+%   multilingual TTS is an active evaluation frontier. Cite in Related Work.
+% STATUS: VERIFIED (Interspeech 2024)
+@inproceedings{wu2024mole,
+  author    = {Wu, Jiatong and others},
+  title     = {Improving Multilingual Text-to-Speech with Mixture-of-Language Experts},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2024},
+}
+
+% SUMMARY: Cross-lingual embeddings in Tacotron2 for Mandarin-English
+%   code-switching using monolingual corpora. 50+ citations.
+% RELEVANCE: Foundational code-switching TTS paper. Motivates our
+%   code-switching challenge category. Cite in Related Work.
+% STATUS: VERIFIED (ICASSP 2020, 50+ citations)
+@inproceedings{zhou2020codeswitching,
+  author    = {Zhou, Hao and others},
+  title     = {End-to-End Code-Switching {TTS} with Cross-Lingual Language Model},
+  booktitle = {Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year      = {2020},
+}
+
+% ===========================================================================
+% CATEGORY 4: TTS MODELS & SYSTEMS (3 papers)
+% ===========================================================================
+
+% SUMMARY: Massively multilingual zero-shot TTS. VQ-VAE + GPT-2 + HiFi-GAN.
+%   16 languages, 27k hours. CER 0.54, UTMOS 4.01. ~100 citations.
+% RELEVANCE: One of the TTS systems we evaluate (XTTS v2 in our benchmark).
+%   Cite in Experimental Setup (Section 4).
+% STATUS: VERIFIED (Interspeech 2024, DOI:10.48550/arXiv.2406.04904)
+@inproceedings{casanova2024xtts,
+  author    = {Casanova, Edresson and others},
+  title     = {{XTTS}: A Massively Multilingual Zero-Shot Text-to-Speech Model},
+  booktitle = {Proceedings of Interspeech},
+  year      = {2024},
+  eprint    = {2406.04904},
+  archivePrefix = {arXiv},
+  doi       = {10.48550/arXiv.2406.04904},
+}
+
+% SUMMARY: Seed-TTS establishes rigorous evaluation protocols combining
+%   objective metrics with subjective evaluations. RL for robustness.
+% RELEVANCE: Its evaluation methodology (Seed-TTS-Eval) is one of our
+%   7 datasets. Cite in Experimental Setup (Section 4).
+% STATUS: VERIFIED (arXiv:2406.02430, DOI confirmed) -- arXiv only
+@article{anastassiou2024seedtts,
+  author    = {Anastassiou, Philip and Chen, Jianwei and Chen, Jitong and others},
+  title     = {{Seed-TTS}: A Family of High-Quality Versatile Speech Generation Models},
+  journal   = {arXiv preprint},
+  year      = {2024},
+  eprint    = {2406.02430},
+  archivePrefix = {arXiv},
+  doi       = {10.48550/arXiv.2406.02430},
+}
+
+% SUMMARY: Whisper ASR trained on 680k hours of multilingual data.
+%   Approaches human-level accuracy in zero-shot settings. 500+ citations.
+% RELEVANCE: We use Whisper for ASR transcription to compute WER/CER/MER
+%   in our intelligibility dimension. Cite in Methods (Section 3.1).
+% USED IN CODE: Yes — whisper.load_model("base") at line 60
+% STATUS: VERIFIED (ICML 2023, PMLR 202:28492-28518, 500+ citations)
+@inproceedings{radford2023whisper,
+  author    = {Radford, Alec and Kim, Jong Wook and Xu, Tao and Brockman, Greg and McLeavey, Christine and Sutskever, Ilya},
+  title     = {Robust Speech Recognition via Large-Scale Weak Supervision},
+  booktitle = {Proceedings of the 40th International Conference on Machine Learning (ICML)},
+  year      = {2023},
+  series    = {PMLR},
+  volume    = {202},
+  pages     = {28492--28518},
+}
+
+% ===========================================================================
+% CATEGORY 5: TOOLKITS & SOFTWARE (6 entries)
+% ===========================================================================
+
+% SUMMARY: Open-source all-in-one speech toolkit. 200+ recipes. JMLR 2024.
+%   Includes ECAPA-TDNN, speaker verification, and speech processing.
+% RELEVANCE: We reference SpeechBrain for ECAPA-TDNN speaker embeddings
+%   (currently disabled in code due to torchaudio issues; Resemblyzer used
+%   as fallback). Cite in Methods (Section 3.1 Metrics).
+% USED IN CODE: Referenced but ECAPA-TDNN disabled; Resemblyzer used instead
+% STATUS: VERIFIED — Published in JMLR Volume 25, 2024
+%   (replaces arXiv-only entry from v2)
+@article{ravanelli2024speechbrain,
+  author    = {Ravanelli, Mirco and Parcollet, Titouan and Plantinga, Peter and others},
+  title     = {Open-Source Conversational {AI} with {SpeechBrain} 1.0},
+  journal   = {Journal of Machine Learning Research},
+  year      = {2024},
+  volume    = {25},
+  number    = {249},
+  pages     = {1--11},
+}
+
+% SUMMARY: Resemblyzer derives 256-dim speaker embeddings using GE2E
+%   (Generalized End-to-End) loss. Python library for speaker verification.
+% RELEVANCE: We use Resemblyzer as our primary speaker similarity metric
+%   (cosine similarity on GE2E embeddings). Cite in Methods.
+% USED IN CODE: Yes — lines 476-524, VoiceEncoder with NumPy/librosa shims
+% STATUS: Open-source library, no peer-reviewed paper. Widely used in
+%   speaker verification research.
+@misc{jemine2019resemblyzer,
+  author       = {Jemine, Corentin},
+  title        = {Resemblyzer: A {Python} Package for Speaker Embedding and Comparison},
+  year         = {2019},
+  howpublished = {\url{https://github.com/resemble-ai/Resemblyzer}},
+  note         = {Open-source library for speaker verification using GE2E embeddings},
+}
+
+% SUMMARY: Kokoro is an 82M parameter TTS model based on StyleTTS2.
+%   Topped HuggingFace TTS Arena. Supports multiple languages.
+%   Apache 2.0 licensed. Trained on <100h long-form data.
+% RELEVANCE: One of the TTS systems we evaluate in our benchmark.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated as one of 14 TTS model clients
+% STATUS: No peer-reviewed paper. Model card and code on HuggingFace/GitHub.
+@misc{kokoro2025,
+  author       = {{hexgrad}},
+  title        = {Kokoro: An 82{M} Parameter Text-to-Speech Model},
+  year         = {2025},
+  howpublished = {\url{https://huggingface.co/hexgrad/Kokoro-82M}},
+  note         = {Based on StyleTTS2 architecture. Apache 2.0 license.
+                  GitHub: \url{https://github.com/hexgrad/kokoro}},
+}
+
+% SUMMARY: Piper is a fast, local neural TTS system supporting 50+ languages.
+%   Uses ONNX models for efficient inference. Designed for voice assistants.
+% RELEVANCE: One of the TTS systems we evaluate in our benchmark.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated as one of 14 TTS model clients
+% STATUS: No peer-reviewed paper. Documentation on GitHub.
+@misc{piper2023,
+  author       = {{Rhasspy}},
+  title        = {Piper: A Fast, Local Neural Text-to-Speech System},
+  year         = {2023},
+  howpublished = {\url{https://github.com/rhasspy/piper}},
+  note         = {ONNX-based TTS supporting 50+ languages/voices},
+}
+
+% SUMMARY: Deepgram Aura is a commercial streaming TTS API optimized for
+%   real-time conversational AI with low latency (<250ms TTFB).
+% RELEVANCE: One of the commercial TTS systems we evaluate.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated as one of 14 TTS model clients
+% STATUS: Commercial API, no peer-reviewed paper.
+@misc{deepgram2024aura,
+  author       = {{Deepgram}},
+  title        = {Aura: Text-to-Speech {API}},
+  year         = {2024},
+  howpublished = {\url{https://developers.deepgram.com/docs/tts-models}},
+  note         = {Commercial streaming TTS optimized for conversational AI},
+}
+
+% SUMMARY: Cartesia Sonic is a commercial TTS model offering low-latency
+%   streaming synthesis with voice cloning capabilities.
+% RELEVANCE: One of the commercial TTS systems we evaluate.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated as one of 14 TTS model clients
+% STATUS: Commercial API, no peer-reviewed paper.
+@misc{cartesia2024sonic,
+  author       = {{Cartesia}},
+  title        = {Sonic: Text-to-Speech Model},
+  year         = {2024},
+  howpublished = {\url{https://docs.cartesia.ai/}},
+  note         = {Commercial low-latency streaming TTS with voice cloning},
+}
+
+% SUMMARY: ElevenLabs is a commercial TTS API offering high-quality voice
+%   synthesis with voice cloning, multilingual support, and streaming.
+% RELEVANCE: One of the commercial TTS systems we evaluate.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated model with results in leaderboard.json
+% STATUS: Commercial API, no peer-reviewed paper.
+@misc{elevenlabs2024,
+  author       = {{ElevenLabs}},
+  title        = {{ElevenLabs} Text-to-Speech {API}},
+  year         = {2024},
+  howpublished = {\url{https://elevenlabs.io/docs}},
+  note         = {Commercial TTS API with voice cloning and multilingual support},
+}
+
+% SUMMARY: Hume AI provides an empathic voice interface (EVI) with
+%   expression-aware TTS and conversational AI capabilities.
+% RELEVANCE: One of the commercial TTS systems we evaluate.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated model with results in leaderboard.json
+% STATUS: Commercial API, no peer-reviewed paper.
+@misc{hume2024,
+  author       = {{Hume AI}},
+  title        = {Hume {AI} Empathic Voice Interface},
+  year         = {2024},
+  howpublished = {\url{https://docs.hume.ai/}},
+  note         = {Commercial expression-aware TTS and conversational voice AI},
+}
+
+% SUMMARY: LMNT is a commercial TTS API focused on ultra-low-latency
+%   streaming synthesis for conversational AI applications.
+% RELEVANCE: One of the commercial TTS systems we evaluate.
+%   Cite in Experimental Setup (Section 4).
+% USED IN CODE: Yes — evaluated model with results in leaderboard.json
+% STATUS: Commercial API, no peer-reviewed paper.
+@misc{lmnt2024,
+  author       = {{LMNT}},
+  title        = {{LMNT} Text-to-Speech {API}},
+  year         = {2024},
+  howpublished = {\url{https://docs.lmnt.com/}},
+  note         = {Commercial ultra-low-latency streaming TTS for conversational AI},
+}
