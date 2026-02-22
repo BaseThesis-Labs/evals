@@ -36,49 +36,57 @@ We are a 3-person team submitting a paper to **Interspeech 2026** by **25 Februa
 - Saves per-utterance WAV files organized by model/dataset
 
 #### Stage 3: `evaluate.py` — Metric Computation
-- Runs **35 metrics across 9 dimensions** on every generated utterance:
+- Runs **28 active metrics across 6 dimensions** on every generated utterance
+  (plus 13 additional diagnostic metrics stored in raw output):
 
-**Naturalness (10 metrics):**
+**Naturalness (5 active metrics in dimension scoring):**
 - UTMOS (UTokyo-SaruLab MOS predictor)
-- SCOREQ (speech quality estimator)
-- NISQA: overall, noisiness, coloration, discontinuity, loudness (5 sub-scores)
-- DNSMOS: overall, speech quality, noise quality (3 sub-scores)
+- DNSMOS overall (+ signal/background sub-scores computed but not in dimension)
+- Output SNR (Silero VAD-based, reference-free)
+- PESQ (ITU-T P.862, requires reference audio)
+- STOI (Short-Time Objective Intelligibility, requires reference audio)
+- ~~SCOREQ~~ — **STUBBED**: `compute_scoreq()` returns `None` (line 241)
+- ~~NISQA (5 sub-scores)~~ — **STUBBED**: `compute_nisqa()` returns all `None` (line 246-253)
 
-**Intelligibility (7 metrics):**
-- WER (Word Error Rate via Whisper large-v3)
+**Intelligibility (5 active metrics):**
+- WER (Word Error Rate via **Whisper base** model — line 60)
 - CER (Character Error Rate)
-- ASR transcript mismatch rate
-- Word skip rate, insertion rate, substitution rate, deletion rate
+- ASR transcript mismatch (binary)
+- Word skip rate (deletion rate)
+- Semantic distance (sentence-transformers all-MiniLM-L6-v2 cosine distance)
+- (Also computed but not in dimension: MER, insertion rate, substitution rate)
 
-**Speaker Similarity (2 metrics):**
-- ECAPA-TDNN cosine similarity (SpeechBrain)
-- Resemblyzer cosine similarity
-- (Only computed for voice-cloning-capable models with reference audio)
+**Speaker Similarity (1 active metric):**
+- Resemblyzer GE2E cosine similarity (lines 476-524)
+- ~~ECAPA-TDNN cosine similarity~~ — **DISABLED**: hardcoded `None` (line 472, "torchaudio compatibility issues")
+- (Only computed when reference audio is available)
 
-**Prosody (5 metrics):**
-- F0 mean, F0 standard deviation, F0 range (via CREPE/PYIN)
-- Pause ratio (silence proportion)
-- Duration ratio (generated/reference length)
+**Prosody (13 active metrics):**
+- F0 range, jitter, shimmer, HNR (via **Parselmouth/Praat** — line 538)
+- Pause ratio, pause count, pause mean duration (via Silero VAD — lines 641-692)
+- Speaking rate, syllable rate (words/syllables per second)
+- Duration ratio (actual / expected from text length)
+- Energy mean, energy std (via Parselmouth intensity — line 571)
+- Dynamic range in dB (frame-level RMS percentile range)
 
-**Robustness (3 metrics):**
-- Repetition detection (repeated word/phrase segments)
-- Silence detection (excessive silence > thresholds)
-- Empty/failed generation detection
+**Robustness (3 active metrics):**
+- Repetition detection (n-gram repeated 3+ times)
+- Silence anomaly detection (from VAD pause data, line 838-839)
+- Insertion rate (from intelligibility, reused here)
 
-**Latency (3 metrics):**
-- TTFA (Time to First Audio byte) — for streaming models
-- RTF (Real-Time Factor) — audio_duration / generation_time
-- Raw inference time per utterance
+**Latency (1 active metric in dimension scoring):**
+- RTF (Real-Time Factor) — from generation metadata
+- (Also computed but not in dimension: TTFA, raw inference time)
 
 #### Stage 4: `aggregate.py` — Score Aggregation (CORE NOVELTY)
-- **Normalizes** all 35 metrics to [0, 1] scale (min-max per metric, direction-aware)
+- **Normalizes** all 28 dimension metrics to [0, 1] scale (min-max per metric, direction-aware)
 - **Averages** into 6 dimension scores: Naturalness, Intelligibility, Speaker Similarity, Prosody, Robustness, Latency
 - **Computes 5 weighted use-case composite scores** (THIS IS THE KEY CONTRIBUTION):
-  - **Audiobook**: weights Naturalness (0.35), Prosody (0.30), Intelligibility (0.20), Robustness (0.15)
-  - **Conversational AI**: weights Latency (0.30), Naturalness (0.25), Intelligibility (0.25), Robustness (0.20)
-  - **Voice Clone**: weights Speaker Similarity (0.40), Naturalness (0.30), Intelligibility (0.20), Prosody (0.10)
-  - **Low-Latency**: weights Latency (0.50), Intelligibility (0.25), Robustness (0.25)
-  - **Balanced**: equal weights across all dimensions
+  - **Audiobook**: Naturalness (0.35), Prosody (0.25), Intelligibility (0.15), Robustness (0.15), Speaker Similarity (0.10)
+  - **Conversational AI**: Latency (0.30), Intelligibility (0.25), Naturalness (0.20), Robustness (0.15), Prosody (0.10)
+  - **Voice Clone**: Speaker Similarity (0.40), Naturalness (0.20), Intelligibility (0.15), Latency (0.10), Robustness (0.10), Prosody (0.05)
+  - **Low-Latency**: Latency (0.45), Intelligibility (0.20), Naturalness (0.15), Robustness (0.15), Prosody (0.05)
+  - **Balanced**: Naturalness (0.20), Intelligibility (0.20), Latency (0.20), Speaker Similarity (0.15), Robustness (0.15), Prosody (0.10)
 - Computes **Wilcoxon signed-rank p-values** for all pairwise model comparisons (statistical significance)
 - Outputs per-model dimension scores, composite scores, and p-value matrix as JSON/CSV
 
@@ -130,7 +138,7 @@ This is a separate but related framework for evaluating voice AI in conversation
 main/tts_benchmark/
 ├── datasets/download.py      # Data preparation + Challenge Set definition
 ├── generate.py               # TTS generation orchestrator
-├── evaluate.py               # 35-metric evaluation engine
+├── evaluate.py               # 28-metric evaluation engine (+ 13 diagnostic)
 ├── aggregate.py              # Normalization + composites + Wilcoxon
 ├── visualize.py              # 6 chart types
 ├── architecture_diagram.py   # Pipeline figure
@@ -186,7 +194,7 @@ pipeline2.py                  # EnhancedVoiceEvaluator (SeMaScore, SAER, ASD)
 
 ### Explicit Review Criteria
 1. **Novelty and originality** — weighted composites + adversarial challenge set
-2. **Technical correctness** — 35 validated metrics, Wilcoxon p-values, proper normalization
+2. **Technical correctness** — 28 validated metrics across 6 dimensions, Wilcoxon p-values, proper normalization
 3. **Clarity of presentation** — figures, tables, concise methodology
 4. **Key strengths** — what sets this apart from existing benchmarks
 5. **Quality of references** — MUST be primarily peer-reviewed (arXiv "kept to a minimum")
@@ -246,9 +254,9 @@ pipeline2.py                  # EnhancedVoiceEvaluator (SeMaScore, SAER, ASD)
 **"TTS-Bench: A Multi-Dimensional Evaluation Framework with Use-Case-Driven Composite Scoring for Text-to-Speech Systems"**
 
 ### Core Claims (In Order of Novelty)
-1. **Use-case-driven composite scoring**: 5 weighted profiles (Audiobook, Conversational-AI, Voice Clone, Low-Latency, Balanced) that aggregate 35 metrics into actionable scores — practitioners can pick the composite matching their deployment scenario. NO EXISTING BENCHMARK DOES THIS.
+1. **Use-case-driven composite scoring**: 5 weighted profiles (Audiobook, Conversational-AI, Voice Clone, Low-Latency, Balanced) that aggregate 28 metrics into actionable scores — practitioners can pick the composite matching their deployment scenario. NO EXISTING BENCHMARK DOES THIS.
 2. **7-category adversarial Challenge Set**: stress-tests TTS beyond standard read speech — code-switching, emotional, tongue twisters, long-form, questions, numbers, proper nouns. Most benchmarks only use clean read speech.
-3. **35 metrics across 9 dimensions** with principled normalization and aggregation, vs. the typical MOS + WER.
+3. **28 metrics across 6 dimensions** with principled normalization and aggregation, vs. the typical MOS + WER.
 4. **Statistical rigor**: Wilcoxon signed-rank tests for all pairwise comparisons.
 5. **Commercial vs. open-source comparison**: Deepgram/Cartesia APIs alongside Kokoro/Piper/XTTS — rarely done in academic benchmarks due to API cost/access.
 
@@ -259,7 +267,7 @@ Page 1:  Abstract (150 words) + Introduction (motivation, gap, contributions)
 Page 1-2: Related Work (0.5 page — existing TTS benchmarks and their limitations)
 Page 2-3: Methodology
          - Framework Architecture (pipeline diagram, 6 stages)
-         - Evaluation Metrics (table: 35 metrics grouped by 6 dimensions)
+         - Evaluation Metrics (table: 28 metrics grouped by 6 dimensions)
          - Challenge Set (7 categories with examples, motivation for each)
          - Composite Scoring (formulas, use-case weight tables)
 Page 3-4: Experiments
@@ -386,7 +394,7 @@ python architecture_diagram.py        # Stage 6
 When writing any section of this paper, remember:
 - **Interspeech reviewers are speech/audio experts** — don't over-explain WER or MOS but DO explain novel elements (composites, challenge set design rationale)
 - **Be concise** — 4 pages means every paragraph must advance the argument
-- **Lead with the "so what"** — not "we computed 35 metrics" but "existing benchmarks reduce TTS quality to a single MOS score, obscuring critical deployment-specific tradeoffs"
+- **Lead with the "so what"** — not "we computed 28 metrics" but "existing benchmarks reduce TTS quality to a single MOS score, obscuring critical deployment-specific tradeoffs"
 - **Use active voice** — "We propose" not "A framework is proposed"
 - **Quantify everything** — "7 categories, 350 total utterances" not "several categories"
 - **One key finding per paragraph** in Results
