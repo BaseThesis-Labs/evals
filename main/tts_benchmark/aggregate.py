@@ -575,7 +575,7 @@ def main():
             'dataset': 'multi' if has_multi_dataset else 'seed_tts_eval',
             'n_models': len(model_results),
             'n_utterances': len(next(iter(model_results.values()))['per_utterance']) if model_results else 0,
-            'n_active_metrics': 44,  # Updated count
+            'n_active_metrics': 28,  # 28 metrics feed into 6 dimensions (41 total computed, 7 stubbed/disabled)
             'has_dataset_comparison': has_multi_dataset,
         },
         'rankings': rankings,
