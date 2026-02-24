@@ -1,0 +1,77 @@
+scenario_id: "information_retrieval_001"
+category: "information_retrieval"
+difficulty: "hard"
+description: "User asks a series of factual questions about the solar system, building on previous answers. Tests accuracy, depth, and ability to connect information across turns."
+n_turns: 10
+max_turns: 15
+
+system_prompt: |
+  You are a knowledgeable science educator assistant. Provide accurate, detailed answers
+  to factual questions. When the user asks follow-up questions that reference earlier
+  parts of the conversation, connect the information naturally. Use concrete numbers and
+  facts where possible. If you are uncertain about a specific detail, say so rather than
+  guessing.
+
+user_turns:
+  - turn_index: 0
+    text: "I'm curious about Jupiter. How many moons does it have and what's the largest one?"
+    speech_style: "curious"
+
+  - turn_index: 2
+    text: "Interesting. Is Ganymede bigger than any planets? And does it have an atmosphere?"
+    speech_style: "engaged"
+    context_check:
+      description: "Agent should identify Ganymede as Jupiter's largest moon"
+      check_type: "response_contains_all"
+      expected: ["Ganymede"]
+
+  - turn_index: 4
+    text: "You mentioned Jupiter's moons earlier. Which of them might have conditions for life, and why?"
+    speech_style: "thoughtful"
+    context_check:
+      description: "Agent should address Ganymede's size comparison and atmosphere"
+      check_type: "response_contains_any"
+      expected: ["Mercury", "larger than Mercury", "bigger than Mercury", "atmosphere", "oxygen"]
+
+  - turn_index: 6
+    text: "How does Europa's ocean compare in volume to Earth's oceans? That's pretty wild if it has more water than us."
+    speech_style: "amazed"
+    context_check:
+      description: "Agent should mention Europa as a candidate for life"
+      check_type: "response_contains_all"
+      expected: ["Europa"]
+
+  - turn_index: 8
+    text: "Going back to what you said about Ganymede being bigger than Mercury, why isn't Ganymede considered a planet then? What's the actual distinction?"
+    speech_style: "analytical"
+    context_check:
+      description: "Agent should provide information about Europa's subsurface ocean"
+      check_type: "response_contains_any"
+      expected: ["ocean", "water", "ice", "subsurface"]
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Wait, what was the name of Jupiter's largest moon again? I forgot."
+    expected_contains: ["Ganymede"]
+    measures: "context_retention"
+
+  - inject_after_turn: 7
+    probe_text: "Which moons did you say could potentially support life?"
+    expected_contains: ["Europa"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent correctly identifies Ganymede as Jupiter's largest moon"
+    - "Agent provides accurate information about Ganymede's size relative to Mercury"
+    - "Agent identifies Europa as a candidate for extraterrestrial life"
+    - "Agent explains the planet vs moon distinction when asked"
+  optional:
+    - "Agent mentions the approximate number of Jupiter's known moons"
+    - "Agent mentions Enceladus or other moons with subsurface oceans"
+    - "Agent provides specific numbers for Europa's ocean volume"
+
+voice_checks:
+  - compare_turns: [1, 7]
+    metric: "sim_wavlm"
+    threshold: 0.85

@@ -1,0 +1,92 @@
+scenario_id: "restaurant_ordering_001"
+category: "restaurant_ordering"
+difficulty: "medium"
+description: "User orders food from a restaurant with multiple modifications, changes their mind mid-order, and adds items. Tests the agent's ability to track a complex evolving order."
+n_turns: 12
+max_turns: 15
+
+system_prompt: |
+  You are a voice ordering assistant for Bella Cucina Italian Restaurant.
+  Menu items:
+  - Margherita Pizza (small $12, large $18)
+  - Pepperoni Pizza (small $14, large $20)
+  - Caesar Salad ($10)
+  - Garlic Bread ($6)
+  - Spaghetti Carbonara ($16)
+  - Chicken Parmesan ($19)
+  - Tiramisu ($8)
+  - Drinks: Soda ($3), Sparkling Water ($4), House Wine ($9)
+  Modifications available: gluten-free crust (+$3), extra cheese (+$2), no onions, no garlic.
+  Repeat the order back to confirm before finalizing. Apply tax of 8.5%.
+
+user_turns:
+  - turn_index: 0
+    text: "Hi, I'd like to place an order for delivery. Can I get a large pepperoni pizza and a Caesar salad?"
+    speech_style: "casual"
+
+  - turn_index: 2
+    text: "Actually, can you make the pizza gluten-free? And add extra cheese on it too."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should confirm initial order"
+      check_type: "response_contains_any"
+      expected: ["pepperoni", "Caesar", "salad"]
+
+  - turn_index: 4
+    text: "You know what, let me change the salad to a spaghetti carbonara instead. And add a garlic bread."
+    speech_style: "casual"
+    context_check:
+      description: "Agent should acknowledge gluten-free and extra cheese modifications"
+      check_type: "response_contains_any"
+      expected: ["gluten-free", "gluten free", "extra cheese"]
+
+  - turn_index: 6
+    text: "Yeah, and two sodas and a tiramisu for dessert. I think that's everything."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should have updated order replacing salad with carbonara and adding garlic bread"
+      check_type: "response_contains_any"
+      expected: ["carbonara", "garlic bread"]
+
+  - turn_index: 8
+    text: "Yes that's correct. How much is the total?"
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should read back the complete updated order"
+      check_type: "llm_judge"
+      prompt: "Did the agent read back the full order including: large pepperoni pizza with gluten-free crust and extra cheese, spaghetti carbonara, garlic bread, two sodas, and tiramisu? The Caesar salad should NOT be in the order."
+
+  - turn_index: 10
+    text: "Sounds good, go ahead and place that. Delivery address is 42 Elm Street."
+    speech_style: "satisfied"
+    context_check:
+      description: "Agent should provide a total price"
+      check_type: "llm_judge"
+      prompt: "Did the agent provide a total price? The correct subtotal is $20+$3+$2+$16+$6+$3+$3+$8 = $61, plus 8.5% tax = $66.19 approximately."
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Wait, I still have the salad on the order right? Or did I change that?"
+    expected_contains: ["carbonara", "changed", "replaced", "switched"]
+    measures: "context_retention"
+
+  - inject_after_turn: 9
+    probe_text: "The pizza is gluten-free, right? I need to make sure because of allergies."
+    expected_contains: ["gluten-free", "gluten free", "yes"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent correctly tracks the order after the salad-to-carbonara substitution"
+    - "Agent applies gluten-free and extra cheese modifications to the pizza"
+    - "Agent reads back the complete final order accurately"
+    - "Agent calculates total price including modifications and tax"
+  optional:
+    - "Agent confirms delivery address"
+    - "Agent provides estimated delivery time"
+    - "Agent is conversational and friendly"
+
+voice_checks:
+  - compare_turns: [1, 9]
+    metric: "sim_wavlm"
+    threshold: 0.85

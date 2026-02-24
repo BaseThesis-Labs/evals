@@ -1,0 +1,39 @@
+# Weights for voice cloning use-case composite score
+
+use_case: voice_cloning
+
+dimension_weights:
+  speaker: 0.35          # secs (WavLM-large) + sim_wavlm + sim_ecapa
+  content: 0.18          # wer
+  quality: 0.18          # utmos
+  prosody: 0.15          # pitch_corr + dswed + mcd
+  emotion: 0.07          # esim
+  latency: 0.05
+  asr_quality: 0.02
+
+metric_weights:
+  speaker:
+    secs: 0.50           # WavLM-large — de facto standard
+    sim_wavlm: 0.30
+    sim_ecapa: 0.20      # if available
+
+  content:
+    wer: 0.60
+    bert_score_f1: 0.40
+
+  quality:
+    utmos: 0.60
+    dnsmos_ovrl: 0.40
+
+  prosody:
+    pitch_corr: 0.35
+    mcd: 0.30
+    f0_rmse: 0.20
+    dswed: 0.15
+
+  emotion:
+    esim: 0.50
+    emotion_sim: 0.50
+
+  latency:
+    e2e_latency_ms: 1.0

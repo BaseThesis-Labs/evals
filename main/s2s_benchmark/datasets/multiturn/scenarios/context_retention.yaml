@@ -1,0 +1,98 @@
+scenario_id: "context_retention_001"
+category: "context_retention"
+difficulty: "hard"
+description: "Long conversation where the user provides many specific details across turns, then later asks the agent to recall them. Specifically tests long-range memory and detail tracking."
+n_turns: 14
+max_turns: 18
+
+system_prompt: |
+  You are a travel planning assistant. The user will provide details about their
+  upcoming trip over several turns. Keep track of ALL details mentioned, as the user
+  will ask you to recall them later. Pay close attention to names, dates, numbers,
+  and preferences.
+
+user_turns:
+  - turn_index: 0
+    text: "I'm planning a trip to Japan. It's for me and my wife Elena. We're going from April twelfth to April twenty-sixth, so about two weeks. Our budget is around six thousand dollars total."
+    speech_style: "enthusiastic"
+
+  - turn_index: 2
+    text: "We definitely want to spend time in Tokyo and Kyoto. Maybe four days in Tokyo and three in Kyoto. Elena really wants to see the cherry blossoms and visit some temples. I'm more into the food scene and technology district in Akihabara."
+    speech_style: "planning"
+    context_check:
+      description: "Agent should acknowledge trip details"
+      check_type: "response_contains_any"
+      expected: ["Elena", "April", "Japan", "two weeks", "6000", "six thousand"]
+
+  - turn_index: 4
+    text: "For hotels, we prefer boutique places over big chains. Budget around a hundred and fifty per night max. Oh and Elena is vegetarian, so we need restaurants that have good vegetarian options. I eat everything though."
+    speech_style: "detailed"
+    context_check:
+      description: "Agent should incorporate city preferences"
+      check_type: "response_contains_any"
+      expected: ["Tokyo", "Kyoto", "cherry blossom", "temple", "Akihabara", "food"]
+
+  - turn_index: 6
+    text: "One more thing, Elena has a mild shellfish allergy. Not life-threatening but she needs to avoid it. Also, we both want to take a day trip to Mount Fuji if the weather allows. And we're flying out of San Francisco on United Airlines."
+    speech_style: "thorough"
+    context_check:
+      description: "Agent should note hotel and dietary preferences"
+      check_type: "response_contains_any"
+      expected: ["boutique", "150", "hundred and fifty", "vegetarian"]
+
+  - turn_index: 8
+    text: "Okay, now here's my test. Can you give me a complete summary of everything I've told you about the trip? All the details, dates, preferences, dietary stuff, everything."
+    speech_style: "testing"
+    context_check:
+      description: "Agent should note allergy, Fuji trip, and flight details"
+      check_type: "response_contains_any"
+      expected: ["shellfish", "allergy", "Mount Fuji", "Fuji", "San Francisco", "United"]
+
+  - turn_index: 10
+    text: "Pretty good. But you missed one thing: where are we flying out of and what airline? Also, how many days did I say for each city?"
+    speech_style: "quizzing"
+    context_check:
+      description: "Agent should give comprehensive trip summary"
+      check_type: "llm_judge"
+      prompt: "Did the agent's summary include: names (Elena), dates (April 12-26), budget ($6000), cities (Tokyo 4 days, Kyoto 3 days), interests (cherry blossoms, temples, food, Akihabara), hotel preference (boutique, $150/night), dietary (vegetarian, shellfish allergy), and day trip (Mount Fuji)?"
+
+  - turn_index: 12
+    text: "Great. Now based on everything you know about our preferences, what's the one restaurant in Tokyo you'd recommend for us given Elena's dietary needs?"
+    speech_style: "curious"
+    context_check:
+      description: "Agent should recall flight details and city day counts"
+      check_type: "response_contains_all"
+      expected: ["San Francisco", "United"]
+
+context_probes:
+  - inject_after_turn: 3
+    probe_text: "Sorry, what were the exact dates again?"
+    expected_contains: ["April 12", "April twelfth", "April 26", "April twenty-sixth"]
+    measures: "context_retention"
+
+  - inject_after_turn: 7
+    probe_text: "My wife's name is... wait, did I tell you her name?"
+    expected_contains: ["Elena"]
+    measures: "context_retention"
+
+  - inject_after_turn: 11
+    probe_text: "What's our total budget again? And the nightly hotel limit?"
+    expected_contains: ["6000", "six thousand", "150", "hundred and fifty"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent recalls both travelers' preferences (Elena: cherry blossoms, temples, vegetarian; User: food, Akihabara)"
+    - "Agent recalls exact dates (April 12-26)"
+    - "Agent recalls budget ($6000 total, $150/night hotels)"
+    - "Agent recalls dietary restrictions (vegetarian, shellfish allergy)"
+    - "Agent recalls city breakdown (4 days Tokyo, 3 days Kyoto)"
+  optional:
+    - "Agent recalls flight details (San Francisco, United Airlines)"
+    - "Agent recalls Mount Fuji day trip plan"
+    - "Agent makes restaurant recommendation consistent with stated dietary needs"
+
+voice_checks:
+  - compare_turns: [1, 11]
+    metric: "sim_wavlm"
+    threshold: 0.85

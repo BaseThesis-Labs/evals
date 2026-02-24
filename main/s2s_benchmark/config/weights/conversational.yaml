@@ -1,0 +1,62 @@
+# Weights for conversational AI use-case composite score
+# All weights should sum to 1.0
+
+use_case: conversational
+
+dimension_weights:
+  latency: 0.18
+  content: 0.14          # wer primary
+  quality: 0.14          # utmos primary
+  speaker: 0.10          # secs primary
+  prosody: 0.08
+  emotion: 0.08
+  asr_quality: 0.10      # STT quality of intermediate ASR step
+  response_quality: 0.10 # LLM-as-judge + instruction follow + safety
+  interaction: 0.08      # TOR↑/↓ (turn-taking quality)
+
+# Per-metric weights within each dimension
+metric_weights:
+  content:
+    wer: 0.40
+    cer: 0.10
+    bert_score_f1: 0.30
+    sem_dist: 0.20
+
+  quality:
+    utmos: 0.50
+    dnsmos_ovrl: 0.30
+    pesq: 0.20
+
+  speaker:
+    secs: 0.70
+    sim_wavlm: 0.30
+
+  prosody:
+    f0_rmse: 0.40
+    pitch_corr: 0.30
+    energy_corr: 0.30
+
+  emotion:
+    emotion_match: 0.40
+    emotion_sim: 0.30
+    esim: 0.30
+
+  latency:
+    e2e_latency_ms: 0.50
+    ttfb_ms: 0.30
+    rtf: 0.20
+
+  asr_quality:
+    insertion_rate: 0.25
+    deletion_rate: 0.25
+    substitution_rate: 0.25
+    word_accuracy: 0.25
+
+  response_quality:
+    judge_overall: 0.45
+    instruction_follow: 0.30
+    safety_refusal: 0.25
+
+  interaction:
+    tor_up: 0.50
+    tor_down: 0.50

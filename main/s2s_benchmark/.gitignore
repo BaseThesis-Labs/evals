@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Environment
+.env
+.env.*
+
+# Audio/media files
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.tar.bz2
+*.tar.gz
+*.zip
+
+# Large datasets (audio + extracted)
+datasets/_ljspeech_extracted/
+datasets/cmu_arctic_audio/
+datasets/manifests/
+datasets/multiturn/audio/
+
+# Results (audio, large JSONs, Excel)
+results/
+*.xlsx
+
+# Temp/junk dirs
+--manifest
+--model
+--output
+datase
+kaggle/
+
+# Logs
+*.log
+*.csv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.claude/

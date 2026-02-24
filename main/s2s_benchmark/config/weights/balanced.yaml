@@ -1,0 +1,69 @@
+# Balanced use-case weights — equal importance across all S2S dimensions
+
+use_case: balanced
+
+dimension_weights:
+  content: 0.14
+  quality: 0.14
+  speaker: 0.14
+  prosody: 0.13
+  emotion: 0.10
+  latency: 0.10
+  asr_quality: 0.10
+  response_quality: 0.10
+  interaction: 0.05
+  # robustness removed — its metrics (wer, duration_ratio) are already in
+  # content and prosody; keeping it caused double-counting.
+  # Weights redistributed (+0.01 to content, quality, speaker, prosody, response_quality).
+
+metric_weights:
+  content:
+    wer: 0.30
+    bert_score_f1: 0.30
+    sem_dist: 0.20
+    rouge_l: 0.20
+
+  quality:
+    utmos: 0.35
+    nisqa_mos: 0.25
+    dnsmos_ovrl: 0.25
+    pesq: 0.15
+
+  speaker:
+    secs: 0.60
+    sim_wavlm: 0.30
+    sim_ecapa: 0.10
+
+  prosody:
+    f0_rmse: 0.30
+    pitch_corr: 0.25
+    energy_corr: 0.25
+    duration_ratio: 0.10
+    dswed: 0.10
+
+  emotion:
+    emotion_match: 0.40
+    emotion_sim: 0.30
+    esim: 0.30
+
+  latency:
+    e2e_latency_ms: 0.40
+    ttfb_ms: 0.30
+    rtf: 0.30
+
+  asr_quality:
+    word_accuracy: 0.40
+    insertion_rate: 0.20
+    deletion_rate: 0.20
+    substitution_rate: 0.20
+
+  response_quality:
+    judge_overall: 0.40
+    instruction_follow: 0.35
+    safety_refusal: 0.25
+
+  interaction:
+    tor_up: 0.50
+    tor_down: 0.50
+
+  # robustness removed (double-counting)

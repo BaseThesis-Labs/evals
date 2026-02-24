@@ -1,0 +1,52 @@
+# Weights for audiobook narration use-case composite score
+
+use_case: audiobook
+
+dimension_weights:
+  quality: 0.23
+  content: 0.20          # wer critical for narration
+  prosody: 0.20          # f0, energy, pitch, dswed all important
+  speaker: 0.15          # secs
+  emotion: 0.10
+  latency: 0.05          # less critical for offline rendering
+  asr_quality: 0.05
+  response_quality: 0.02 # instruction follow (e.g. reading style)
+
+metric_weights:
+  content:
+    wer: 0.50
+    bert_score_f1: 0.30
+    sem_dist: 0.20
+
+  quality:
+    utmos: 0.50
+    dnsmos_ovrl: 0.30
+    pesq: 0.20
+
+  speaker:
+    secs: 0.70
+    sim_wavlm: 0.30
+
+  prosody:
+    f0_rmse: 0.25
+    energy_corr: 0.25
+    pitch_corr: 0.25
+    duration_ratio: 0.15
+    dswed: 0.10
+
+  emotion:
+    emotion_match: 0.40
+    emotion_sim: 0.30
+    esim: 0.30
+
+  latency:
+    rtf: 0.60
+    e2e_latency_ms: 0.40
+
+  asr_quality:
+    word_accuracy: 0.60
+    deletion_rate: 0.20
+    substitution_rate: 0.20
+
+  response_quality:
+    instruction_follow: 1.0

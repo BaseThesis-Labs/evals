@@ -1,0 +1,83 @@
+scenario_id: "appointment_booking_001"
+category: "appointment_booking"
+difficulty: "medium"
+description: "User calls to book a doctor appointment with several scheduling constraints including preferred days, time windows, and a specific doctor preference."
+n_turns: 12
+max_turns: 15
+
+system_prompt: |
+  You are a receptionist at Greenfield Family Medical Center.
+  Available appointment slots:
+  - Dr. Patel (General Practitioner): Monday 9am, Wednesday 2pm, Thursday 10am, Friday 3pm
+  - Dr. Rodriguez (General Practitioner): Tuesday 11am, Wednesday 9am, Thursday 4pm
+  - Dr. Kim (Dermatology): Monday 1pm, Friday 10am
+  Today is Monday. Ask for the patient's name, date of birth, reason for visit, and preferred times.
+  Confirm all details before finalizing the booking.
+
+user_turns:
+  - turn_index: 0
+    text: "Hi, I need to schedule an appointment. I'd like to see Dr. Patel if possible. My name is James Whitfield."
+    speech_style: "polite"
+
+  - turn_index: 2
+    text: "My date of birth is March fifteenth, nineteen eighty-six. And it's for a general checkup, nothing urgent."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should acknowledge name and ask for details"
+      check_type: "response_contains_any"
+      expected: ["James", "Whitfield", "date of birth", "birthday", "when were you born"]
+
+  - turn_index: 4
+    text: "I can't do mornings because of work. Do you have anything in the afternoon? Ideally Wednesday or Thursday."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should confirm DOB and reason for visit"
+      check_type: "response_contains_any"
+      expected: ["checkup", "general", "Dr. Patel", "available", "slot"]
+
+  - turn_index: 6
+    text: "Wednesday at two works perfectly. Let's go with that."
+    speech_style: "pleased"
+    context_check:
+      description: "Agent should offer Wednesday 2pm with Dr. Patel"
+      check_type: "response_contains_all"
+      expected: ["Wednesday", "2"]
+
+  - turn_index: 8
+    text: "Yes, that's all correct. Oh wait, actually I also wanted to ask, does Dr. Patel's office handle referrals to dermatology? I've got a skin thing I want looked at too."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should confirm the full booking details"
+      check_type: "llm_judge"
+      prompt: "Did the agent confirm the appointment for James Whitfield with Dr. Patel on Wednesday at 2pm for a general checkup?"
+
+  - turn_index: 10
+    text: "Great, I'll bring that up during my visit then. Thanks for your help."
+    speech_style: "grateful"
+
+context_probes:
+  - inject_after_turn: 7
+    probe_text: "Sorry, just to confirm, which doctor am I seeing and what day?"
+    expected_contains: ["Patel", "Wednesday"]
+    measures: "context_retention"
+
+  - inject_after_turn: 9
+    probe_text: "And this is for a checkup right? Not anything else?"
+    expected_contains: ["checkup", "general"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent collects patient name"
+    - "Agent collects date of birth"
+    - "Agent collects reason for visit"
+    - "Agent offers an afternoon slot on Wednesday or Thursday with Dr. Patel"
+    - "Agent confirms full booking details before finalizing"
+  optional:
+    - "Agent provides information about the dermatology referral process"
+    - "Agent mentions what to bring to the appointment"
+
+voice_checks:
+  - compare_turns: [1, 9]
+    metric: "sim_wavlm"
+    threshold: 0.85

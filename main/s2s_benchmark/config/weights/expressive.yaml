@@ -1,0 +1,45 @@
+# Weights for expressive/emotional speech use-case composite score
+
+use_case: expressive
+
+dimension_weights:
+  emotion: 0.28          # emotion_match + emotion_sim + esim
+  quality: 0.18          # utmos
+  prosody: 0.18          # f0 + energy + dswed
+  content: 0.14          # wer
+  speaker: 0.10          # secs
+  response_quality: 0.07 # judge scores
+  latency: 0.05
+  asr_quality: 0.00
+
+metric_weights:
+  emotion:
+    emotion_match: 0.35
+    emotion_sim: 0.30
+    esim: 0.35
+
+  quality:
+    utmos: 0.60
+    dnsmos_ovrl: 0.40
+
+  prosody:
+    f0_rmse: 0.35
+    energy_corr: 0.30
+    pitch_corr: 0.20
+    dswed: 0.15
+
+  content:
+    wer: 0.50
+    bert_score_f1: 0.30
+    sem_dist: 0.20
+
+  speaker:
+    secs: 0.70
+    sim_wavlm: 0.30
+
+  response_quality:
+    judge_overall: 0.60
+    instruction_follow: 0.40
+
+  latency:
+    e2e_latency_ms: 1.0

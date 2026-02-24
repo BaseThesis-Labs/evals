@@ -1,0 +1,405 @@
+# S2S Benchmark — Metric Normalization Bounds
+# Format: metric_name: {floor, ceiling, direction}
+#   direction: "higher" (higher raw → higher score)
+#              "lower"  (lower raw → higher score)
+#              "target" (target value → highest score; floor/ceiling are deviation limits)
+
+METRIC_BOUNDS:
+  # ── Content preservation ─────────────────────────────────────────────────
+  wer:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  cer:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  mer:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  wil:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  bert_score_f1:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  sem_dist:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  rouge_l:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  # ── ASR quality (intermediate ASR step) ──────────────────────────────────
+  insertion_rate:
+    floor: 0.0
+    ceiling: 0.5
+    direction: lower
+
+  deletion_rate:
+    floor: 0.0
+    ceiling: 0.5
+    direction: lower
+
+  substitution_rate:
+    floor: 0.0
+    ceiling: 0.5
+    direction: lower
+
+  word_accuracy:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  her:
+    floor: 0.0
+    ceiling: 0.5
+    direction: lower
+
+  hallucination_rate:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  fwer:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  # SER: Sentence Error Rate — per-utterance binary (0 or 1); lower=better
+  ser:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  # WIP: Word Information Preserved = 1 − WIL; higher=better
+  wip:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  asr_latency_ms:
+    floor: 0.0
+    ceiling: 5000.0
+    direction: lower
+
+  rtfx:
+    floor: 0.0
+    ceiling: 20.0
+    direction: higher
+
+  # ── Audio quality ─────────────────────────────────────────────────────────
+  utmos:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  nisqa_mos:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  nisqa_noisiness:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  nisqa_coloration:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  nisqa_discontinuity:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  nisqa_loudness:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  dnsmos_sig:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  dnsmos_bak:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  dnsmos_ovrl:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  pesq:
+    floor: -0.5
+    ceiling: 4.5
+    direction: higher
+
+  mcd:
+    floor: 0.0
+    ceiling: 20.0
+    direction: lower
+
+  # ── Speaker similarity ────────────────────────────────────────────────────
+  sim_wavlm:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  sim_ecapa:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  # ── Prosody ───────────────────────────────────────────────────────────────
+  f0_rmse:
+    floor: 0.0
+    ceiling: 200.0
+    direction: lower
+
+  pitch_corr:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  energy_corr:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  duration_ratio:
+    floor: 0.0
+    ceiling: 3.0
+    direction: target
+    target: 1.0
+    tolerance: 0.2
+
+  # ── Speaker similarity (extended) ────────────────────────────────────────
+  secs:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  eer:
+    floor: 0.0
+    ceiling: 50.0
+    direction: lower
+
+  # ── Prosody (extended) ────────────────────────────────────────────────────
+  dswed:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  # Speaking rate: syllables/sec — target ≈ 3.5–4.5 for natural English
+  speaking_rate:
+    floor: 0.5
+    ceiling: 10.0
+    direction: target
+    target: 4.0
+    tolerance: 1.5
+
+  # Speaking rate ratio (echo mode): hyp_rate / ref_rate — ideal = 1.0
+  speaking_rate_ratio:
+    floor: 0.0
+    ceiling: 3.0
+    direction: target
+    target: 1.0
+    tolerance: 0.2
+
+  # Pause ratio: fraction silent frames — target ≈ 0.10–0.25 natural speech
+  pause_ratio:
+    floor: 0.0
+    ceiling: 1.0
+    direction: target
+    target: 0.15
+    tolerance: 0.15
+
+  # ── Latency (extended) ────────────────────────────────────────────────────
+  # Tail ratio = P99/P50 latency; ideal < 3.0; > 5.0 indicates instability
+  tail_ratio:
+    floor: 1.0
+    ceiling: 10.0
+    direction: lower
+
+  # ── Emotion ───────────────────────────────────────────────────────────────
+  emotion_match:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  emotion_sim:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  esim:
+    floor: -1.0
+    ceiling: 1.0
+    direction: higher
+
+  # ── Response quality (LLM-as-judge) ──────────────────────────────────────
+  judge_coherence:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  judge_relevance:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  judge_helpfulness:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  judge_safety:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  judge_naturalness:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  judge_overall:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  instruction_follow:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  safety_refusal:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  # ── Interaction / TOR ─────────────────────────────────────────────────────
+  tor_up:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  tor_down:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  # ── Latency ───────────────────────────────────────────────────────────────
+  ttfb_ms:
+    floor: 0.0
+    ceiling: 3000.0
+    direction: lower
+
+  e2e_latency_ms:
+    floor: 0.0
+    ceiling: 10000.0
+    direction: lower
+
+  rtf:
+    floor: 0.0
+    ceiling: 5.0
+    direction: lower
+
+  latency:
+    floor: 0.0
+    ceiling: 10000.0
+    direction: lower
+
+  # ── Multi-turn metrics ──────────────────────────────────────────────────
+  task_completion:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  session_verdict:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  session_verdict_impossible:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  session_verdict_audio_issues:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  context_retention:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  voice_consistency:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  degradation_slope:
+    floor: -0.5
+    ceiling: 0.5
+    direction: target
+    target: 0.0
+    tolerance: 0.05
+
+  error_recovery_rate:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  error_recovery:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  dialogue_coherence:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  persona_drift:
+    floor: 0.0
+    ceiling: 1.0
+    direction: lower
+
+  factual_consistency:
+    floor: 0.0
+    ceiling: 1.0
+    direction: higher
+
+  avg_turn_latency:
+    floor: 0.0
+    ceiling: 5000.0
+    direction: lower
+
+  session_dnsmos_ovrl:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher
+
+  session_utmos:
+    floor: 1.0
+    ceiling: 5.0
+    direction: higher

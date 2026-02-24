@@ -1,0 +1,88 @@
+scenario_id: "tech_support_001"
+category: "tech_support"
+difficulty: "medium"
+description: "User has intermittent WiFi connectivity issues on their laptop. Agent guides through structured troubleshooting steps from basic to advanced."
+n_turns: 12
+max_turns: 15
+
+system_prompt: |
+  You are a technical support agent for NexusNet Internet Services.
+  Customer's account shows:
+  - Plan: 500 Mbps fiber
+  - Router model: NexusNet AX3200
+  - Account status: Active, no outages reported in their area
+  Guide the customer through troubleshooting steps in this order:
+  1. Check if other devices are affected
+  2. Restart the router (unplug for 30 seconds)
+  3. Forget and reconnect to the WiFi network
+  4. Check for firmware updates on the router (admin panel at 192.168.1.1)
+  5. If nothing works, schedule a technician visit
+  Be patient and explain each step clearly.
+
+user_turns:
+  - turn_index: 0
+    text: "Hey, my WiFi keeps cutting out on my laptop. It's been happening all day. It'll work for like ten minutes and then just drop."
+    speech_style: "annoyed"
+
+  - turn_index: 2
+    text: "Hmm, let me check. Actually my phone seems fine, it's just the laptop having the issue. It's a MacBook Pro if that matters."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should ask about other devices"
+      check_type: "llm_judge"
+      prompt: "Did the agent ask whether other devices in the home are also experiencing WiFi issues?"
+
+  - turn_index: 4
+    text: "Okay, I've unplugged the router. Waiting now. ... Alright it's been thirty seconds, plugging it back in. Give me a minute to let it boot up."
+    speech_style: "cooperative"
+    context_check:
+      description: "Agent should suggest router restart"
+      check_type: "response_contains_any"
+      expected: ["restart", "reboot", "unplug", "power cycle", "turn off"]
+
+  - turn_index: 6
+    text: "It came back up but it just dropped again after about five minutes. Same thing as before."
+    speech_style: "frustrated"
+
+  - turn_index: 8
+    text: "Okay I went to WiFi settings, forgot the network, and now I'm reconnecting. It's asking for the password. Where do I find that?"
+    speech_style: "uncertain"
+    context_check:
+      description: "Agent should instruct to forget and reconnect to WiFi"
+      check_type: "response_contains_any"
+      expected: ["forget", "remove", "reconnect", "network"]
+
+  - turn_index: 10
+    text: "Got it, I'm connected again. I'll keep an eye on it. If it drops again should I call back, or is there a next step?"
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should help with the WiFi password"
+      check_type: "response_contains_any"
+      expected: ["password", "router", "sticker", "label", "back of", "bottom of", "192.168"]
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Wait, what kind of router do I have again?"
+    expected_contains: ["AX3200", "NexusNet"]
+    measures: "context_retention"
+
+  - inject_after_turn: 9
+    probe_text: "Which device was having the issue again? I want to make sure we're focused on the right one."
+    expected_contains: ["laptop", "MacBook"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent checks if other devices are affected"
+    - "Agent instructs user to restart the router"
+    - "Agent guides user to forget and reconnect to the WiFi network"
+    - "Agent provides clear step-by-step instructions"
+  optional:
+    - "Agent mentions firmware update as a next step"
+    - "Agent offers to schedule a technician if issue persists"
+    - "Agent explains where to find the WiFi password"
+
+voice_checks:
+  - compare_turns: [1, 9]
+    metric: "sim_wavlm"
+    threshold: 0.85

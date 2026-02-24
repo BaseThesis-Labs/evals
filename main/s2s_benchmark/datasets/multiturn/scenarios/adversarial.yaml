@@ -1,0 +1,91 @@
+scenario_id: "adversarial_001"
+category: "adversarial"
+difficulty: "hard"
+description: "User contradicts themselves, provides conflicting information, interrupts with off-topic questions, and tests the agent's ability to handle confusion, recover from errors, and maintain coherence."
+n_turns: 12
+max_turns: 18
+
+system_prompt: |
+  You are a helpful assistant for a car rental company called DriveEasy.
+  Available vehicles:
+  - Economy (Toyota Corolla): $35/day
+  - Mid-size (Honda Accord): $50/day
+  - SUV (Toyota RAV4): $65/day
+  - Luxury (BMW 5 Series): $120/day
+  Locations: Downtown, Airport, Suburban Mall
+  Insurance options: Basic ($12/day), Premium ($22/day)
+  When the customer provides contradictory information, politely ask for clarification.
+  Do not assume; always confirm.
+
+user_turns:
+  - turn_index: 0
+    text: "I need to rent a car for next weekend. I want something small and fuel-efficient. An economy car should work."
+    speech_style: "casual"
+
+  - turn_index: 2
+    text: "Actually, I changed my mind. I need an SUV because I'm going hiking and I need the cargo space. Wait, no, how much is the luxury one? The BMW?"
+    speech_style: "indecisive"
+    context_check:
+      description: "Agent should acknowledge economy car request"
+      check_type: "response_contains_any"
+      expected: ["economy", "Corolla", "35", "thirty-five"]
+
+  - turn_index: 4
+    text: "One hundred twenty a day? Never mind, that's too much. Let me go with the SUV. Oh by the way, completely unrelated, what's the capital of France? I'm settling a bet with my friend."
+    speech_style: "scattered"
+    context_check:
+      description: "Agent should handle the rapid changes and provide BMW pricing"
+      check_type: "response_contains_any"
+      expected: ["120", "hundred twenty", "BMW", "luxury"]
+
+  - turn_index: 6
+    text: "Thanks. Okay back to the rental. I want to pick up from the airport on Saturday. Actually wait, I said next weekend right? I meant this coming Thursday to Monday. And I need it from the downtown location, not the airport."
+    speech_style: "correcting"
+    context_check:
+      description: "Agent should handle the off-topic question and return to rental"
+      check_type: "llm_judge"
+      prompt: "Did the agent either answer the France capital question or politely redirect to the rental, and also confirm the SUV selection?"
+
+  - turn_index: 8
+    text: "Hold on, I just realized something. I told you I wanted a small fuel-efficient car at the beginning, and now I'm getting an SUV. You should have flagged that contradiction. Why didn't you?"
+    speech_style: "confrontational"
+    context_check:
+      description: "Agent should clarify the corrected dates and location"
+      check_type: "response_contains_any"
+      expected: ["Thursday", "Monday", "downtown"]
+
+  - turn_index: 10
+    text: "Fair enough. Alright let's finalize this. SUV from downtown, Thursday to Monday. Add the basic insurance. What's my total going to be?"
+    speech_style: "decisive"
+    context_check:
+      description: "Agent should handle the confrontational question gracefully"
+      check_type: "llm_judge"
+      prompt: "Did the agent respond to the accusation about not flagging contradictions in a professional, non-defensive way? The agent should acknowledge the point."
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Wait, what car am I getting again? I've changed my mind so many times I lost track."
+    expected_contains: ["SUV", "RAV4"]
+    measures: "context_retention"
+
+  - inject_after_turn: 9
+    probe_text: "And the pickup location, is that the airport or somewhere else? I know I changed that too."
+    expected_contains: ["downtown"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent tracks the vehicle choice through multiple changes (economy -> SUV -> luxury -> SUV)"
+    - "Agent handles the off-topic question without losing the rental conversation"
+    - "Agent correctly updates dates and location when corrected"
+    - "Agent responds gracefully to the confrontational question about contradictions"
+    - "Agent calculates correct total (SUV $65 x 4 days + basic insurance $12 x 4 = $308)"
+  optional:
+    - "Agent answers the France capital question correctly (Paris)"
+    - "Agent proactively confirms details when the user is being indecisive"
+    - "Agent maintains a patient, professional tone throughout"
+
+voice_checks:
+  - compare_turns: [1, 9]
+    metric: "sim_wavlm"
+    threshold: 0.85

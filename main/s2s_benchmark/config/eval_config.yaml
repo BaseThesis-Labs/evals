@@ -1,0 +1,282 @@
+asr:
+  cache_transcripts: true
+  device: cpu
+  language: en
+  model: whisper-base
+
+# ── Evaluation Modes ───────────────────────────────────────────────────────
+evaluation_modes:
+  echo:
+    description: "Model repeats/resynthesizes input speech"
+    system_prompt: "Repeat exactly what the user says, maintaining the same tone and emotion."
+    valid_metrics:
+      - wer
+      - cer
+      - mer
+      - wil
+      - wip
+      - bert_score_f1
+      - sem_dist
+      - rouge_l
+      - pesq
+      - mcd
+      - utmos
+      - dnsmos_ovrl
+      - sim_wavlm
+      - secs
+      - sim_ecapa
+      - f0_rmse
+      - energy_corr
+      - pitch_corr
+      - duration_ratio
+      - speaking_rate
+      - pause_ratio
+      - emotion_match
+      - emotion_sim
+      - esim
+      - ttfb_ms
+      - e2e_latency_ms
+      - rtf
+
+  conversational:
+    description: "Model generates a spoken response to speech input"
+    system_prompt: "You are a helpful voice assistant. Respond naturally to the user."
+    valid_metrics:
+      - dnsmos_ovrl
+      - utmos
+      - judge_overall
+      - judge_coherence
+      - judge_helpfulness
+      - judge_naturalness
+      - judge_relevance
+      - judge_safety
+      - instruction_follow
+      - emotion_match
+      - emotion_sim
+      - ttfb_ms
+      - e2e_latency_ms
+      - rtf
+      - speaking_rate
+      - sim_wavlm
+      - sem_dist
+
+  multiturn:
+    description: "Multi-turn agent evaluation over dialogue sessions"
+    system_prompt: null
+    valid_metrics:
+      - task_completion
+      - context_retention
+      - voice_consistency
+      - degradation_slope
+      - error_recovery_rate
+      - dialogue_coherence
+      - avg_turn_latency
+      - ttfb_ms
+      - e2e_latency_ms
+      - session_dnsmos_ovrl
+      - session_utmos
+      - persona_drift
+      - factual_consistency
+
+# ── Multi-Turn Configuration ───────────────────────────────────────────────
+multiturn:
+  scenarios_dir: datasets/multiturn/scenarios
+  tts_voice: "aura-asteria-en"
+  tts_provider: deepgram
+  max_turns_per_session: 15
+  probe_timeout_s: 30
+  output_dir: results/multiturn
+
+metrics:
+  compute_asr_details: true
+  compute_bert_score: true
+  compute_cer: true
+  compute_dnsmos: true
+  compute_duration_ratio: true
+  compute_energy_corr: true
+  compute_f0_rmse: true
+  compute_latency: true
+  compute_mcd: true
+  compute_pesq: true
+  compute_pitch_corr: true
+  compute_rouge_l: true
+  compute_sem_dist: true
+  compute_sim_wavlm: true
+  compute_utmos: true
+  compute_wer: true
+  emotion2vec_model: iic/emotion2vec_plus_seed
+  include_ecapa: false
+  use_emotion2vec: true
+  use_stt_benchmark_metrics: true
+  use_llm_judge: true
+  use_wav2vec2_emotion: true
+models:
+  cascaded_cartesia:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      tts_model: cartesia
+      voice: a0e99841-438c-4a64-b679-ae501e7d6091
+    enabled: true
+    model_type: echo
+    rate_limit_rps: 5
+  cascaded_claude_cartesia:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: claude-haiku-4-5-20251001
+      llm_provider: anthropic
+      tts_model: cartesia
+      voice: sonic-english
+    enabled: false
+    model_type: generative
+    rate_limit_rps: 5
+  cascaded_claude_deepgram:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: claude-haiku-4-5-20251001
+      llm_provider: anthropic
+      tts_model: deepgram
+      voice: aura-asteria-en
+    enabled: false
+    model_type: generative
+    rate_limit_rps: 5
+  cascaded_claude_elevenlabs:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: claude-haiku-4-5-20251001
+      llm_provider: anthropic
+      tts_model: elevenlabs
+      voice: Rachel
+    enabled: false
+    model_type: generative
+    rate_limit_rps: 3
+  cascaded_deepgram:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      tts_model: deepgram
+      voice: aura-asteria-en
+    enabled: true
+    model_type: echo
+    rate_limit_rps: 2
+  cascaded_elevenlabs:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      tts_model: elevenlabs
+      voice: 21m00Tcm4TlvDq8ikWAM
+    enabled: false
+    model_type: echo
+    rate_limit_rps: 3
+  cascaded_groq_cartesia:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: llama-3.3-70b-versatile
+      llm_provider: groq
+      tts_model: cartesia
+      voice: a0e99841-438c-4a64-b679-ae501e7d6091
+    enabled: true
+    model_type: generative
+    rate_limit_rps: 5
+  cascaded_groq_deepgram:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: llama-3.3-70b-versatile
+      llm_provider: groq
+      tts_model: deepgram
+      voice: aura-asteria-en
+    enabled: true
+    model_type: generative
+    rate_limit_rps: 5
+  cascaded_llama3_deepgram:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: llama3.2
+      llm_provider: ollama
+      tts_model: deepgram
+      voice: aura-asteria-en
+    enabled: false
+    model_type: generative
+    rate_limit_rps: 10
+  cascaded_together_deepgram:
+    class_path: inference.adapters.cascaded.CascadedS2SAdapter
+    config:
+      asr_model: base
+      llm_model: meta-llama/Llama-3.3-70B-Instruct-Turbo
+      llm_provider: together
+      tts_model: deepgram
+      voice: aura-asteria-en
+    enabled: false
+    model_type: generative
+    rate_limit_rps: 5
+  elevenlabs_s2s:
+    class_path: inference.adapters.elevenlabs_s2s.ElevenLabsS2SAdapter
+    config:
+      model_id: eleven_english_sts_v2
+      voice_id: 21m00Tcm4TlvDq8ikWAM
+    enabled: false
+    model_type: echo
+  gemini_live:
+    class_path: inference.adapters.gemini_live.GeminiLiveAdapter
+    config:
+      model: gemini-2.0-flash-live
+      voice: Puck
+    enabled: false
+    model_type: generative
+  gpt4o_realtime:
+    class_path: inference.adapters.gpt4o_realtime.GPT4ORealtimeAdapter
+    config:
+      model: gpt-4o-realtime-preview
+      voice: alloy
+    enabled: true
+    model_type: generative
+  moshi:
+    class_path: inference.adapters.moshi.MoshiAdapter
+    config:
+      model: moshi-v0.1
+    enabled: false
+    model_type: generative
+  qwen25_omni_3b:
+    class_path: inference.adapters.qwen_omni.Qwen25OmniAdapter
+    config:
+      device: auto
+      dtype: bfloat16
+      load_in_4bit: true
+      model_id: Qwen/Qwen2.5-Omni-3B
+    enabled: false
+    model_type: generative
+  qwen25_omni_7b:
+    class_path: inference.adapters.qwen_omni.Qwen25OmniAdapter
+    config:
+      device: auto
+      dtype: bfloat16
+      model_id: Qwen/Qwen2.5-Omni-7B
+    enabled: false
+    model_type: generative
+  ultravox:
+    class_path: inference.adapters.ultravox.UltravoxAdapter
+    enabled: true
+    model_type: generative
+    config:
+      model: ultravox-v0.7
+      voice: Mark
+output:
+  audio_format: wav
+  sample_rate: 24000
+  save_audio: true
+retry:
+  backoff_base_s: 1.0
+  backoff_max_s: 60.0
+  max_retries: 3
+  retry_on:
+  - 429
+  - 500
+  - 502
+  - 503
+  - 504

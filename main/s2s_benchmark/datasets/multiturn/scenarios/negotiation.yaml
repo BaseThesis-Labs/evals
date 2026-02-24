@@ -1,0 +1,93 @@
+scenario_id: "negotiation_001"
+category: "negotiation"
+difficulty: "hard"
+description: "User calls to negotiate a better deal on their internet service plan, threatening to switch to a competitor. Agent must balance retention with company policies."
+n_turns: 12
+max_turns: 15
+
+system_prompt: |
+  You are a retention specialist for Streamline Internet.
+  Customer's account:
+  - Name: David Morales
+  - Current plan: Standard 200 Mbps at $69.99/month (contract expired 2 months ago)
+  - Customer for 4 years
+  - Payment history: Always on time
+  Available offers for retention:
+  - Upgrade to 500 Mbps at same price ($69.99/month) with 12-month commitment
+  - 15% discount on current plan ($59.49/month) for 6 months
+  - Free router upgrade (value $120) with 12-month commitment
+  - Maximum combined: 500 Mbps + 10% discount ($62.99/month) + free router with 24-month commitment
+  Do not offer the maximum deal immediately. Start with the smallest offer and escalate
+  only if the customer pushes back. Be professional but firm on limits.
+
+user_turns:
+  - turn_index: 0
+    text: "Hi, I've been with you guys for four years and honestly I'm thinking about switching. FiberFirst is offering me 500 megabits for fifty-five a month. Can you do anything to keep me?"
+    speech_style: "assertive"
+
+  - turn_index: 2
+    text: "A speed upgrade is nice but I'd still be paying the same amount. FiberFirst's deal is fifteen dollars cheaper. I need you to come down on the price."
+    speech_style: "firm"
+    context_check:
+      description: "Agent should make an initial retention offer"
+      check_type: "response_contains_any"
+      expected: ["500", "upgrade", "Mbps", "megabits", "offer"]
+
+  - turn_index: 4
+    text: "Fifty-nine forty-nine for six months? That's still more than what FiberFirst is offering permanently. And after six months I'm back to seventy? Come on, you can do better than that."
+    speech_style: "negotiating"
+    context_check:
+      description: "Agent should offer a price discount"
+      check_type: "response_contains_any"
+      expected: ["discount", "59.49", "fifteen percent", "15%", "reduced"]
+
+  - turn_index: 6
+    text: "Now we're getting somewhere. So let me make sure I understand: 500 Mbps at sixty-three a month with a new router, for a twenty-four month commitment? What happens after the twenty-four months?"
+    speech_style: "interested"
+    context_check:
+      description: "Agent should present a better combined offer"
+      check_type: "response_contains_any"
+      expected: ["router", "62.99", "sixty-two", "500", "combined"]
+
+  - turn_index: 8
+    text: "Can you make it a twelve-month commitment instead of twenty-four? I don't want to be locked in that long."
+    speech_style: "negotiating"
+    context_check:
+      description: "Agent should explain what happens after the commitment period"
+      check_type: "llm_judge"
+      prompt: "Did the agent explain what the pricing or terms would be after the 24-month commitment period ends?"
+
+  - turn_index: 10
+    text: "Alright, I'll take the twelve-month deal with the speed upgrade and router. Let's do it."
+    speech_style: "satisfied"
+    context_check:
+      description: "Agent should respond to the 12-month counteroffer"
+      check_type: "llm_judge"
+      prompt: "Did the agent either accept a modified 12-month deal or explain why 24 months is required for the full package?"
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Remind me, how long have I been a customer? And what am I paying right now?"
+    expected_contains: ["four years", "69.99", "seventy"]
+    measures: "context_retention"
+
+  - inject_after_turn: 9
+    probe_text: "What was that competitor price I mentioned at the beginning?"
+    expected_contains: ["55", "fifty-five", "FiberFirst"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent does not immediately offer the maximum deal"
+    - "Agent escalates offers progressively in response to pushback"
+    - "Agent clearly explains the terms of each offer"
+    - "Agent acknowledges the customer's loyalty"
+  optional:
+    - "Agent addresses the competitor comparison directly"
+    - "Agent explains post-commitment pricing"
+    - "Agent confirms the final agreed terms before closing"
+
+voice_checks:
+  - compare_turns: [1, 9]
+    metric: "sim_wavlm"
+    threshold: 0.85

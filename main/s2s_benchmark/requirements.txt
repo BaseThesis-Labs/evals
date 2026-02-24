@@ -1,0 +1,47 @@
+# S2S Benchmark — extends tts_benchmark deps
+# Run inside tts_benchmark venv:
+#   pip install -r requirements.txt
+
+# ── content metrics ──────────────────────────────────────────────────────────
+bert-score>=0.3.13
+rouge-score>=0.1.2
+jiwer>=3.0.3
+
+# ── prosody & signal ─────────────────────────────────────────────────────────
+pymcd>=0.1.4
+dtw-python>=1.3.0
+
+# ── emotion / speaker ────────────────────────────────────────────────────────
+# funasr required for emotion2vec
+funasr>=1.1.0
+modelscope>=1.9.0
+
+# ── quality ──────────────────────────────────────────────────────────────────
+# pesq, parselmouth, torch, torchaudio already in tts_benchmark venv
+
+# ── sentence embeddings ───────────────────────────────────────────────────────
+sentence-transformers>=2.2.2
+
+# ── misc ──────────────────────────────────────────────────────────────────────
+datasets>=2.14.0        # HuggingFace datasets (TESS, SAVEE, RAVDESS streaming)
+huggingface-hub>=0.19.0
+kagglehub>=0.2.0        # Kaggle dataset download
+tqdm>=4.66.0
+pyyaml>=6.0.1
+
+# ── Native S2S models (install only what you need) ────────────────────────────
+
+# Qwen2.5-Omni (open-source native S2S, GPU required)
+# pip install transformers>=4.51 accelerate qwen-omni-utils
+
+# Moshi full-duplex (open-source, GPU recommended)
+# pip install moshi sentencepiece
+
+# GPT-4o Realtime (proprietary, requires OPENAI_API_KEY)
+# pip install openai>=1.37 websockets
+
+# Gemini 2.5 Flash Live (proprietary, requires GOOGLE_API_KEY)
+# pip install google-genai>=0.7
+
+# Ultravox (open-source speech-LLM, GPU required)
+# pip install transformers>=4.40 accelerate

@@ -1,0 +1,75 @@
+scenario_id: "customer_service_001"
+category: "customer_service"
+difficulty: "medium"
+description: "User calls about an unexpected charge on their monthly bill and needs the agent to investigate, explain, and resolve the issue with a credit."
+n_turns: 10
+max_turns: 15
+
+system_prompt: |
+  You are a customer service representative for Meridian Telecom.
+  The customer's account shows:
+  - Name: Sarah Chen
+  - Account #: MT-884721
+  - Plan: Unlimited Plus ($79.99/month)
+  - Last bill: $124.47 (includes a $44.48 "Premium Content Bundle" add-on activated on Jan 15)
+  - The Premium Content Bundle was activated via an in-app prompt that the customer may not have noticed.
+  Be helpful, empathetic, and transparent. You can issue credits up to $50 without supervisor approval.
+
+user_turns:
+  - turn_index: 0
+    text: "Hi, I just got my bill and it's way higher than it should be. I'm usually at about eighty dollars a month but this one is over a hundred and twenty. Can you look into that?"
+    speech_style: "frustrated"
+
+  - turn_index: 2
+    text: "A premium content bundle? I never signed up for that. I don't even know what that is. Can you tell me exactly what happened?"
+    speech_style: "confused"
+    context_check:
+      description: "Agent should have identified the extra charge"
+      check_type: "response_contains_any"
+      expected: ["Premium Content Bundle", "premium content", "$44.48", "44.48", "add-on"]
+
+  - turn_index: 4
+    text: "Okay so it was some kind of in-app thing. That's really misleading. I want that removed and I want a refund for this month."
+    speech_style: "assertive"
+    context_check:
+      description: "Agent should explain how the charge originated"
+      check_type: "llm_judge"
+      prompt: "Did the agent explain that the Premium Content Bundle was activated via an in-app prompt on January 15th?"
+
+  - turn_index: 6
+    text: "Great, thank you. And can you make sure nothing like that gets added to my account again without me explicitly confirming it?"
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should confirm credit and removal"
+      check_type: "response_contains_any"
+      expected: ["credit", "refund", "removed", "cancel"]
+
+  - turn_index: 8
+    text: "Perfect, that's all I needed. What's my new balance going to be then?"
+    speech_style: "relieved"
+    context_check:
+      description: "Agent should confirm account protection measures"
+      check_type: "llm_judge"
+      prompt: "Did the agent acknowledge the request to prevent unauthorized add-ons and describe a protective measure?"
+
+context_probes:
+  - inject_after_turn: 7
+    probe_text: "By the way, how much was that extra charge again?"
+    expected_contains: ["44.48", "forty-four"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent identifies the Premium Content Bundle as the source of the overcharge"
+    - "Agent issues a credit or refund for $44.48"
+    - "Agent removes the Premium Content Bundle from the account"
+    - "Agent confirms the corrected balance"
+  optional:
+    - "Agent apologizes for the inconvenience"
+    - "Agent explains how to prevent future unauthorized add-ons"
+    - "Agent provides a reference number for the interaction"
+
+voice_checks:
+  - compare_turns: [1, 7]
+    metric: "sim_wavlm"
+    threshold: 0.85

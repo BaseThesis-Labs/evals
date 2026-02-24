@@ -1,0 +1,55 @@
+# Agent use-case weights — multi-turn dialogue agent evaluation
+
+use_case: agent
+
+dimension_weights:
+  task_completion: 0.20
+  context_retention: 0.15
+  quality: 0.10
+  speaker: 0.10        # voice_consistency maps here
+  dialogue_coherence: 0.10
+  error_recovery: 0.10
+  latency: 0.10
+  emotion: 0.05
+  prosody: 0.05
+  interaction: 0.05
+
+metric_weights:
+  task_completion:
+    task_completion: 1.0
+
+  context_retention:
+    context_retention: 0.60
+    factual_consistency: 0.40
+
+  quality:
+    session_utmos: 0.40
+    session_dnsmos_ovrl: 0.35
+    degradation_slope: 0.25
+
+  speaker:
+    voice_consistency: 0.60
+    persona_drift: 0.40
+
+  dialogue_coherence:
+    dialogue_coherence: 1.0
+
+  error_recovery:
+    error_recovery_rate: 1.0
+
+  latency:
+    avg_turn_latency: 0.50
+    ttfb_ms: 0.30
+    e2e_latency_ms: 0.20
+
+  emotion:
+    emotion_match: 0.50
+    emotion_sim: 0.50
+
+  prosody:
+    speaking_rate: 0.50
+    pause_ratio: 0.50
+
+  interaction:
+    tor_up: 0.50
+    tor_down: 0.50

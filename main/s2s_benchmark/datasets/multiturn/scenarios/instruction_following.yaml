@@ -1,0 +1,75 @@
+scenario_id: "instruction_following_001"
+category: "instruction_following"
+difficulty: "hard"
+description: "User gives specific constraints on how the agent should respond: format requirements, word limits, language constraints. Tests whether the agent adheres to explicit instructions across multiple turns."
+n_turns: 10
+max_turns: 15
+
+system_prompt: |
+  You are a helpful assistant. Follow the user's instructions precisely regarding
+  response format, length, and content constraints. If the user asks you to respond
+  in a specific way, prioritize following those instructions exactly.
+
+user_turns:
+  - turn_index: 0
+    text: "I want you to explain what machine learning is, but here's the rule: every sentence in your response must be exactly ten words long. No more, no less. Go ahead."
+    speech_style: "direct"
+
+  - turn_index: 2
+    text: "Good effort. Now I want you to list three benefits of exercise. But each benefit should be stated as a question, not a statement. And keep each question under fifteen words."
+    speech_style: "directive"
+    context_check:
+      description: "Agent should have attempted 10-word sentences about machine learning"
+      check_type: "llm_judge"
+      prompt: "Did the agent attempt to explain machine learning using sentences that are approximately 10 words long each?"
+
+  - turn_index: 4
+    text: "Now here's a harder one. Explain photosynthesis, but you cannot use the letter E anywhere in your response. Not a single E."
+    speech_style: "challenging"
+    context_check:
+      description: "Agent should list three benefits as questions"
+      check_type: "llm_judge"
+      prompt: "Did the agent list exactly three benefits of exercise, each phrased as a question rather than a statement?"
+
+  - turn_index: 6
+    text: "Okay, now go back to the normal rules. No more constraints. Can you summarize all three tasks I gave you and how well you think you did on each?"
+    speech_style: "evaluative"
+    context_check:
+      description: "Agent should attempt to avoid the letter E"
+      check_type: "llm_judge"
+      prompt: "Did the agent make a clear effort to avoid using the letter E in the response about photosynthesis? Check if the agent acknowledged the constraint."
+
+  - turn_index: 8
+    text: "One more. Give me a haiku about the ocean. Remember, five syllables, then seven, then five."
+    speech_style: "neutral"
+    context_check:
+      description: "Agent should summarize all three previous tasks"
+      check_type: "llm_judge"
+      prompt: "Did the agent summarize the three tasks (10-word sentences about ML, exercise benefits as questions, photosynthesis without letter E) and reflect on its performance?"
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "What was the first constraint I gave you? The one about machine learning?"
+    expected_contains: ["ten words", "10 words", "exactly ten"]
+    measures: "context_retention"
+
+  - inject_after_turn: 7
+    probe_text: "How many different format constraints have I given you so far in our conversation?"
+    expected_contains: ["three", "3"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent attempts to follow the 10-word sentence constraint"
+    - "Agent phrases exercise benefits as questions"
+    - "Agent acknowledges and attempts the no-letter-E constraint"
+    - "Agent provides an accurate self-assessment of task performance"
+  optional:
+    - "Agent produces a valid haiku with correct syllable counts"
+    - "Agent maintains good content quality despite format constraints"
+    - "Agent acknowledges when a constraint is particularly difficult"
+
+voice_checks:
+  - compare_turns: [1, 7]
+    metric: "sim_wavlm"
+    threshold: 0.85

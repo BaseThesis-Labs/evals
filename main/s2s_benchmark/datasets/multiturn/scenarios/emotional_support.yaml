@@ -1,0 +1,75 @@
+scenario_id: "emotional_support_001"
+category: "emotional_support"
+difficulty: "hard"
+description: "User is stressed and overwhelmed about work deadlines and a difficult manager. Agent provides empathetic support, validates feelings, and helps the user think through practical steps."
+n_turns: 10
+max_turns: 15
+
+system_prompt: |
+  You are a supportive conversational assistant. The user is going through a stressful
+  time at work. Your role is to:
+  1. Listen actively and validate their feelings
+  2. Avoid dismissing their concerns or jumping to solutions too quickly
+  3. Gently help them think through practical steps when they seem ready
+  4. Maintain a warm, calm, empathetic tone throughout
+  You are NOT a therapist. Do not diagnose or provide medical advice. If the user
+  expresses thoughts of self-harm, direct them to appropriate resources.
+
+user_turns:
+  - turn_index: 0
+    text: "I just need to vent for a minute. Work has been absolutely insane. I've got three major deadlines this week and my manager keeps piling on more stuff. I feel like I'm drowning."
+    speech_style: "stressed"
+
+  - turn_index: 2
+    text: "The worst part is I told my manager I'm at capacity and she just said everyone's busy and I need to figure it out. It's like she doesn't even hear me."
+    speech_style: "upset"
+    context_check:
+      description: "Agent should validate the user's feelings of being overwhelmed"
+      check_type: "llm_judge"
+      prompt: "Did the agent acknowledge and validate the user's feelings of being overwhelmed and stressed, rather than immediately jumping to solutions?"
+
+  - turn_index: 4
+    text: "I haven't been sleeping well either. I'm up at like three AM thinking about all the stuff I have to do. And then I'm exhausted the next day which makes everything harder."
+    speech_style: "tired"
+    context_check:
+      description: "Agent should empathize about the manager situation"
+      check_type: "llm_judge"
+      prompt: "Did the agent show empathy about the frustrating experience with the manager and the feeling of not being heard?"
+
+  - turn_index: 6
+    text: "Yeah, I think you're right. Maybe I should try to prioritize. I just don't know where to start because everything feels equally urgent."
+    speech_style: "uncertain"
+    context_check:
+      description: "Agent should address the sleep issue with care"
+      check_type: "llm_judge"
+      prompt: "Did the agent acknowledge the sleep difficulty and its impact on the user's wellbeing without being dismissive?"
+
+  - turn_index: 8
+    text: "That actually helps. Breaking it down like that makes it feel less overwhelming. I think the client presentation is the real priority. The other stuff can probably wait a day."
+    speech_style: "calmer"
+    context_check:
+      description: "Agent should help with prioritization gently"
+      check_type: "llm_judge"
+      prompt: "Did the agent help the user think about prioritization in a supportive way, perhaps suggesting a framework for deciding what's most urgent?"
+
+context_probes:
+  - inject_after_turn: 5
+    probe_text: "Sorry I'm kind of all over the place. What was I saying about my manager?"
+    expected_contains: ["capacity", "busy", "doesn't listen", "not heard", "piling on"]
+    measures: "context_retention"
+
+success_criteria:
+  required:
+    - "Agent validates the user's feelings before offering solutions"
+    - "Agent does not dismiss or minimize the user's stress"
+    - "Agent shows empathy about the manager situation"
+    - "Agent helps with prioritization when the user is ready for practical steps"
+  optional:
+    - "Agent acknowledges the sleep issue specifically"
+    - "Agent maintains a consistently warm tone throughout"
+    - "Agent affirms the user's progress when they start to feel better"
+
+voice_checks:
+  - compare_turns: [1, 7]
+    metric: "sim_wavlm"
+    threshold: 0.85
